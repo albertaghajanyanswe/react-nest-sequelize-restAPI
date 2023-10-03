@@ -1,0 +1,188 @@
+openapi: 3.0.0
+paths:
+  /api/users/signup:
+    post:
+      operationId: UsersController_create
+      summary: Create new user
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      tags: &ref_0
+        - Users
+      security: &ref_1
+        - bearer: []
+  /api/users:
+    get:
+      operationId: UsersController_getAll
+      summary: Get all users
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+      tags: *ref_0
+      security: *ref_1
+  /api/roles:
+    post:
+      operationId: RolesController_create
+      summary: Create new role
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoleDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+      tags: &ref_2
+        - roles
+  /api/roles/{value}:
+    get:
+      operationId: RolesController_getRoleByValue
+      summary: Get role by value
+      parameters:
+        - name: value
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+      tags: *ref_2
+  /api/auth/login:
+    post:
+      operationId: AuthController_login
+      parameters: []
+      responses:
+        '201':
+          description: ''
+info:
+  title: Test BE
+  description: Description for REST APIs
+  version: 1.0.0
+  contact: {}
+tags:
+  - name: APIs
+    description: ''
+servers: []
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+  schemas:
+    CreateUserDto:
+      type: object
+      properties:
+        email:
+          type: string
+          example: test@yopmail.com
+          description: User email address
+        password:
+          type: string
+          example: '11111'
+          description: User password
+      required:
+        - email
+        - password
+    User:
+      type: object
+      properties:
+        id:
+          type: number
+          example: '1'
+          description: Unique id
+        firstName:
+          type: string
+          example: First name
+          description: User first name
+        lastName:
+          type: string
+          example: Last name
+          description: User last name
+        email:
+          type: string
+          example: test@yopmail.com
+          description: User email address
+        password:
+          type: string
+          example: '11111'
+          description: User password
+        phone:
+          type: string
+          example: Last name
+          description: User last name
+        isActive:
+          type: boolean
+          example: true
+          description: User active state
+        archived:
+          type: boolean
+          example: false
+          description: User archived
+        roles:
+          example: 1
+          description: Corresponding role id
+          type: array
+          items:
+            type: string
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+        - password
+        - phone
+        - isActive
+        - archived
+        - roles
+    CreateRoleDto:
+      type: object
+      properties: {}
+    Role:
+      type: object
+      properties:
+        id:
+          type: number
+          example: '1'
+          description: Unique id
+        value:
+          type: string
+          example: USER
+          description: Role value
+        description:
+          type: string
+          example: User
+          description: Role description
+      required:
+        - id
+        - value
+        - description

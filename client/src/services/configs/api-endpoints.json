@@ -1,0 +1,9 @@
+{
+  "users": "/users",
+  "registration": "/users/registration",
+  "registrationGuest": "/users/registration/guest",
+  "login": "/auth/login",
+  "postLogin": "/auth/postLogin",
+  "postLoginGuest": "/auth/postLogin/guest",
+  "user": "users/:userId"
+}

@@ -1,0 +1,25 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { combineReducers, configureStore, getDefaultMiddleware } from "@reduxjs/toolkit"
+import userReducer from './reducers/UsersSlice';
+import counterReducer from './reducers/CounterSlice';
+import { usersAPI } from "../services/rtk/UsersApi";
+import { setupListeners } from '@reduxjs/toolkit/query/react';
+import { rtkQueryErrorLogger } from "./middleware/rtkErrorHandling";
+
+const rootReducer = combineReducers({
+  userReducer,
+  counterReducer,
+  [usersAPI.reducerPath]: usersAPI.reducer
+});
+
+export const setupStore = () => {
+  return configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(usersAPI.middleware, rtkQueryErrorLogger)
+  })
+}
+setupListeners(setupStore().dispatch);
+
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore['dispatch'];

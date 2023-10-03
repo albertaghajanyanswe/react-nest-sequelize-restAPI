@@ -1,0 +1,91 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
+import { iLogin, iLoginGuest, iRegistration, iRegistrationGuest, IUser } from '../../configs/shared/types';
+// import { axiosInstance } from '../client/axiosHelper';
+import { apiEndpoints } from '../configs';
+import { getCurrentUser } from '../lsService';
+
+// const baseUrl = `${process.env.REACT_APP_UI_URL}/api` || 'http://localhost:4000/api';
+const baseUrl = '';
+
+console.log('baseUrl = ', baseUrl)
+
+// interface CustomError {
+//   data: {
+//     message: string,
+//     stack: string
+//   },
+//   status: number
+// }
+
+export const usersAPI = createApi({
+  reducerPath: 'usersAPI',
+  // baseQuery: fetchBaseQuery({ baseUrl }) as BaseQueryFn<string | FetchArgs, unknown, CustomError, {}>,
+  baseQuery: fetchBaseQuery({
+    baseUrl: process.env.REACT_APP_UI_URL,
+    prepareHeaders: (headers, { getState }) => {
+      const currentUser = getCurrentUser();
+      if (currentUser?.token) {
+        headers.set('authorization', `Bearer ${currentUser.token}`);
+      }
+
+      return headers;
+    },
+  }),
+  tagTypes: ['Users'],
+  endpoints: (build) => ({
+    getAllUsers: build.query<IUser[], any>({
+      query: () => ({
+        url: `api${apiEndpoints.users}`,
+        // params: {
+        //   _limit: limit
+        // }
+      }),
+      providesTags: result => ['Users']
+    }),
+    register: build.mutation<iRegistration, iRegistration>({
+      query: (user) => ({
+        url: `api${apiEndpoints.registration}`,
+        method: 'POST',
+        body: user
+      }),
+      // invalidatesTags: ['Users']
+    }),
+    registerGuest: build.mutation<iRegistrationGuest, iRegistrationGuest>({
+      query: (user) => ({
+        url: `api${apiEndpoints.registrationGuest}`,
+        method: 'POST',
+        body: user
+      }),
+      // invalidatesTags: ['Users']
+    }),
+    login: build.mutation<any, iLogin>({
+      query: (credentials) => ({
+        url: `api${apiEndpoints.login}`,
+        method: 'POST',
+        body: { email: credentials.email, password: credentials.password }
+      }),
+    }),
+    postLogin: build.mutation<iLogin, iLogin>({
+      query: (credentials) => ({
+        url: `api${apiEndpoints.postLogin}`,
+        method: 'POST',
+        body: credentials
+      }),
+    }),
+    postLoginGuest: build.mutation<iLoginGuest, iLoginGuest>({
+      query: (credentials) => ({
+        url: `api${apiEndpoints.postLoginGuest}`,
+        method: 'POST',
+        body: credentials
+      }),
+    }),
+    deleteUser: build.mutation<IUser, IUser>({
+      query: (user) => ({
+        url: `/${apiEndpoints.user.replace(':userId', `${user.id}`)}`,
+        method: 'DELETE',
+        body: user.id
+      }),
+      invalidatesTags: ['Users']
+    })
+  }),
+});
