@@ -3,7 +3,7 @@ import { Box, Grid } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import CustomButton from '../../../components/customButton';
-import StepHOC from '../../../components/FormHOC';
+import StepHOC from '../../../components/form/FormHOC';
 import { isEmail, requiredErrMsg } from '../../../helpers/formHelper';
 import { iLogin } from '../../../configs/shared/types';
 

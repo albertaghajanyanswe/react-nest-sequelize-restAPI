@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private readonly usersService: UsersService, private jwtService: JwtService) {}
 
   async validateUser(email: string, password: string): Promise<any> {
-    const user = await this.usersService.getUser({ email });
+    const user = await this.usersService.getUser({ where: { email } });
     if (!user) {
       throw new NotAcceptableException('could not find the user');
     }
@@ -24,9 +24,10 @@ export class AuthService {
   }
 
   async validatePostUser(email: string, password: string): Promise<any> {
-    const user = await this.usersService.getUser({ email });
+    const user = await this.usersService.getUser({ where: { email } });
+    console.log('user = ', user)
     if (!user) {
-      throw new NotAcceptableException('could not find the user');
+      throw new NotAcceptableException('Could not find the user.');
     }
     if (!user.isActive) {
       throw new CustomUserNotActiveException();
@@ -39,9 +40,9 @@ export class AuthService {
   }
 
   async validatePostUserGuest(nickName: string, password: string): Promise<any> {
-    const user = await this.usersService.getUser({ nickName });
+    const user = await this.usersService.getUser({ where: { nickName } });
     if (!user) {
-      throw new NotAcceptableException('could not find guest user');
+      throw new NotAcceptableException('Could not find the user.');
     }
     const passwordValid = await this.comparePassword(password, user.password);
     if (user.dataValues && passwordValid) {

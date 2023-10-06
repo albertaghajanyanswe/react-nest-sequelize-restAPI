@@ -4,7 +4,7 @@ import { Theme } from "@mui/system";
 const stylesWithTheme = (theme: Theme) => ({
   container: {
     margin: 'auto',
-    marginTop: '7%',
+    // marginTop: '7%',
     width: 'auto',
     borderRadius: '4px',
     textAlign: 'center',
@@ -14,13 +14,13 @@ const stylesWithTheme = (theme: Theme) => ({
       marginRight: "auto",
       boxShadow: '1px 2px 10px 0px #3a4e9975',
     },
-    [theme.breakpoints.up(550)]: {
-      width: 480,
+    [theme.breakpoints.up(570)]: {
+      width: 500,
       marginLeft: "auto",
       marginRight: "auto",
       boxShadow: '1px 2px 10px 0px #3a4e9975',
     },
-    [theme.breakpoints.down(550)]: {
+    [theme.breakpoints.down(570)]: {
       boxShadow: 'none'
     },
   },

@@ -2,6 +2,7 @@
 import { combineReducers, configureStore, getDefaultMiddleware } from "@reduxjs/toolkit"
 import userReducer from './reducers/UsersSlice';
 import counterReducer from './reducers/CounterSlice';
+import sidebarReducer from './reducers/SidebarSlice';
 import { usersAPI } from "../services/rtk/UsersApi";
 import { setupListeners } from '@reduxjs/toolkit/query/react';
 import { rtkQueryErrorLogger } from "./middleware/rtkErrorHandling";
@@ -9,6 +10,7 @@ import { rtkQueryErrorLogger } from "./middleware/rtkErrorHandling";
 const rootReducer = combineReducers({
   userReducer,
   counterReducer,
+  sidebarReducer,
   [usersAPI.reducerPath]: usersAPI.reducer
 });
 

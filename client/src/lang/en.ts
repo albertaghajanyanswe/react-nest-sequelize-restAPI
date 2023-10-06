@@ -4,9 +4,30 @@ const en = {
     changeTheme: 'Change theme',
     light: 'Light',
     dark: 'Dark',
-    users: 'All users list',
     meetings: 'Meetings',
-    products: 'Products'
+    products: 'Products',
+    home: 'Home',
+    users: 'Users',
+    settings: 'settings',
+    logout: 'Logout'
+  },
+  sidebar: {
+    home: 'Home',
+    users: 'Users',
+    overview: 'Overview',
+    clients: 'Clients',
+    companies: 'Companies',
+    companiesEmployee: 'Companies employee',
+    payments: 'Payments',
+    appointments: 'Appointments',
+    applications: 'Applications',
+    notifications: 'Notifications',
+    settings: 'Settings',
+    help: 'Help center',
+    welcome: 'Welcome',
+    cfRegistration: 'CF Registration',
+    departments: 'Departments',
+    members: 'Members'
   },
   lang: {
     english: 'English',

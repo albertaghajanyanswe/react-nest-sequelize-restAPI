@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Box, Tooltip, IconButton, FormLabel } from '@mui/material';
-import {ReactComponent as InfoSvg} from '../../assets/systemMessage/info.svg';
+import {ReactComponent as InfoSvg} from '../../../assets/systemMessage/info.svg';
 
 import { muiStyles } from './styles';
 

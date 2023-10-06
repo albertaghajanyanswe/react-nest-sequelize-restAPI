@@ -1,5 +1,5 @@
 import { DefaultTheme, Theme } from "@mui/system";
-import { globalMuiStylesWithTheme } from "../../globalMuiStyles";
+import { globalMuiStylesWithTheme } from "../../../globalMuiStyles";
 
 const muiStylesWithTheme = (theme?: Theme | DefaultTheme | undefined) => ({
   selectBtnLeft: {

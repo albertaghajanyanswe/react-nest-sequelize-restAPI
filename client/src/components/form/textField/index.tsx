@@ -2,11 +2,11 @@ import React, { useCallback, useState } from 'react';
 import { InputAdornment, TextField, Box, Typography, IconButton } from '@mui/material';
 import { Path, useController, FieldValues } from 'react-hook-form';
 import Tooltip from '@mui/material/Tooltip';
-import {ReactComponent as InputError} from '../../assets/form/input-error.svg';
-import {ReactComponent as VisibleOn16Svg}from '../../assets/form/visibility-on-16.svg';
-import {ReactComponent as VisibleOff16Svg} from '../../assets/form/visibility-off-16.svg';
-import {ReactComponent as VisibleOn24Svg}from '../../assets/form/visibility-on-24.svg';
-import {ReactComponent as VisibleOff24Svg} from '../../assets/form/visibility-off-24.svg';
+import {ReactComponent as InputError} from '../../../assets/form/input-error.svg';
+import {ReactComponent as VisibleOn16Svg}from '../../../assets/form/visibility-on-16.svg';
+import {ReactComponent as VisibleOff16Svg} from '../../../assets/form/visibility-off-16.svg';
+import {ReactComponent as VisibleOn24Svg}from '../../../assets/form/visibility-on-24.svg';
+import {ReactComponent as VisibleOff24Svg} from '../../../assets/form/visibility-off-24.svg';
 
 import { muiStyles } from './styles';
 import FormFieldTitle from '../fieldTitle';

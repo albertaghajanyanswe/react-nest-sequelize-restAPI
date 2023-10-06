@@ -1,6 +1,6 @@
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './users.model';
-import { HttpException, HttpStatus, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { SEQUELIZE, USER_REPOSITORY } from 'src/shared/constants';
 import { Sequelize } from 'sequelize-typescript';
@@ -38,6 +38,10 @@ export class UsersService {
     return this.userRepository.findOne<User>(query);
   }
 
+  async getUserByEmail(email: string): Promise<User> {
+    return this.userRepository.findOne<User>({ where: { email } });
+  }
+
   async findOneById(id: number): Promise<User> {
     return await this.userRepository.findOne<User>({ where: { id } });
   }
@@ -64,7 +68,7 @@ export class UsersService {
       if (dto.switchGuestAccount) {
         existGuest = await this.userRepository.findOne({ where: { nickName: dto.nickName } });
         if (!existGuest) {
-          throw new UnauthorizedException('Guest user not found');
+          throw new NotFoundException('Guest user not found');
         }
         const validPassword = await this.comparePassword(dto.password, existGuest.password);
         console.log('validPassword = ', validPassword)

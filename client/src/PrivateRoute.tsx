@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navigate } from "react-router-dom";
+import Layout from './components/Layout';
 import { isLoggedIn } from './services/lsService';
 
 const PrivateRoute = ({ children }: { children: React.ReactNode}) => {
@@ -9,7 +10,8 @@ const PrivateRoute = ({ children }: { children: React.ReactNode}) => {
     return <Navigate to="/login" replace />;
   }
 
-  return <>{children}</>;
+  // return <>{children}</>;
+  return <Layout>{children}</Layout>;
 };
 
 export default PrivateRoute;

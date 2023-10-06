@@ -35,9 +35,10 @@ const RegistrationPage = () => {
 
   const [register] = usersAPI.useRegisterMutation();
 
-  const handleSubmitLogin = useCallback(() => handleSubmit(async (data) => {
+  const handleSubmitRegistration = useCallback(() => handleSubmit(async (data) => {
     try {
-      await register(data as iRegistration).unwrap();
+      const res = await register(data as iRegistration).unwrap();
+      console.log('res = ', res)
       // toast.success(getMessage('', 'success'));
       SystemMessage(enqueueSnackbar, getMessage('', 'success'), { variant: 'success', theme });
       navigate(routes.login.path)
@@ -58,7 +59,7 @@ const RegistrationPage = () => {
             <Grid item xs={12}>
               <Typography color="primary" variant="h5">{t('register.title')}</Typography>
             </Grid>
-            <RegistrationForm handleSubmit={handleSubmitLogin} />
+            <RegistrationForm handleSubmit={handleSubmitRegistration} />
             <Grid item xs={12}>
               <CustomButton
                 href={routes.login.path}

@@ -2,7 +2,7 @@ import React, { memo, MemoExoticComponent, ReactElement, useEffect } from "react
 import { FieldValues, useFormContext } from "react-hook-form";
 import FormTextField from "./textField";
 import FormPhoneField from "./phoneNumberInput";
-import FormSwitchField from "./switchField";
+import FormSwitchField from "../switchField";
 
 export function testStepsIntersection(steps: StepType<any, any>[]) {
   const names: {[key: string]: number} = {}

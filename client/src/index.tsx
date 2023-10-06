@@ -24,13 +24,12 @@ root.render(
           <Box
             sx={{ justifyContent: 'center' }}
             component={SnackbarProvider}
-            autoHideDuration={5000000}
+            autoHideDuration={5000}
             hideIconVariant
             anchorOrigin={{
               vertical: 'bottom',
               horizontal: 'right',
             }}
-            className="AAAAAAAA"
             maxSnack={4}
           >
             <App />

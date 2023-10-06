@@ -16,6 +16,7 @@ declare module '@mui/material/styles' {
     grey1?: string;
     grey2?: string;
     grey3?: string;
+    grey4?: string;
     red1: string;
     red2: string;
     red3: string;
@@ -45,6 +46,7 @@ declare module '@mui/material/styles' {
     grey1?: string;
     grey2?: string;
     grey3?: string;
+    grey4?: string;
     red1: string;
     red2: string;
     red3: string;
@@ -82,6 +84,7 @@ const Default = (): DefaultPaletteOptions => {
       grey1: '#F1F4FA',
       grey2: '#B4B4B4',
       grey3: '#878787',
+      grey4: '#1D1D1D',
       red1: '#FEF1F3',
       red2: '#F7D9DE',
       red3: '#d16374',
@@ -110,6 +113,7 @@ const Default = (): DefaultPaletteOptions => {
       grey1: '#F1F4FA',
       grey2: '#B4B4B4',
       grey3: '#878787',
+      grey4: '#1D1D1D',
       red1: '#FEF1F3',
       red2: '#F7D9DE',
       red3: '#d16374',

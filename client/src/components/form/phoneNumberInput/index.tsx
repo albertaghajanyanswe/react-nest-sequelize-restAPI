@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, FormControl, FormHelperText, Tooltip } from '@mui/material';
 import { Path, useController } from "react-hook-form";
 import { MuiTelInput } from "mui-tel-input";
-import {ReactComponent as InputError} from '../../assets/form/input-error.svg';
+import {ReactComponent as InputError} from '../../../assets/form/input-error.svg';
 import FormFieldTitle from '../fieldTitle';
 import { muiStyles } from './styles';
 

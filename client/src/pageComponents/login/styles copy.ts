@@ -4,7 +4,7 @@ import { Theme } from "@mui/system";
 const stylesWithTheme = (theme: Theme) => ({
   container: {
     margin: 'auto',
-    marginTop: '7%',
+    // marginTop: '7%',
     width: 'auto',
     borderRadius: '4px',
     textAlign: 'center',

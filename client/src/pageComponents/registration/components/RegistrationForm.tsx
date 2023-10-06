@@ -7,7 +7,7 @@ import { useFormContext } from 'react-hook-form';
 import { isEmail, requiredErrMsg } from '../../../helpers/formHelper';
 import { iRegistration } from '../../../configs/shared/types';
 import CustomButton from '../../../components/customButton';
-import StepHOC from '../../../components/FormHOC';
+import StepHOC from '../../../components/form/FormHOC';
 
 
 interface iProps {

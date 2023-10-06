@@ -33,6 +33,7 @@ export const usersAPI = createApi({
   }),
   tagTypes: ['Users'],
   endpoints: (build) => ({
+    // getAllUsers: build.query<User[], any>({
     getAllUsers: build.query<IUser[], any>({
       query: () => ({
         url: `api${apiEndpoints.users}`,

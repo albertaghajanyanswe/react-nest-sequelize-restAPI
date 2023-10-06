@@ -1,10 +1,16 @@
 // todo: add and using all variables from theme
 import { Theme } from "@mui/system";
+import loginBg from '../../assets/login-1.jpg';
 
 const stylesWithTheme = (theme: Theme) => ({
+  layout: {
+    width: '100%',
+    display: 'flex',
+    // backgroundImage: `url(${loginBg})`
+  },
   container: {
     margin: 'auto',
-    marginTop: '7%',
+    // marginTop: '7%',
     width: 'auto',
     borderRadius: '4px',
     textAlign: 'center',

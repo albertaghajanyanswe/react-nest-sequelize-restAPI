@@ -19,4 +19,14 @@ const deleteAllSpacesFromStr = (str) => str.replace(/\s/g, "");
 const dateFormat = (date, format = "YYYY-MM-DDTHH:mm") =>
   moment(date).format(format);
 
-export { getMessage, deleteAllSpacesFromStr, dateFormat };
+function stringAvatar(name, w, h) {
+  return {
+    sx: {
+      // bgcolor: stringToColor(name),
+      width: w || 32,
+      height: h || 32,
+    },
+    children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+  };
+}
+export { getMessage, deleteAllSpacesFromStr, dateFormat, stringAvatar };

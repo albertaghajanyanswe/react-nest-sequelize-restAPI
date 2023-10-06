@@ -17,6 +17,9 @@ import { routes } from './configs';
 import RegistrationPage from './pageComponents/registration/RegistrationPage';
 import LoginGuestPage from './pageComponents/login/LoginGuestPage';
 import RegistrationGuestPage from './pageComponents/registration/RegistrationGuestPage';
+import NotFound from './components/NotFound';
+import UsersPage from './pageComponents/users/UsersPage';
+import SettingsPage from './pageComponents/settings/SettingsPage';
 
 function App() {
 
@@ -77,7 +80,23 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route path="**" element={<>Not found</>} />
+          <Route
+            path={routes.users.path}
+            element={
+              <PrivateRoute>
+                <UsersPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={routes.settings.path}
+            element={
+              <PrivateRoute>
+                <SettingsPage />
+              </PrivateRoute>
+            }
+          />
+          <Route path="**" element={<NotFound />} />
         </Routes>
       </QueryClientProvider>
     </div>
