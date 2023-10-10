@@ -17,7 +17,7 @@ function ChangeTheme() {
 
   return (
     <div>
-      <h1>{t('pages.changeTheme')}</h1>
+      <h1>{t('common.changeTheme')}</h1>
       <button onClick={() => handleChangeTheme('light')}>{t('pages.light')}</button>
       <button onClick={() => handleChangeTheme('dark')}>{t('pages.dark')}</button>
       <Box sx={{ backgroundColor: theme.palette.primary.main }}>AAAA</Box>

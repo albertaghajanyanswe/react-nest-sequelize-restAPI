@@ -22,7 +22,7 @@ const stylesWithTheme = (theme: Theme) => ({
     background: 'white',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'primary.grey1',
+    borderColor: 'primary.borderColor1',
     boxShadow: '0px 4px 16px rgba(181, 195, 211, 0.25)',
     borderRadius: '8px',
     '& > ul': {
@@ -34,7 +34,7 @@ const stylesWithTheme = (theme: Theme) => ({
     fontWeight: 400,
     fontSize: '14px',
     lineHeight: '20px',
-    color: 'primary.blue3'
+    color: 'primary.btnMainDisabled'
   },
   userName: {
     fontFamily: 'Poppins',
@@ -74,7 +74,7 @@ const stylesWithTheme = (theme: Theme) => ({
     minHeight: '48px',
     px: 2.5,
     '&:hover': {
-      background: theme.palette.primary.blue5,
+      background: theme.palette.primary.btnMainPressed,
       '& .MuiListItemIcon-root': {
         '& > svg': {
           '& path': {
@@ -85,7 +85,7 @@ const stylesWithTheme = (theme: Theme) => ({
     }
   },
   listItemBtnActive: {
-    backgroundColor: 'primary.blue5'
+    backgroundColor: 'primary.btnMainPressed'
   },
   activeLinkIcon: {
     '& > svg': {
@@ -102,16 +102,16 @@ const stylesWithTheme = (theme: Theme) => ({
     }
   },
   divider: {
-    borderColor: 'primary.blue5',
+    borderColor: 'primary.btnMainPressed',
     "&::before": {
       borderTopWidth: '1px',
       borderTopStyle: 'solid',
-      borderTopColor: 'primary.blue5',
+      borderTopColor: 'primary.btnMainPressed',
     },
     "&::after": {
       borderTopWidth: '1px',
       borderTopStyle: 'solid',
-      borderTopColor: 'primary.blue5',
+      borderTopColor: 'primary.btnMainPressed',
     },
   },
   linkText: {

@@ -11,6 +11,7 @@ import { ReactComponent as SettingsIcon } from '../../assets/sidebar/settings.sv
 import { ReactComponent as BlockedIcon } from '../../assets/sidebar/blocked.svg';
 import { routes } from '../../../src/configs';
 import i18n from "../../i18n";
+import { UserRole } from '../../configs/shared/types';
 
 const links = [
   {
@@ -19,6 +20,7 @@ const links = [
     link: routes.home.path,
     icon: OverviewIcon,
     disabled: false,
+    roles: [UserRole.Guest, UserRole.User, UserRole.Admin],
   },
   {
     id: 'users',
@@ -26,6 +28,7 @@ const links = [
     link: routes.users.path,
     icon: BlockedIcon,
     disabled: false,
+    roles: [UserRole.User, UserRole.Admin],
   },
   {
     id: 'divider-1',
@@ -40,6 +43,7 @@ const links = [
     link: routes.settings.path,
     icon: SettingsIcon,
     disabled: false,
+    roles: [UserRole.User, UserRole.Admin],
   },
 
 ];

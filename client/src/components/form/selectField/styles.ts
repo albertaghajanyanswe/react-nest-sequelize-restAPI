@@ -33,7 +33,7 @@ const muiStylesWithTheme = (theme?: Theme | DefaultTheme | undefined) => ({
     maxHeight: '16px'
   },
   title: {
-    fontFamily: 'Noto sans',
+    fontFamily: 'Poppins',
     fontSize: '12px',
     lineHeight: '16px',
     fontWeight: 600,
@@ -127,7 +127,7 @@ const muiStylesWithTheme = (theme?: Theme | DefaultTheme | undefined) => ({
     }
   },
   menuItemOpt: {
-    fontFamily: 'Noto sans',
+    fontFamily: 'Poppins',
     fontWeight: 400,
     fontSize: '14px',
     lineHeight: '16px',
@@ -135,7 +135,7 @@ const muiStylesWithTheme = (theme?: Theme | DefaultTheme | undefined) => ({
   },
   listSubheader: {
     position: 'static',
-    fontFamily: 'Noto sans',
+    fontFamily: 'Poppins',
     fontSize: '11px',
     lineHeight: '12px',
     fontWeight: 700,

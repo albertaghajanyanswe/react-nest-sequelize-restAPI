@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useParams, useLocation, useSearchParams } from 'react-router-dom';
 
 import { Box, Grid, Typography } from '@mui/material';
 
@@ -19,6 +19,8 @@ import { DEFAULT_VALUES_LOGIN } from '../../configs/shared/defaultValues';
 
 
 const LoginPage = () => {
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const { t } = useTranslation();
   const theme = useTheme();

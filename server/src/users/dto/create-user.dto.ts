@@ -31,3 +31,11 @@ export class CreateUserDto {
   @ApiProperty({ example: true, description: 'User active state' })
   readonly isActive: boolean;
 }
+
+export class CreateGuestUserDto {
+  @ApiProperty({ example: 'Nick name', description: 'User nick name' })
+  readonly nickName: string;
+
+  @ApiProperty({ example: '11111', description: 'User password' })
+  readonly password: string;
+}

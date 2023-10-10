@@ -146,6 +146,21 @@ const globalMuiStyles = {
     lineHeight: '40px',
     fontWeight: 400
   },
+  font_36_40_500: {
+    fontSize: '36px',
+    lineHeight: '40px',
+    fontWeight: 500
+  },
+  font_36_40_600: {
+    fontSize: '36px',
+    lineHeight: '40px',
+    fontWeight: 600
+  },
+  font_36_40_700: {
+    fontSize: '36px',
+    lineHeight: '40px',
+    fontWeight: 700
+  },
   divider: {
     borderColor: 'primary.borderColor2',
     "&::before": {

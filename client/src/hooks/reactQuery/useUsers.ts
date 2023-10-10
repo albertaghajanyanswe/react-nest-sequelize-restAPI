@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { iLogin, IUser } from '../../configs/shared/types';
+import { iRegistrationGuest, IUser } from '../../configs/shared/types';
 import userService from '../../services/usersService';
 import { queryFnKeys } from './reactQueryFnKeys';
 
@@ -13,7 +13,7 @@ const useUsers = () => {
 
 const useCreateUser = () => {
   const queryClient = useQueryClient();
-  return useMutation([userQueryFnKeys.addUsers], (data: iLogin) => userService.createUser({data}), {
+  return useMutation([userQueryFnKeys.addUsers], (data: iRegistrationGuest) => userService.createUser({data}), {
     onSuccess() {
       queryClient.invalidateQueries([userQueryFnKeys.users])
     },

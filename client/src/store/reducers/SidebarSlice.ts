@@ -48,7 +48,7 @@ export const sidebarSlice = createSlice({
       localStorage.setItem(lsConstants.SIDE_BAR_MENUS, JSON.stringify({...oldObj, [action.payload]: oldObj ? !oldObj[action.payload] : true}));
       state.sidebarMenus = {...oldObj, [action.payload]: oldObj ? !oldObj[action.payload] : true};
     },
-    clickedSideBarLink(state, action: PayloadAction<string>) {
+    setActiveLink(state, action: PayloadAction<string>) {
       state.activeLink = action.payload;
     },
     toggleSidebarByValue(state, action: PayloadAction<boolean>) {

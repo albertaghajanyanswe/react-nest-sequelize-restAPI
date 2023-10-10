@@ -1,4 +1,4 @@
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateGuestUserDto, CreateUserDto } from './dto/create-user.dto';
 import { User } from './users.model';
 import { HttpException, HttpStatus, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
@@ -10,7 +10,9 @@ import { Role } from 'src/roles/roles.model';
 import { CustomInvalidCredentialsException } from 'src/exceptions/invalid-credetials.exception copy';
 import { CustomAlreadyExistException } from 'src/exceptions/exist.exception';
 import * as uuid from 'uuid';
-import { Response } from 'express';
+import { Request, Response } from 'express';
+import { GetUsersDto } from './dto/user.dto';
+import { CollectPayloadService } from 'src/payloadHelper/collectPayload.service';
 
 @Injectable()
 export class UsersService {
@@ -19,10 +21,26 @@ export class UsersService {
     @Inject(SEQUELIZE) private readonly sequelize: Sequelize,
     private roleService: RolesService,
     private readonly mailerService: MailerService,
-  ) { }
+    private readonly collectPayload: CollectPayloadService,
+  ) {}
 
-  async getAllUsers(): Promise<User[]> {
-    const users = await this.userRepository.findAll({
+  async getAllUsers(req: Request): Promise<GetUsersDto> {
+    const payload = this.collectPayload.getListPayload(req);
+    payload.include = [
+      {
+        model: Role,
+        attributes: ['id', 'value', 'description'],
+        through: { attributes: [] },
+      },
+    ];
+    console.log('\n\n paload = ', payload)
+    const { rows, count } = await this.userRepository.findAndCountAll(payload);
+    return { count: count, data: rows };
+  }
+
+  async getUser(query: object): Promise<User> {
+    return this.userRepository.findOne<User>({
+      ...query,
       include: [
         {
           model: Role,
@@ -31,11 +49,6 @@ export class UsersService {
         },
       ],
     });
-    return users;
-  }
-
-  async getUser(query: object): Promise<User> {
-    return this.userRepository.findOne<User>(query);
   }
 
   async getUserByEmail(email: string): Promise<User> {
@@ -92,7 +105,7 @@ export class UsersService {
           { where: { id: existGuest.id }, transaction },
         );
         const updatedUser = await this.userRepository.findOne({ where: { id: existGuest.id }, transaction });
-        const role = await this.roleService.getRoleByValue('GUEST');
+        const role = await this.roleService.getRoleByValue('USER');
         if (role) {
           await updatedUser.$set('roles', [role.id], { transaction });
         }
@@ -122,7 +135,7 @@ export class UsersService {
     }
   }
 
-  async registerGuest(dto: CreateUserDto & { switchGuestAccount: boolean }): Promise<CreateUserDto> {
+  async registerGuest(dto: CreateGuestUserDto & { switchGuestAccount: boolean }): Promise<CreateUserDto> {
     let transaction;
     try {
       transaction = await this.sequelize.transaction();

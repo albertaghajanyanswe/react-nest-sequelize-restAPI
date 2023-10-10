@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { iLogin, IUser } from '../../configs/shared/types';
+import { iLogin, iRegistrationGuest, IUser } from '../../configs/shared/types';
 import userService from '../../services/usersService';
 
 interface IUserState {
@@ -26,8 +26,8 @@ export const getUsers = createAsyncThunk(
   }
 );
 export const addUser = createAsyncThunk(
-  'api/users/signUp',
-  async (newUser: iLogin, thunkAPI) => {
+  'api/users/registration/guest',
+  async (newUser: iRegistrationGuest, thunkAPI) => {
     try {
       await userService.createUser({data: {...newUser }});
     } catch(err: any) {

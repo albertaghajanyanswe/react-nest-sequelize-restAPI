@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Param, Post, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Response } from 'express';
+import { ApiBearerAuth, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Request, Response } from 'express';
 import { DoesUserExist } from 'src/shared/guards/doesUserExist.guard';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateGuestUserDto, CreateUserDto } from './dto/create-user.dto';
+import { GetUsersDto } from './dto/user.dto';
 import { User } from './users.model';
 import { UsersService } from './users.service';
 
@@ -23,11 +24,12 @@ export class UsersController {
   @ApiOperation({ summary: 'Create new guest user' })
   @ApiResponse({ status: 200, type: User })
   @Post('/registration/guest')
-  registerGuest(@Body() userDto: CreateUserDto & { switchGuestAccount: boolean }) {
+  registerGuest(@Body() userDto: CreateGuestUserDto & { switchGuestAccount: boolean }) {
     return this.userService.registerGuest(userDto);
   }
 
-  @ApiOperation({ summary: 'Create new user' })
+  @ApiOperation({ summary: 'Activate registred user account' })
+  @ApiParam({ name: 'link', type: String, description: 'The activation link' })
   @ApiResponse({ status: 200, type: User })
   @Get('/activate/:link')
   activateUser(@Res() response: Response, @Param('link') link) {
@@ -35,10 +37,11 @@ export class UsersController {
   }
 
   @ApiOperation({ summary: 'Get all users' })
-  @ApiResponse({ status: 200, type: [User] })
+  @ApiResponse({ status: 200, type: GetUsersDto })
   @UseGuards(AuthGuard('jwt'))
   @Get()
-  getAll() {
-    return this.userService.getAllUsers();
+  // getAll(@Req() request: Request, @Query('params') params: string) {
+    getAll(@Req() request: Request) {
+    return this.userService.getAllUsers(request);
   }
 }

@@ -1,9 +1,14 @@
 const en = {
-  pages: {
+  common: {
     changeLang: 'Change language',
     changeTheme: 'Change theme',
     light: 'Light',
     dark: 'Dark',
+    loading: 'Loading',
+    search: 'Search',
+    none: 'None'
+  },
+  pages: {
     meetings: 'Meetings',
     products: 'Products',
     home: 'Home',
@@ -12,22 +17,10 @@ const en = {
     logout: 'Logout'
   },
   sidebar: {
+    welcome: 'Welcome',
     home: 'Home',
     users: 'Users',
-    overview: 'Overview',
-    clients: 'Clients',
-    companies: 'Companies',
-    companiesEmployee: 'Companies employee',
-    payments: 'Payments',
-    appointments: 'Appointments',
-    applications: 'Applications',
-    notifications: 'Notifications',
     settings: 'Settings',
-    help: 'Help center',
-    welcome: 'Welcome',
-    cfRegistration: 'CF Registration',
-    departments: 'Departments',
-    members: 'Members'
   },
   lang: {
     english: 'English',
@@ -68,50 +61,29 @@ const en = {
     guestNickName: 'Your guest account nick name',
     guestPassword: 'Your guest account password'
   },
-  navbar: {
-    todo: 'Todo',
-    todoList: 'Todo List',
-    users: 'Users',
-    logout: 'Log Out',
-    meeting: 'Booking meeting',
-    products: 'Products'
-  },
-  todo: {
-    title: 'TODO LIST',
-    addTodo: 'Add Todo',
-    statuses: {
-      all: 'All',
-      inprogress: 'Inprogress',
-      completed: 'Completed'
-    },
-    modal: {
-      title: 'Add TODO',
-      description: 'Fill the todo details.',
-      id: 'ID',
-      name: 'Name',
-      estimatedDate: 'Estimated date',
-      status: 'Status',
-      reminderDate: 'Reminder date',
-      reminder: {
-        title: 'Schedule reminder',
-        description: 'Set up todo reminder date.',
-        setReminder: 'Set reminder',
-      }
-    },
-    noTodos: 'No Todos',
-    sortByStatus: 'Sort by status',
-    sortByEstimatedDate: 'Sort by estimated date',
-    table: {
-      id: 'ID',
-      name: 'Name',
-      estimatedDate: 'Estimated date',
-      status: 'Status',
-      reminderDate: 'Reminder date',
-      user: 'User'
-    },
-  },
   table: {
-    noResult: 'No result'
+    noResult: 'No result',
+    rowPerPage: 'Row  per page',
+    showingItems: 'Showing {first}–{second} of {count} ',
+    itemSelected: 'Item selected',
+  },
+  filter: {
+    none: 'None'
+  },
+  users: {
+    title: 'Users',
+    id: 'ID',
+    firstName: 'First name',
+    lastName: 'Last name',
+    email: 'Email',
+    nickName: 'Nick name',
+    role: 'Role',
+    phone: 'Phone',
+    isActive: 'Is active',
+    userStatus: 'User status',
+    active: 'Active',
+    inactive: 'In active',
+    allUsers: 'All users'
   },
   actions: {
     login: 'Login',
@@ -123,7 +95,32 @@ const en = {
     edit: 'Edit',
     delete: 'Delete',
     setReminder: 'Set reminder time',
-    changeStatus: 'Click to the row to change status'
+    changeStatus: 'Click to the row to change status',
+    clickToRow: 'Click to the row',
+    recoverDeletedItem: 'Recover deleted item'
+  },
+  deleteUserModal: {
+    title1: 'Do you want to remove',
+    title2: '{0} from users list?',
+    desc: '{0} will no longer be able to enter the platform',
+    remove: 'Yes, remove',
+    cancel: 'No, don’t remove ',
+  },
+  systemMsg: {
+    failedSaveData: 'Failed to save data',
+    newChangeArrived: 'New change requests have arrived',
+    taskCompleted: 'Task completed',
+    taskReturned: 'Task returned',
+    dataModificationRequestSent: 'Data modification request sent',
+    appReturnedToHandler: 'Application No. {0} returned to handler',
+    appFormDeleted: 'Application form deleted',
+    appFormNotFount: 'Application form not found',
+    userRemoved: '${0} was removed',
+    couldNotOpen: 'Could not open page with status "Not Submitted"',
+    couldNotOpenInvestor: 'Could not open page with status "Submitted"',
+    permissionDenied: 'Permission denied',
+    taskDisregarded: 'Task disregarded',
+    licenseNotFound: 'Application license not found',
   },
   actionMsg: {
     success: {
@@ -140,13 +137,6 @@ const en = {
       delete: 'Could not delete item.',
       unknownError: 'Unknown error.',
     },
-  },
-  meeting: {
-    title: 'Title',
-    description: 'Description',
-    startDate: 'Start date',
-    endDate: 'End date',
-    createMeeting: "Create meeting",
   },
   validation: {
     required: '{name} is required'

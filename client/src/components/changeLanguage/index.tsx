@@ -12,7 +12,7 @@ function ChangeLanguage() {
 
   return (
     <div>
-      <h1>{t('pages.changeLang')}</h1>
+      <h1>{t('common.changeLang')}</h1>
       <button onClick={() => changeLanguage('en')}>{t('lang.english')}</button>
       <button onClick={() => changeLanguage('ru')}>{t('lang.russian')}</button>
     </div>

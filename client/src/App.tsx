@@ -18,8 +18,9 @@ import RegistrationPage from './pageComponents/registration/RegistrationPage';
 import LoginGuestPage from './pageComponents/login/LoginGuestPage';
 import RegistrationGuestPage from './pageComponents/registration/RegistrationGuestPage';
 import NotFound from './components/NotFound';
-import UsersPage from './pageComponents/users/UsersPage';
+import UsersPage from './pageComponents/users';
 import SettingsPage from './pageComponents/settings/SettingsPage';
+import Layout from './components/Layout';
 
 function App() {
 
@@ -96,7 +97,7 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route path="**" element={<NotFound />} />
+          <Route path="*" element={<Layout><NotFound /></Layout>} />
         </Routes>
       </QueryClientProvider>
     </div>

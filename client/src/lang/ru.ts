@@ -1,12 +1,26 @@
 const ru = {
-  pages: {
+  common: {
     changeLang: 'Изменить язык',
     changeTheme: 'Изменить тему',
     light: 'Светлый',
     dark: 'Тёмный',
+    loading: 'Загрузка',
+    search: 'Наити',
+    none: 'Ничто'
+  },
+  pages: {
+    home: 'Домой',
+    settings: 'Настройки',
+    logout: 'Выйти',
     users: 'Список всех пользователей',
     meetings: 'Встречи',
-    products: 'Продукты'
+    products: 'Продукты',
+  },
+  sidebar: {
+    welcome: 'Добро пожаловать',
+    home: 'Домой',
+    users: 'Пользователи',
+    settings: 'Настройки',
   },
   lang: {
     english: 'English',
@@ -46,50 +60,29 @@ const ru = {
     guestNickName: 'Псевдоним вашей гостевой учетной записи',
     guestPassword: 'Пароль вашей гостевой учетной записи'
   },
-  navbar: {
-    todo: 'Todo',
-    todoList: 'Список дел',
-    users: 'Пользователи',
-    logout: 'Выйти',
-    meeting: 'Забронировать встречу',
-    products: 'Продукты'
-  },
-  todo: {
-    title: 'СПИСОК ЗАДАЧ',
-    addTodo: 'Добавить задачу',
-    statuses: {
-      all: 'Все',
-      inprogress: 'В процессе',
-      completed: 'Завершено'
-    },
-    modal: {
-      title: 'Добавить TODO',
-      description: 'Заполните детали задачи.',
-      id: 'ID',
-      name: 'Имя',
-      estimatedDate: 'Предполагаемая дата',
-      status: 'Статус',
-      reminderDate: 'Дата напоминания',
-      reminder: {
-        title: 'Запланировать напоминание',
-        description: 'Установить дату напоминания о делах.',
-        setReminder: 'Установить напоминание',
-      }
-    },
-    noTodos: 'Нет задач',
-    sortByStatus: 'Сортировать по статусу',
-    sortByEstimatedDate: 'Сортировать по предполагаемой дате',
-    table: {
-      id: 'ID',
-      name: 'Имя',
-      estimatedDate: 'Предполагаемая дата',
-      status: 'Статус',
-      reminderDate: 'Дата напоминания',
-      user: 'Пользователь'
-    },
-  },
   table: {
+    rowPerPage: 'Строки на странице',
+    showingItems: 'Показаны {first}–{second} из {count}',
+    itemSelected: 'Элемент выбран',
     noResult: 'Нет результата'
+  },
+  filter: {
+    none: 'Невыбран'
+  },
+  users: {
+    title: 'Пользователи',
+    id: 'ID',
+    firstName: 'Имя',
+    lastName: 'Фамилия',
+    email: 'Электронная почта',
+    nickName: 'Псевдоним',
+    role: 'Роль',
+    phone: 'Телефон',
+    isActive: 'Активен',
+    userStatus: 'Статус пользователя',
+    active: 'Активный',
+    inactive: 'Неактивный',
+    allUsers: 'Все пользователи'
   },
   actions: {
     login: 'Войти',

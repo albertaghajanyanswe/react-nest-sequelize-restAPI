@@ -6,7 +6,7 @@ const muiStyles = {
       fontSize: '16px',
       lineHeight: '24px',
       fontWeight: 400,
-      color: 'primary.grey3',
+      color: 'primary.textColor4',
     }
   },
   errorLabel: {

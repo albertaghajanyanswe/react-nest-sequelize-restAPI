@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 import { iLogin, iLoginGuest, iRegistration, iRegistrationGuest, IUser } from '../../configs/shared/types';
+import { GetUsersDto, User } from '../../generated/openapi';
 // import { axiosInstance } from '../client/axiosHelper';
 import { apiEndpoints } from '../configs';
 import { getCurrentUser } from '../lsService';
@@ -33,14 +34,15 @@ export const usersAPI = createApi({
   }),
   tagTypes: ['Users'],
   endpoints: (build) => ({
-    // getAllUsers: build.query<User[], any>({
-    getAllUsers: build.query<IUser[], any>({
-      query: () => ({
-        url: `api${apiEndpoints.users}`,
-        // params: {
-        //   _limit: limit
-        // }
-      }),
+    getAllUsers: build.query<GetUsersDto, any>({
+      query: (params) => {
+        return {
+          // url: `api${apiEndpoints.users}?${JSON.stringify(params)}`,
+          url: `api${apiEndpoints.users}?params=${encodeURIComponent(JSON.stringify(params))}`,
+          // url: `api${apiEndpoints.users}`,
+          // params
+        }
+      },
       providesTags: result => ['Users']
     }),
     register: build.mutation<iRegistration, iRegistration>({

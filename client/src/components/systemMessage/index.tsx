@@ -10,35 +10,32 @@ import { Theme } from '@mui/system';
 const SystemMessage = (
   enqueueSnackbar: any,
   message: string | ReactNode,
-  options: { variant: 'success' | 'error' | 'warning' | 'info' | 'default', sx?: any, action?: SnackbarAction, theme: Theme }
+  options: { variant: 'success' | 'error' | 'warning' | 'info' | 'default', sx?: any, action?: SnackbarAction, theme?: Theme }
 ) => {
 
   const { variant, sx = {}, action, theme } = options;
 
-  console.log('theme = ', theme)
-  console.log('theme = ', theme.palette.primary.red1)
-  console.log('message = ', message)
   const variantBGColor = {
     success: (theme as Theme)?.palette.primary.green1,
     error: (theme as Theme)?.palette.primary.red1,
     warning: (theme as Theme)?.palette.primary.orange1,
-    info: (theme as Theme)?.palette.primary.blue1,
-    default: (theme as Theme)?.palette.primary.blue1
+    info: (theme as Theme)?.palette.primary.lightBG1,
+    default: (theme as Theme)?.palette.primary.lightBG1
   }
 
   const variantBorderColor = {
     success: (theme as Theme)?.palette.primary.green2,
     error: (theme as Theme)?.palette.primary.red2,
     warning: (theme as Theme)?.palette.primary.orange2,
-    info: (theme as Theme)?.palette.primary.blue2,
-    default: (theme as Theme)?.palette.primary.blue2
+    info: (theme as Theme)?.palette.primary.borderColor2,
+    default: (theme as Theme)?.palette.primary.borderColor2
   }
   const variantTextColor = {
     success: (theme as Theme)?.palette.primary.green3,
     error: (theme as Theme)?.palette.primary.red5,
     warning: (theme as Theme)?.palette.primary.orange3,
-    info: (theme as Theme)?.palette.primary.blue5,
-    default: (theme as Theme)?.palette.primary.blue5
+    info: (theme as Theme)?.palette.primary.btnMainPressed,
+    default: (theme as Theme)?.palette.primary.btnMainPressed
   }
 
   const variantIcon = {

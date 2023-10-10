@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { User } from '../users.model';
 
 export class UserDto {
   @ApiProperty({ example: '1', description: 'Unique id' })
@@ -51,4 +52,12 @@ export class UserDto {
 
   @ApiProperty({ example: '', description: 'Device type' })
   readonly deviceType: string;
+}
+
+export class GetUsersDto {
+  @ApiProperty({ type: [User] })
+  readonly data: User[];
+
+  @ApiProperty()
+  readonly count: number;
 }

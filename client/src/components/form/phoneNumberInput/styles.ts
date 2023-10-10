@@ -16,7 +16,7 @@ const muiStyles = {
       }
     },
     '& > .MuiOutlinedInput-root': {
-      fontFamily: 'Noto sans',
+      fontFamily: 'Poppins',
       fontSize: '14px',
       borderRadius: '8px',
       paddingLeft: '12px',
@@ -67,7 +67,7 @@ const muiStyles = {
       maxHeight: '224px',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: 'primary.grey1',
+      borderColor: 'primary.borderColor1',
       boxShadow: '0px 4px 16px rgba(181, 195, 211, 0.25)',
       borderRadius: '12px',
       '&::-webkit-scrollbar': {
@@ -114,7 +114,7 @@ const muiStyles = {
     mt: '2px'
   },
   descriptionText: {
-    fontFamily: 'Noto sans',
+    fontFamily: 'Poppins',
     fontSize: '12px',
     lineHeight: '16px',
     fontWeight: 400,

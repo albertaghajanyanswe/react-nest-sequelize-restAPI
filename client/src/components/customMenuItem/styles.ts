@@ -2,7 +2,7 @@ import { Theme } from "@mui/system";
 
 export const stylesWithTheme = (theme: Theme) => ({
   menuItem: {
-    color: 'primary.grey4',
+    color: 'primary.textColor1',
     maxHeight: 'inherit',
     fontWeight: 400
   },

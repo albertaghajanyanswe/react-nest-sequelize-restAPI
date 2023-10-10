@@ -3,7 +3,6 @@ import { useTheme } from '@mui/system';
 import { Box, ListItemIcon, ListItemText, MenuItem } from '@mui/material';
 import { stylesWithTheme } from './styles';
 
-
 interface IProps {
   text: string,
   children?: any,
@@ -12,13 +11,10 @@ interface IProps {
   isLinkActive?: boolean
 };
 
-const CustomMenuItem = (props: IProps) => {
+const CustomMenuItem = ({ text, children, onClick, disableItem, isLinkActive }: IProps) => {
   const theme = useTheme();
   const muiStyles = stylesWithTheme(theme);
 
-  const {text, children, onClick, disableItem, isLinkActive} = props;
-
-  // Used ref to solve <Function components cannot be given refs> warning
   return (
     <MenuItem disabled={disableItem} onClick={onClick} sx={muiStyles.menuItem}>
       <Box sx={muiStyles.listItem}>

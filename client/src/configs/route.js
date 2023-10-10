@@ -23,6 +23,10 @@ const routes = {
     path: '/users',
     title: 'pages.users'
   },
+  user: {
+    path: '/users/:id',
+    title: 'pages.user'
+  },
   todo: {
     path: '/todo',
   },

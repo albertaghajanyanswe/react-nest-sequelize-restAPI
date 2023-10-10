@@ -1,34 +1,15 @@
+import { UserRole } from "./shared/types";
+
 const routesAccess = {
-  overview: {
-    access: []
+  home: {
+    access: [UserRole.Guest, UserRole.User, UserRole.Admin]
   },
-  clients: {
-    access: []
-  },
-  companies: {
-    access: []
-  },
-  payments: {
-    access: []
-  },
-  appointments: {
-    access: []
-  },
-  applications: {
-    access: []
-  },
-  notifications: {
-    access: []
+  users: {
+    access: [UserRole.User, UserRole.Admin]
   },
   settings: {
-    access: []
+    access: [UserRole.User, UserRole.Admin]
   },
 };
 
-const roles = {
-  guest: 'GUEST',
-  user: 'USER',
-  admin: 'ADMIN',
-}
-
-export {routesAccess, roles};
+export {routesAccess};

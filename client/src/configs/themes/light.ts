@@ -7,16 +7,26 @@ declare module '@mui/material/styles' {
     warning?: string;
     success?: string;
     info?: string;
-    blue1?: string;
-    blue2?: string;
-    blue3?: string;
-    blue4?: string;
-    blue5?: string;
-    blue6?: string;
-    grey1?: string;
-    grey2?: string;
-    grey3?: string;
-    grey4?: string;
+    lightBG1?: string;
+    btnMainDisabled?: string;
+    btnMainHover?: string;
+    btnMainPressed?: string;
+    btnMain?: string;
+    textColor1?: string;
+    textColor2?: string;
+    textColor3?: string;
+    textColor4?: string;
+    textColor5?: string;
+    textColor6?: string;
+    textColor7?: string;
+    borderColor1?: string;
+    borderColor2?: string;
+    borderColor3?: string;
+    borderColor4?: string;
+    borderColor5?: string;
+    borderColor6?: string;
+    borderColor7?: string;
+    borderColor8?: string;
     red1: string;
     red2: string;
     red3: string;
@@ -37,16 +47,26 @@ declare module '@mui/material/styles' {
     warning?: string;
     success?: string;
     info?: string;
-    blue1?: string;
-    blue2?: string;
-    blue3?: string;
-    blue4?: string;
-    blue5?: string;
-    blue6?: string;
-    grey1?: string;
-    grey2?: string;
-    grey3?: string;
-    grey4?: string;
+    lightBG1?: string;
+    btnMain?: string;
+    btnMainHover?: string;
+    btnMainPressed?: string;
+    btnMainDisabled?: string;
+    textColor1?: string;
+    textColor2?: string;
+    textColor3?: string;
+    textColor4?: string;
+    textColor5?: string;
+    textColor6?: string;
+    textColor7?: string;
+    borderColor1?: string;
+    borderColor2?: string;
+    borderColor3?: string;
+    borderColor4?: string;
+    borderColor5?: string;
+    borderColor6?: string;
+    borderColor7?: string;
+    borderColor8?: string;
     red1: string;
     red2: string;
     red3: string;
@@ -76,16 +96,30 @@ const Default = (): DefaultPaletteOptions => {
       warning: '#E99800',
       success: '#21a900',
       info: '#096C7C',
-      blue1: '#FAFBFD',
-      blue2: '#DFE8F3',
-      blue3: '#CFE3F2',
-      blue4: '#457BAC',
-      blue5: '#226395',
-      blue6: '#004B7F',
-      grey1: '#F1F4FA',
-      grey2: '#B4B4B4',
-      grey3: '#878787',
-      grey4: '#1D1D1D',
+      lightBG1: '#FAFBFD',
+
+      btnMain: '#004B7F',
+      btnMainHover: '#457BAC',
+      btnMainPressed: '#226395',
+      btnMainDisabled: '#CFE3F2',
+
+      textColor1: '#1D1D1B',
+      textColor2: '#ECF4F9',
+      textColor3: '#728191',
+      textColor4: '#878787',
+      textColor5: '#494947',
+      textColor6: '#9FAEBD',
+      textColor7: '#8998A8',
+
+      borderColor1: '#F1F4FA',
+      borderColor2: '#DFE8F3',
+      borderColor3: '#B4B4B4',
+      borderColor4: '#E0E0E0',
+      borderColor5: '#ECE8E2',
+      borderColor6: '#D2CDC6',
+      borderColor7: '#EFEFEF',
+      borderColor8: '#8EB8D7',
+
       red1: '#FEF1F3',
       red2: '#F7D9DE',
       red3: '#d16374',
@@ -105,16 +139,26 @@ const Default = (): DefaultPaletteOptions => {
       warning: '#E99800',
       success: '#21a900',
       info: '#096C7C',
-      blue1: '#FAFBFD',
-      blue2: '#DFE8F3',
-      blue3: '#CFE3F2',
-      blue4: '#457BAC',
-      blue5: '#226395',
-      blue6: '#004B7F',
-      grey1: '#F1F4FA',
-      grey2: '#B4B4B4',
-      grey3: '#878787',
-      grey4: '#1D1D1D',
+      lightBG1: '#FAFBFD',
+
+      btnMain: '#004B7F',
+      btnMainHover: '#457BAC',
+      btnMainPressed: '#226395',
+      btnMainDisabled: '#CFE3F2',
+
+      textColor1: '#1D1D1B',
+      textColor2: '#ECF4F9',
+      textColor3: '#728191',
+      textColor4: '#878787',
+      textColor5: '#494947',
+
+      textColor6: '#9FAEBD',
+      textColor7: '#8998A8',
+
+      borderColor1: '#F1F4FA',
+      borderColor2: '#DFE8F3',
+      borderColor3: '#B4B4B4',
+
       red1: '#FEF1F3',
       red2: '#F7D9DE',
       red3: '#d16374',

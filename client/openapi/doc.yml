@@ -1,16 +1,10 @@
 openapi: 3.0.0
 paths:
-  /api/users/signup:
+  /api/users/registration:
     post:
-      operationId: UsersController_create
+      operationId: UsersController_register
       summary: Create new user
       parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateUserDto'
       responses:
         '200':
           description: ''
@@ -22,6 +16,40 @@ paths:
         - Users
       security: &ref_1
         - bearer: []
+  /api/users/registration/guest:
+    post:
+      operationId: UsersController_registerGuest
+      summary: Create new guest user
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      tags: *ref_0
+      security: *ref_1
+  /api/users/activate/{link}:
+    get:
+      operationId: UsersController_activateUser
+      summary: Activate registred user account
+      parameters:
+        - name: link
+          required: true
+          in: path
+          description: The activation link
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      tags: *ref_0
+      security: *ref_1
   /api/users:
     get:
       operationId: UsersController_getAll
@@ -33,9 +61,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/GetUsersDto'
       tags: *ref_0
       security: *ref_1
   /api/roles:
@@ -57,7 +83,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Role'
       tags: &ref_2
-        - roles
+        - Roles
   /api/roles/{value}:
     get:
       operationId: RolesController_getRoleByValue
@@ -83,6 +109,46 @@ paths:
       responses:
         '201':
           description: ''
+      tags: &ref_3
+        - Auth
+  /api/auth/postLogin:
+    post:
+      operationId: AuthController_postLogin
+      summary: Login
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostLoginDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      tags: *ref_3
+  /api/auth/postLogin/guest:
+    post:
+      operationId: AuthController_postLoginGuest
+      summary: Login guest
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostLoginGuestDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      tags: *ref_3
 info:
   title: Test BE
   description: Description for REST APIs
@@ -99,20 +165,6 @@ components:
       bearerFormat: JWT
       type: http
   schemas:
-    CreateUserDto:
-      type: object
-      properties:
-        email:
-          type: string
-          example: test@yopmail.com
-          description: User email address
-        password:
-          type: string
-          example: '11111'
-          description: User password
-      required:
-        - email
-        - password
     User:
       type: object
       properties:
@@ -120,6 +172,10 @@ components:
           type: number
           example: '1'
           description: Unique id
+        nickName:
+          type: string
+          example: Nick name
+          description: User nick name
         firstName:
           type: string
           example: First name
@@ -136,10 +192,22 @@ components:
           type: string
           example: '11111'
           description: User password
+        passwordExpireDate:
+          type: string
+          example: '2023-09-19 19:31:35.669+04'
+          description: User password expire date
+        lastLogin:
+          type: string
+          example: '2023-09-19 19:31:35.669+04'
+          description: User last login date
         phone:
           type: string
           example: Last name
           description: User last name
+        activationLink:
+          type: string
+          example: ''
+          description: User activation link
         isActive:
           type: boolean
           example: true
@@ -154,16 +222,52 @@ components:
           type: array
           items:
             type: string
+        image:
+          type: string
+          example: ''
+          description: User image
+        firebaseSubscription:
+          type: string
+          example: ''
+          description: Firebase subscription
+        firebaseToken:
+          type: string
+          example: ''
+          description: Firebase token
+        deviceType:
+          type: string
+          example: ''
+          description: Device type
       required:
         - id
+        - nickName
         - firstName
         - lastName
         - email
         - password
+        - passwordExpireDate
+        - lastLogin
         - phone
+        - activationLink
         - isActive
         - archived
         - roles
+        - image
+        - firebaseSubscription
+        - firebaseToken
+        - deviceType
+    GetUsersDto:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        count:
+          type: number
+      required:
+        - data
+        - count
     CreateRoleDto:
       type: object
       properties: {}
@@ -186,3 +290,31 @@ components:
         - id
         - value
         - description
+    PostLoginDto:
+      type: object
+      properties:
+        email:
+          type: string
+          example: test@yopmail.com
+          description: User email address
+        password:
+          type: string
+          example: '11111'
+          description: User password
+      required:
+        - email
+        - password
+    PostLoginGuestDto:
+      type: object
+      properties:
+        nickName:
+          type: string
+          example: test
+          description: User nickname
+        password:
+          type: string
+          example: '11111'
+          description: User password
+      required:
+        - nickName
+        - password

@@ -23,11 +23,11 @@ const stylesCallback = (theme?: Theme | undefined) => ({
   },
   primaryBtn: {
     color: 'white',
-    backgroundColor: 'primary.blue5',
+    backgroundColor: 'primary.btnMainPressed',
     borderRadius: '500px',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'primary.blue5',
+    borderColor: 'primary.btnMainPressed',
     fontSize: '16px',
     lineHeight: '24px',
     fontWeight: 500,
@@ -37,25 +37,25 @@ const stylesCallback = (theme?: Theme | undefined) => ({
 
     '&:hover': {
       boxShadow: 'none',
-      backgroundColor: 'primary.blue4',
+      backgroundColor: 'primary.btnMainHover',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: 'primary.blue4',
+      borderColor: 'primary.btnMainHover',
     },
     '&:active': {
       boxShadow: 'none',
-      backgroundColor: 'primary.blue6',
+      backgroundColor: 'primary.btnMain',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: 'primary.blue6',
+      borderColor: 'primary.btnMain',
     },
     '&:disabled': {
       boxShadow: 'none',
-      backgroundColor: 'primary.blue3',
+      backgroundColor: 'primary.btnMainDisabled',
       color: 'primary.textColor2',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: 'primary.blue3',
+      borderColor: 'primary.btnMainDisabled',
     },
   },
   secondaryBtn: {
@@ -66,15 +66,15 @@ const stylesCallback = (theme?: Theme | undefined) => ({
     boxShadow: 'none',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'primary.blue5',
+    borderColor: 'primary.btnMainPressed',
     color: 'primary.main',
     borderRadius: '500px',
     '&:hover': {
       boxShadow: 'none',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: 'primary.blue4',
-      color: 'primary.blue4',
+      borderColor: 'primary.btnMainHover',
+      color: 'primary.btnMainHover',
       backgroundColor: 'inherit',
       '& > span': {
         '& > svg': {
@@ -88,16 +88,16 @@ const stylesCallback = (theme?: Theme | undefined) => ({
       boxShadow: 'none',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: 'primary.blue4',
-      color: 'primary.blue4',
+      borderColor: 'primary.btnMainHover',
+      color: 'primary.btnMainHover',
       backgroundColor: 'inherit'
     },
     '&:disabled': {
       boxShadow: 'none',
-      color: 'primary.blue3',
+      color: 'primary.btnMainDisabled',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: 'primary.blue3',
+      borderColor: 'primary.btnMainDisabled',
       background: 'white',
       '& > span': {
         '& > svg': {
@@ -116,14 +116,14 @@ const stylesCallback = (theme?: Theme | undefined) => ({
     boxShadow: 'none',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'primary.blue5',
+    borderColor: 'primary.btnMainPressed',
     color: 'primary.btnMain',
     borderRadius: '500px',
     '&:hover': {
       boxShadow: 'none',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: 'primary.blue3',
+      borderColor: 'primary.btnMainDisabled',
       color: 'primary.btnMainHover',
       backgroundColor: 'inherit',
       '& > span': {
@@ -138,13 +138,13 @@ const stylesCallback = (theme?: Theme | undefined) => ({
       boxShadow: 'none',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: 'primary.blue4',
+      borderColor: 'primary.btnMainHover',
       color: 'primary.btnMainPressed',
-      backgroundColor: 'primary.blue4'
+      backgroundColor: 'primary.btnMainHover'
     },
     '&:disabled': {
       boxShadow: 'none',
-      color: 'primary.blue3',
+      color: 'primary.btnMainDisabled',
       borderWidth: '1px',
       borderStyle: 'solid',
       borderColor: 'primary.textColor2',
@@ -159,7 +159,7 @@ const stylesCallback = (theme?: Theme | undefined) => ({
     },
     '&.Mui-disabled': {
       boxShadow: 'none',
-      color: 'primary.blue3',
+      color: 'primary.btnMainDisabled',
       borderWidth: '1px',
       borderStyle: 'solid',
       borderColor: 'primary.textColor2',

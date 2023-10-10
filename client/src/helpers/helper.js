@@ -29,4 +29,14 @@ function stringAvatar(name, w, h) {
     children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
   };
 }
-export { getMessage, deleteAllSpacesFromStr, dateFormat, stringAvatar };
+
+function isJsonString(str) {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
+
+export { getMessage, deleteAllSpacesFromStr, dateFormat, stringAvatar, isJsonString };

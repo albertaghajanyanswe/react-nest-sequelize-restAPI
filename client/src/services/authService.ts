@@ -1,11 +1,11 @@
 // import { CreateUserDto, DefaultApi, User, UsersApi } from '../generated/openapi';
-import { DefaultApi } from '../generated/openapi';
+import { AuthApi } from '../generated/openapi';
 
 import { axiosInstance } from './client/axiosHelper';
 
 const PREFIX = 'api';
 
-let authApi = new DefaultApi(undefined, PREFIX, axiosInstance)
+let authApi = new AuthApi(undefined, PREFIX, axiosInstance)
 // let authApi = new DefaultApi(new Configuration());
 
 const authService = {

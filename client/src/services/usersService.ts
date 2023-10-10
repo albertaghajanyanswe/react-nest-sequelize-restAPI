@@ -1,41 +1,32 @@
 import { AxiosResponse } from 'axios';
-import { CreateUserDto, User, UsersApi } from '../generated/openapi';
+import { iRegistrationGuest } from '../configs/shared/types';
+import { GetUsersDto, User, UsersApi } from '../generated/openapi';
 import { axiosInstance } from './client/axiosHelper';
 
 const PREFIX = '/api';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function decodeCreateUser<T,>(response: AxiosResponse<CreateUserDto>): {
-  email: string,
+function decodeCreateUser<T,>(response: AxiosResponse<iRegistrationGuest>): {
+  nickName: string,
   password: string
 } {
-  const { email, password } = response.data
+  const { nickName, password } = response.data
   return {
-    email,
+    nickName,
     password
   }
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function decodeGetUsers<T,>(response: AxiosResponse<User[]>): {
-  id: number,
-  email: string,
-  password: string,
-  firstName: string
-  lastName: string,
-  phone: string,
-  isActive: boolean,
-  archived: boolean,
-  roles: any
-}[] {
-  return response.data;
+function decodeGetUsers<T,>(response: AxiosResponse<GetUsersDto>) {
+  return response;
 }
 
 const usersApi = new UsersApi(undefined, PREFIX, axiosInstance)
 
 const usersService = {
-  createUser: async <T>({data}: {data: { email: string, password: string }}) => {
-    return decodeCreateUser<T>(await usersApi.usersControllerCreate(data));
+  createUser: async <T>({ data }: { data: { nickName: string, password: string } }) => {
+    return decodeCreateUser<T>(await usersApi.usersControllerRegisterGuest({ data }));
   },
   getUsers: async <T>(params: any) => {
     return decodeGetUsers<T[]>(await usersApi.usersControllerGetAll(params));

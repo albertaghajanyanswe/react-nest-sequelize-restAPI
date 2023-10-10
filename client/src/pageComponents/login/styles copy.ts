@@ -29,7 +29,7 @@ const stylesWithTheme = (theme: Theme) => ({
     alignSelf: 'center',
     color: theme.palette.primary.main,
     '&:hover': {
-      color: theme.palette.primary.blue4,
+      color: theme.palette.primary.btnMainHover,
     }
   },
   submit: {

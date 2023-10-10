@@ -10,7 +10,7 @@ const muiStyles = {
     fontSize: '14px',
     lineHeight: '16px',
     fontWeight: 500,
-    color: 'primary.grey3',
+    color: 'primary.textColor4',
     // NOTE: hide text color change for checkboxes
     '&.Mui-focused': {
       color: 'primary.textColor5'
@@ -30,7 +30,7 @@ const muiStyles = {
       fontSize: '12px',
       lineHeight: '16px',
       mt: '8px!important',
-      backgroundColor: 'primary.blue3',
+      backgroundColor: 'primary.btnMainDisabled',
       color: 'primary.main',
       fontWeight: '500'
     }
