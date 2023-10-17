@@ -137,9 +137,9 @@ const FormFileInput = <T extends FieldValues>({
   return (
     <Box sx={{ ...muiStyles.container, ...sx }} display="flex" flexDirection="column">
       <Box sx={{ ...muiStyles.root, ...rootSx, ...(error && muiStyles.rootError) }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: {xs: 'center', sm: 'center', md: 'center', lg: 'inherit'}, flexDirection: { xs: 'column', sm: 'column', md: 'column', lg: 'row'} }}>
           <Box>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: { xs: 'column', sm: 'row', md: 'row', lg: 'row'} }}>
               <Avatar alt={alt} src={isLoading ? LOADING_GIF : imagePath(initialFile) || previewFile} sx={{ mr: 2, width: 72, height: 72 }} />
               <Box component="div" sx={{ display: 'flex', flexDirection: 'column' }}>
                 {label ? typeof label === 'string' ? <Typography sx={{ ...muiStyles.label, ...labelSx }}>{label}</Typography> : label : null}
@@ -147,7 +147,7 @@ const FormFileInput = <T extends FieldValues>({
               </Box>
             </Box>
           </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', margin: {xs: '24px 0', sm: '24px 0', md: '24px 0', lg: '0'} }}>
             {initialFile && <IconButton onClick={onDelete} sx={{ height: '32px', width: '32px', mr: '12px', '& > svg': { '& > path': { stroke: '#004B7F' } } }}>
               <CleanSvg />
             </IconButton>}

@@ -86,6 +86,21 @@ const ru = {
     inactive: 'Неактивный',
     allUsers: 'Все пользователи'
   },
+  profile: {
+    yourPhoto: 'Ваше фото',
+    photoDesc: 'Это будет отображаться в вашем профиле',
+    deleteAccount: 'Удалить учетную запись',
+    deleteThisAccount: 'Удалить учетную запись',
+    deleteAccountDesc_1: 'Это действие приведет к удалению всех данных, связанных с вашей учетной записью.',
+    deleteAccountDesc_2_1: 'Вы ',
+    deleteAccountDesc_2_2: 'не сможете восстановиться',
+    deleteAccountDesc_2_3: ' ваша учетная запись самостоятельно',
+    deleteModal: {
+      deleteAccount: 'Вы хотите удалить свою учетную запись?',
+      remove: 'Да, удалить',
+      cancel: 'Нет, не удалять '
+    }
+  },
   actions: {
     login: 'Войти',
     signIn: 'Войти',
@@ -97,7 +112,8 @@ const ru = {
     delete: 'Удалить',
     setReminder: 'Установить время напоминания',
     changeStatus: 'Нажмите на строку, чтобы изменить статус',
-    save: 'Сохранить'
+    save: 'Сохранить',
+    uploadNewImage: 'Загрузить новое изображение',
   },
   actionMsg: {
     success: {
