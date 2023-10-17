@@ -29,7 +29,7 @@ function UsersLayout<T extends {id: number}>({
   handleRefetch
 }: iProps<T>) {
 
-  const currentUser = getCurrentUser();
+  const currentUser = getCurrentUser()?.user;
 
   // calculate component height
   const pageHeaderRef = useRef<any>();

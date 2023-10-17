@@ -93,17 +93,57 @@ export interface Role {
      */
     'id': number;
     /**
-     * Role value
+     * 
      * @type {string}
      * @memberof Role
      */
-    'value': string;
+    'value': RoleValueEnum;
     /**
      * Role description
      * @type {string}
      * @memberof Role
      */
     'description': string;
+}
+
+export const RoleValueEnum = {
+    Admin: 'ADMIN',
+    User: 'USER',
+    Guest: 'GUEST'
+} as const;
+
+export type RoleValueEnum = typeof RoleValueEnum[keyof typeof RoleValueEnum];
+
+/**
+ * 
+ * @export
+ * @interface UpdateUserDto
+ */
+export interface UpdateUserDto {
+    /**
+     * User first name
+     * @type {string}
+     * @memberof UpdateUserDto
+     */
+    'firstName': string;
+    /**
+     * User last name
+     * @type {string}
+     * @memberof UpdateUserDto
+     */
+    'lastName': string;
+    /**
+     * User last name
+     * @type {string}
+     * @memberof UpdateUserDto
+     */
+    'phone': string;
+    /**
+     * User image
+     * @type {string}
+     * @memberof UpdateUserDto
+     */
+    'image': string;
 }
 /**
  * 
@@ -213,6 +253,115 @@ export interface User {
      * @memberof User
      */
     'deviceType': string;
+}
+/**
+ * 
+ * @export
+ * @interface UserDto
+ */
+export interface UserDto {
+    /**
+     * Unique id
+     * @type {number}
+     * @memberof UserDto
+     */
+    'id': number;
+    /**
+     * User nick name
+     * @type {string}
+     * @memberof UserDto
+     */
+    'nickName': string;
+    /**
+     * User first name
+     * @type {string}
+     * @memberof UserDto
+     */
+    'firstName': string;
+    /**
+     * User last name
+     * @type {string}
+     * @memberof UserDto
+     */
+    'lastName': string;
+    /**
+     * User email address
+     * @type {string}
+     * @memberof UserDto
+     */
+    'email': string;
+    /**
+     * User password
+     * @type {string}
+     * @memberof UserDto
+     */
+    'password': string;
+    /**
+     * User password expire date
+     * @type {string}
+     * @memberof UserDto
+     */
+    'passwordExpireDate': string;
+    /**
+     * User last login date
+     * @type {string}
+     * @memberof UserDto
+     */
+    'lastLogin': string;
+    /**
+     * User last name
+     * @type {string}
+     * @memberof UserDto
+     */
+    'phone': string;
+    /**
+     * User activation link
+     * @type {string}
+     * @memberof UserDto
+     */
+    'activationLink': string;
+    /**
+     * User active state
+     * @type {boolean}
+     * @memberof UserDto
+     */
+    'isActive': boolean;
+    /**
+     * User archived
+     * @type {boolean}
+     * @memberof UserDto
+     */
+    'archived': boolean;
+    /**
+     * User image
+     * @type {string}
+     * @memberof UserDto
+     */
+    'image': string;
+    /**
+     * Firebase subscription
+     * @type {string}
+     * @memberof UserDto
+     */
+    'firebaseSubscription': string;
+    /**
+     * Firebase token
+     * @type {string}
+     * @memberof UserDto
+     */
+    'firebaseToken': string;
+    /**
+     * Device type
+     * @type {string}
+     * @memberof UserDto
+     */
+    'deviceType': string;
+    /**
+     * 
+     * @type {Array<Role>}
+     * @memberof UserDto
+     */
+    'roles': Array<Role>;
 }
 
 /**
@@ -449,6 +598,108 @@ export class AuthApi extends BaseAPI {
 
 
 /**
+ * FilesApi - axios parameter creator
+ * @export
+ */
+export const FilesApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} filename 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fileControllerServeFile: async (filename: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'filename' is not null or undefined
+            assertParamExists('fileControllerServeFile', 'filename', filename)
+            const localVarPath = `/api/files/{filename}`
+                .replace(`{${"filename"}}`, encodeURIComponent(String(filename)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * FilesApi - functional programming interface
+ * @export
+ */
+export const FilesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = FilesApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} filename 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async fileControllerServeFile(filename: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.fileControllerServeFile(filename, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * FilesApi - factory interface
+ * @export
+ */
+export const FilesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = FilesApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} filename 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fileControllerServeFile(filename: string, options?: any): AxiosPromise<void> {
+            return localVarFp.fileControllerServeFile(filename, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * FilesApi - object-oriented interface
+ * @export
+ * @class FilesApi
+ * @extends {BaseAPI}
+ */
+export class FilesApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} filename 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesApi
+     */
+    public fileControllerServeFile(filename: string, options?: AxiosRequestConfig) {
+        return FilesApiFp(this.configuration).fileControllerServeFile(filename, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
  * RolesApi - axios parameter creator
  * @export
  */
@@ -624,6 +875,243 @@ export class RolesApi extends BaseAPI {
 
 
 /**
+ * UploadsApi - axios parameter creator
+ * @export
+ */
+export const UploadsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Delete file by name
+         * @param {string} filename 
+         * @param {string} link File name
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadControllerDeleteAvatar: async (filename: string, link: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'filename' is not null or undefined
+            assertParamExists('uploadControllerDeleteAvatar', 'filename', filename)
+            // verify required parameter 'link' is not null or undefined
+            assertParamExists('uploadControllerDeleteAvatar', 'link', link)
+            const localVarPath = `/api/uploads/avatar/delete/{filename}`
+                .replace(`{${"filename"}}`, encodeURIComponent(String(filename)))
+                .replace(`{${"link"}}`, encodeURIComponent(String(link)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadControllerUploadAvatar: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/uploads/avatar`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadControllerUploadFile: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/uploads`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * UploadsApi - functional programming interface
+ * @export
+ */
+export const UploadsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = UploadsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Delete file by name
+         * @param {string} filename 
+         * @param {string} link File name
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async uploadControllerDeleteAvatar(filename: string, link: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadControllerDeleteAvatar(filename, link, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async uploadControllerUploadAvatar(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadControllerUploadAvatar(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async uploadControllerUploadFile(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadControllerUploadFile(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * UploadsApi - factory interface
+ * @export
+ */
+export const UploadsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = UploadsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Delete file by name
+         * @param {string} filename 
+         * @param {string} link File name
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadControllerDeleteAvatar(filename: string, link: string, options?: any): AxiosPromise<object> {
+            return localVarFp.uploadControllerDeleteAvatar(filename, link, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadControllerUploadAvatar(options?: any): AxiosPromise<void> {
+            return localVarFp.uploadControllerUploadAvatar(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadControllerUploadFile(options?: any): AxiosPromise<void> {
+            return localVarFp.uploadControllerUploadFile(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * UploadsApi - object-oriented interface
+ * @export
+ * @class UploadsApi
+ * @extends {BaseAPI}
+ */
+export class UploadsApi extends BaseAPI {
+    /**
+     * 
+     * @summary Delete file by name
+     * @param {string} filename 
+     * @param {string} link File name
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UploadsApi
+     */
+    public uploadControllerDeleteAvatar(filename: string, link: string, options?: AxiosRequestConfig) {
+        return UploadsApiFp(this.configuration).uploadControllerDeleteAvatar(filename, link, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UploadsApi
+     */
+    public uploadControllerUploadAvatar(options?: AxiosRequestConfig) {
+        return UploadsApiFp(this.configuration).uploadControllerUploadAvatar(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UploadsApi
+     */
+    public uploadControllerUploadFile(options?: AxiosRequestConfig) {
+        return UploadsApiFp(this.configuration).uploadControllerUploadFile(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
  * UsersApi - axios parameter creator
  * @export
  */
@@ -675,6 +1163,40 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
          */
         usersControllerGetAll: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/users`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get current users
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersControllerGetCurrentUser: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/users/currentUser`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -769,6 +1291,50 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary Update user info
+         * @param {number} id User id
+         * @param {UpdateUserDto} updateUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersControllerUpdateUser: async (id: number, updateUserDto: UpdateUserDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('usersControllerUpdateUser', 'id', id)
+            // verify required parameter 'updateUserDto' is not null or undefined
+            assertParamExists('usersControllerUpdateUser', 'updateUserDto', updateUserDto)
+            const localVarPath = `/api/users/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateUserDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -802,6 +1368,16 @@ export const UsersApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Get current users
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersControllerGetCurrentUser(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersControllerGetCurrentUser(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary Create new user
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -818,6 +1394,18 @@ export const UsersApiFp = function(configuration?: Configuration) {
          */
         async usersControllerRegisterGuest(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.usersControllerRegisterGuest(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Update user info
+         * @param {number} id User id
+         * @param {UpdateUserDto} updateUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersControllerUpdateUser(id: number, updateUserDto: UpdateUserDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersControllerUpdateUser(id, updateUserDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -851,6 +1439,15 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
+         * @summary Get current users
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersControllerGetCurrentUser(options?: any): AxiosPromise<UserDto> {
+            return localVarFp.usersControllerGetCurrentUser(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Create new user
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -866,6 +1463,17 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          */
         usersControllerRegisterGuest(options?: any): AxiosPromise<User> {
             return localVarFp.usersControllerRegisterGuest(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update user info
+         * @param {number} id User id
+         * @param {UpdateUserDto} updateUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersControllerUpdateUser(id: number, updateUserDto: UpdateUserDto, options?: any): AxiosPromise<User> {
+            return localVarFp.usersControllerUpdateUser(id, updateUserDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -902,6 +1510,17 @@ export class UsersApi extends BaseAPI {
 
     /**
      * 
+     * @summary Get current users
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public usersControllerGetCurrentUser(options?: AxiosRequestConfig) {
+        return UsersApiFp(this.configuration).usersControllerGetCurrentUser(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Create new user
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -920,6 +1539,19 @@ export class UsersApi extends BaseAPI {
      */
     public usersControllerRegisterGuest(options?: AxiosRequestConfig) {
         return UsersApiFp(this.configuration).usersControllerRegisterGuest(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update user info
+     * @param {number} id User id
+     * @param {UpdateUserDto} updateUserDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public usersControllerUpdateUser(id: number, updateUserDto: UpdateUserDto, options?: AxiosRequestConfig) {
+        return UsersApiFp(this.configuration).usersControllerUpdateUser(id, updateUserDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

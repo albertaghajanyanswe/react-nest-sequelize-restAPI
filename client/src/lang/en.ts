@@ -24,7 +24,9 @@ const en = {
   },
   lang: {
     english: 'English',
-    russian: 'Русский'
+    russian: 'Русский',
+    en: 'EN',
+    ru: 'РУ'
   },
   login: {
     title: 'Sign in',
@@ -83,7 +85,22 @@ const en = {
     userStatus: 'User status',
     active: 'Active',
     inactive: 'In active',
-    allUsers: 'All users'
+    allUsers: 'All users',
+  },
+  profile: {
+    yourPhoto: 'Your photo',
+    photoDesc: 'This will be displayed on your profile',
+    deleteAccount: 'Delete account',
+    deleteThisAccount: 'Delete this account',
+    deleteAccountDesc_1: 'This action will delete all data related to your account.',
+    deleteAccountDesc_2_1: 'You ',
+    deleteAccountDesc_2_2: 'won’t be able to recover',
+    deleteAccountDesc_2_3: ' your account on your own.',
+    deleteModal: {
+      deleteAccount: 'Do you want to remove your account ?',
+      remove: 'Yes, remove',
+      cancel: 'No, don’t remove '
+    }
   },
   actions: {
     login: 'Login',
@@ -97,7 +114,9 @@ const en = {
     setReminder: 'Set reminder time',
     changeStatus: 'Click to the row to change status',
     clickToRow: 'Click to the row',
-    recoverDeletedItem: 'Recover deleted item'
+    recoverDeletedItem: 'Recover deleted item',
+    save: 'Save',
+    uploadNewImage: 'Upload new image',
   },
   deleteUserModal: {
     title1: 'Do you want to remove',

@@ -17,7 +17,7 @@ export const stylesWithTheme = (theme: Theme) => ({
     color: theme.palette.primary.main,
   },
   listItemText: {
-    '& > span:first-child': {
+    '& > span:first-of-type': {
       fontWeight: '400',
       fontSize: '14px'
     }

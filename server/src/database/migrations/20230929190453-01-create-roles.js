@@ -38,7 +38,7 @@ module.exports = {
             primaryKey: true,
           },
           value: {
-            type: Sequelize.STRING,
+            type: Sequelize.ENUM('ADMIN', 'USER', 'GUEST'),
             allowNull: false,
           },
           description: {

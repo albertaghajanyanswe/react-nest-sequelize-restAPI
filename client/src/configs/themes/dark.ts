@@ -8,6 +8,7 @@ declare module '@mui/material/styles' {
     success?: string;
     info?: string;
     lightBG1?: string;
+    lightBG2?: string;
     btnMainDisabled?: string;
     btnMainHover?: string;
     btnMainPressed?: string;
@@ -48,6 +49,7 @@ declare module '@mui/material/styles' {
     success?: string;
     info?: string;
     lightBG1?: string;
+    lightBG2?: string;
     btnMainDisabled?: string;
     btnMainHover?: string;
     btnMainPressed?: string;
@@ -90,16 +92,17 @@ interface DefaultPaletteOptions extends PaletteOptions {
 const Default = (): DefaultPaletteOptions => {
   return {
     primary: {
-      main: '#E5AF6C',
+      main: '#383e43',
       error: '#f44336',
       warning: '##ffcf40',
       success: '#00ff2a',
       info: '#096C7C',
       lightBG1: '#FAFBFD',
-      btnMainDisabled: '#CFE3F2',
-      btnMainHover: '#457BAC',
-      btnMainPressed: '#226395',
-      btnMain: '#004B7F',
+      lightBG2: '#f5f5f5',
+      btnMainDisabled: '#d4d9dd',
+      btnMainHover: '#636e77',
+      btnMainPressed: '#565f67',
+      btnMain: '#383e43',
       textColor1: '#1D1D1B',
       textColor2: '#ECF4F9',
       textColor3: '#728191',
@@ -115,7 +118,7 @@ const Default = (): DefaultPaletteOptions => {
       borderColor5: '#ECE8E2',
       borderColor6: '#D2CDC6',
       borderColor7: '#EFEFEF',
-      borderColor8: '#8EB8D7',
+      borderColor8: '#9ea6ad',
 
       red1: '#FEF1F3',
       red2: '#F7D9DE',
@@ -137,6 +140,7 @@ const Default = (): DefaultPaletteOptions => {
       success: '#00ff2a',
       info: '#096C7C',
       lightBG1: '#FAFBFD',
+      lightBG2: '#f5f5f5',
       btnMainDisabled: '#CFE3F2',
       btnMainHover: '#457BAC',
       btnMainPressed: '#226395',
@@ -175,7 +179,8 @@ const Default = (): DefaultPaletteOptions => {
 
 const defaultColors = Default();
 const palette: PaletteOptions = {
-  mode: 'dark',
+  // mode: 'dark',
+  mode: 'light',
   ...defaultColors,
 };
 
@@ -198,10 +203,76 @@ const theme = createTheme({
     },
   },
   components: {
+    // MuiTableSortLabel: {
+    //   styleOverrides: {
+    //     root: {
+    //       '&:hover': {
+    //         color: 'black',
+    //       }
+    //     }
+    //   }
+    // },
+    // MuiAvatar: {
+    //   styleOverrides: {
+    //     root: {
+    //       backgroundColor: '#bdbdbd',
+    //       color: 'white'
+    //     }
+    //   }
+    // },
+    // MuiPaper: {
+    //   styleOverrides: {
+    //     root: {
+    //       backgroundColor: 'white',
+    //     }
+    //   }
+    // },
+    // MuiTableBody: {
+    //   styleOverrides: {
+    //     root: {
+    //       backgroundColor: 'white',
+    //     }
+    //   }
+    // },
+    MuiInputBase: {
+      styleOverrides: {
+        input: {
+          fontFamily: 'Poppins',
+        }
+      }
+    },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          fontFamily: 'Poppins',
+        }
+      }
+    },
+    MuiGrid: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'Poppins',
+        }
+      }
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'Poppins',
+        }
+      }
+    },
+    MuiFormLabel: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'Poppins',
+        }
+      }
+    },
     MuiFormHelperText: {
       styleOverrides: {
         root: {
-          // fontFamily: 'Poppins',
+          fontFamily: 'Poppins',
         }
       }
     },
@@ -224,7 +295,7 @@ const theme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          // fontFamily: 'Poppins',
+          fontFamily: 'Poppins',
         }
       }
     },
@@ -233,31 +304,34 @@ const theme = createTheme({
         notchedOutline: {
           border: '1px solid #E0E0E0;',
         },
-        input: {
+        // input: {
+        //   WebkitTextFillColor: '#878787!important',
+        // },
+
+        root: {
+          color: '#1D1D1B',
           '&::placeholder': {
             color: '#878787',
             opacity: 1,
-            // fontFamily: 'Poppins',
+            fontFamily: 'Poppins',
           },
-        },
-
-        root: {
           '& .MuiInputBase-inputSizeSmall': {
             padding: '12.5px 16px'
           },
           '& .MuiInputBase-sizeSmall': {
             padding: '12.5px 16px'
           },
-          // fontFamily: 'Poppins',
+          fontFamily: 'Poppins',
           '&:hover': {
             '& .MuiOutlinedInput-notchedOutline': {
-              border: '1px solid #6EA3C9'
+              border: '1px solid #939393'
             },
           },
           '&.Mui-focused': {
             '& .MuiOutlinedInput-notchedOutline': {
-              border: '1px solid #004B7F',
-              boxShadow: '0px 0px 0px 3px rgba(0, 75, 127, 0.1)'
+              border: '1px solid #939393',
+              boxShadow: '0px 0px 0px 3px rgb(45 75 125 / 10%)'
+              // boxShadow: '0px 0px 0px 3px rgba(0, 75, 127, 0.1)'
             },
           },
           '&.Mui-error': {
@@ -268,6 +342,15 @@ const theme = createTheme({
               '& .MuiOutlinedInput-notchedOutline': {
                 boxShadow: '0px 0px 0px 2px rgba(198, 40, 64, 0.1)'
               },
+            },
+          },
+          '&.Mui-disabled': {
+            backgroundColor: '#f5f5f5',
+            '& > input': {
+              cursor: 'text',
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              border: '1px solid #E0E0E0',
             },
           },
 
@@ -316,7 +399,7 @@ const theme = createTheme({
           fontSize: '14px',
           lineHeight: '24px',
           fontWeight: 400,
-          // fontFamily: 'Poppins',
+          fontFamily: 'Poppins',
           '& .MuiMenuItem-root': {
             '&:hover': {
               backgroundColor: '#F3FAFF',
@@ -336,7 +419,7 @@ const theme = createTheme({
         root: {
           fontSize: '16px',
           fontWeight: 600,
-          // fontFamily: 'Poppins',
+          fontFamily: 'Poppins',
         },
       },
     },
@@ -350,7 +433,7 @@ const theme = createTheme({
     MuiStepLabel: {
       styleOverrides: {
         label: {
-          // fontFamily: 'Poppins',
+          fontFamily: 'Poppins',
         }
       }
     },
@@ -360,7 +443,7 @@ const theme = createTheme({
           fontSize: 24,
           fontWeight: 700,
           color: '#646681',
-          // fontFamily: 'Poppins',
+          fontFamily: 'Poppins',
         },
       },
     },

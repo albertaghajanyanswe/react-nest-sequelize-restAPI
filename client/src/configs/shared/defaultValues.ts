@@ -17,3 +17,12 @@ export const DEFAULT_VALUES_REGISTRATION = {
   phone: '',
   switchGuestAccount: false,
 }
+
+export const DEFAULT_VALUES_PROFILE = {
+  image: '',
+  firstName: '',
+  lastName: '',
+  nickName: '',
+  email: '',
+  phone: '',
+}

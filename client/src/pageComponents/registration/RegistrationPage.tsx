@@ -1,20 +1,22 @@
 import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { Box, Grid, Typography } from '@mui/material';
 import { useTheme } from '@mui/system';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
+
 import { getMessage } from "../../helpers/helper";
-import { stylesWithTheme } from "./styles";
-import { routes } from '../../configs';
 import { usersAPI } from '../../services/rtk/UsersApi';
+import { routes } from '../../configs';
 import { iRegistration } from '../../configs/shared/types';
 import { DEFAULT_VALUES_REGISTRATION } from '../../configs/shared/defaultValues';
+import {ReactComponent as ArrowLeft} from '../../assets/arrow-left.svg';
+import CustomButton from '../../components/customButton';
 import SystemMessage from '../../components/systemMessage';
 import RegistrationForm from './components/RegistrationForm';
-import CustomButton from '../../components/customButton';
-import {ReactComponent as ArrowLeft} from '../../assets/arrow-left.svg';
+import { stylesWithTheme } from "./styles";
 
 
 const RegistrationPage = () => {
@@ -37,13 +39,11 @@ const RegistrationPage = () => {
 
   const handleSubmitRegistration = useCallback(() => handleSubmit(async (data) => {
     try {
-      const res = await register(data as iRegistration).unwrap();
-      console.log('res = ', res)
+      await register(data as iRegistration).unwrap();
       // toast.success(getMessage('', 'success'));
       SystemMessage(enqueueSnackbar, getMessage('', 'success'), { variant: 'success', theme });
       navigate(routes.login.path)
     } catch (error: any) {
-      console.log('error = ', error)
       // toast.error('error');
       SystemMessage(enqueueSnackbar, getMessage(error?.response?.data || error.message || error?.data), { variant: 'error', theme });
     }
@@ -68,7 +68,6 @@ const RegistrationPage = () => {
                 sx={{ width: '100%', p: '8px 12px', fontSize: '16px', lineHeight: '24px', fontWeight: 600 }}
                 startIcon={<ArrowLeft />}
               />
-              {/* <Box component={Link} sx={styles.link} to={routes.registration.path}> {t('login.title')}</Box> */}
             </Grid>
           </Grid>
         </form>

@@ -68,7 +68,7 @@ const stylesWithTheme = (theme: Theme) => ({
     fontFamily: 'Poppins',
     borderRightWidth: '4px',
     borderRightStyle: 'solid',
-    borderRightColor: '#8EB8D7',
+    borderRightColor: 'primary.borderColor8',
   },
   listItemBtn: {
     minHeight: '48px',

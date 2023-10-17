@@ -64,7 +64,6 @@ const SystemMessage = (
     }
   }
 
-  console.log('sxStyles = ', sxStyles)
   enqueueSnackbar(
     <Box sx={{ display: 'flex' }}>
       <Box sx={{ mr: 1, height: '16px' }}>{variantIcon[variant]}</Box>

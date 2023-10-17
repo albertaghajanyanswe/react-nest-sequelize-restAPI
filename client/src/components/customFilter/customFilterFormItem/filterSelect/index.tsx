@@ -34,7 +34,7 @@ function CustomFilterSelect<T extends iFilterSelectField>({
   const { t } = useTranslation();
   const theme = useTheme();
   const muiStyles = muiStylesWithTheme(theme);
-  const currentUser = getCurrentUser();;
+  const currentUser = getCurrentUser()?.user;
 
   const defaultValue = searchValue || [];
 
@@ -76,7 +76,6 @@ function CustomFilterSelect<T extends iFilterSelectField>({
 
   const handleOnChang = (event: SelectChangeEvent<string[]>) => {
     const { target: { value } } = event;
-    console.log('value = ', value)
     let copy = typeof value === 'string' ? [...value.split(',')] : [...value];
     if (value[value.length - 1] === "all") {
       setSearchTerm(searchTerm.length === optionsList.length ? [] : optionsList.map((i: any) => i.value));

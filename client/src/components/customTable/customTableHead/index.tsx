@@ -7,6 +7,7 @@ import {ReactComponent as TableArrowsSVG} from '../../../assets/16/table-arrows.
 import { muiStyles } from './styles';
 import { useTranslation } from 'react-i18next';
 import { iTableField } from '../../../configs/shared/types';
+import { useTheme } from '@mui/system';
 
 interface iSortObj {
   order: any;
@@ -39,6 +40,7 @@ const CustomTableHead: FC<iProps> = (props) => {
       onRequestSort(event, property);
     }
   };
+  const theme = useTheme();
 
   return (
     <TableHead>
@@ -65,7 +67,7 @@ const CustomTableHead: FC<iProps> = (props) => {
               >
                 {headCell.sortable && (
                   <TableSortLabel
-                    sx={muiStyles.sortLbl}
+                    sx={{...muiStyles.sortLbl, ...(filteredParams?.params?.sort?.field === id && { color: `${theme.palette.primary.textColor1}!important`})}}
                     // IconComponent={TableArrowsSVG}
                     active={filteredParams?.params?.sort?.field === id}
                     direction={

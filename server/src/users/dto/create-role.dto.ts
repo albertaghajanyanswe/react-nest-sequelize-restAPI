@@ -1,6 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 
+export enum UserRoleEnum {
+  Guest = 'GUEST',
+  User = 'USER',
+  Admin = 'ADMIN',
+}
+
 export class CreateRoleDto {
-  readonly value: string;
+  readonly value: UserRoleEnum;
   readonly description: string;
 }

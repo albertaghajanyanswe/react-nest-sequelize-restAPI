@@ -1,4 +1,4 @@
-import { CreateGuestUserDto, CreateUserDto } from './dto/create-user.dto';
+import { CreateGuestUserDto, CreateUserDto, UpdateUserDto } from './dto/create-user.dto';
 import { User } from './users.model';
 import { HttpException, HttpStatus, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
@@ -11,7 +11,7 @@ import { CustomInvalidCredentialsException } from 'src/exceptions/invalid-credet
 import { CustomAlreadyExistException } from 'src/exceptions/exist.exception';
 import * as uuid from 'uuid';
 import { Request, Response } from 'express';
-import { GetUsersDto } from './dto/user.dto';
+import { GetUsersDto, UserDto } from './dto/user.dto';
 import { CollectPayloadService } from 'src/payloadHelper/collectPayload.service';
 
 @Injectable()
@@ -33,9 +33,35 @@ export class UsersService {
         through: { attributes: [] },
       },
     ];
-    console.log('\n\n paload = ', payload)
     const { rows, count } = await this.userRepository.findAndCountAll(payload);
     return { count: count, data: rows };
+  }
+
+  async getCurrentUser(req: Request): Promise<User> {
+    return this.userRepository.findOne<User>({
+      where: { id: (req.user as UserDto).id },
+      include: [
+        {
+          model: Role,
+          attributes: ['id', 'value', 'description'],
+          through: { attributes: [] },
+        },
+      ],
+    });
+  }
+
+  async updateUser(dto: Partial<UpdateUserDto>, id: number): Promise<User> {
+    await this.userRepository.update(dto, { where: { id } });
+    return this.userRepository.findOne<User>({
+      where: { id },
+      include: [
+        {
+          model: Role,
+          attributes: ['id', 'value', 'description'],
+          through: { attributes: [] },
+        },
+      ],
+    });
   }
 
   async getUser(query: object): Promise<User> {
@@ -84,7 +110,6 @@ export class UsersService {
           throw new NotFoundException('Guest user not found');
         }
         const validPassword = await this.comparePassword(dto.password, existGuest.password);
-        console.log('validPassword = ', validPassword)
         if (!validPassword) {
           throw new CustomInvalidCredentialsException();
         }

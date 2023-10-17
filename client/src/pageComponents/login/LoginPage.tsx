@@ -1,26 +1,21 @@
 import React, { useCallback } from 'react';
-import { useNavigate, Link, useParams, useLocation, useSearchParams } from 'react-router-dom';
-
+import { useNavigate, Link } from 'react-router-dom';
 import { Box, Grid, Typography } from '@mui/material';
-
-import { getMessage } from "../../helpers/helper";
-import { stylesWithTheme } from "./styles";
-import { routes } from '../../configs';
 import { useTheme } from '@mui/system';
 import { FormProvider, useForm } from 'react-hook-form';
-import SystemMessage from '../../components/systemMessage';
 import { useSnackbar } from 'notistack';
-import LoginForm from './components/LoginForm';
 import { useTranslation } from 'react-i18next';
-import { usersAPI } from '../../services/rtk/UsersApi';
-import { lsConstants } from '../../constants/constants';
-import { iLogin } from '../../configs/shared/types';
 import { DEFAULT_VALUES_LOGIN } from '../../configs/shared/defaultValues';
-
+import { usersAPI } from '../../services/rtk/UsersApi';
+import { getMessage } from "../../helpers/helper";
+import { lsConstants } from '../../constants/constants';
+import { routes } from '../../configs';
+import { iLogin } from '../../configs/shared/types';
+import SystemMessage from '../../components/systemMessage';
+import LoginForm from './components/LoginForm';
+import { stylesWithTheme } from "./styles";
 
 const LoginPage = () => {
-
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const { t } = useTranslation();
   const theme = useTheme();
@@ -41,13 +36,11 @@ const LoginPage = () => {
   const handleSubmitLogin = useCallback(() => handleSubmit(async (data) => {
     try {
       const res = await postLogin(data as iLogin).unwrap();
-      console.log('res = ', res)
       localStorage.setItem(lsConstants.CURRENT_USER, JSON.stringify(res));
       // toast.success(getMessage('', 'success'));
       SystemMessage(enqueueSnackbar, getMessage('', 'success'), { variant: 'success', theme });
       navigate(routes.home.path)
     } catch (error: any) {
-      console.log('error = ', error)
       // toast.error('error');
       SystemMessage(enqueueSnackbar, getMessage(error?.response?.data || error.message || error?.data), { variant: 'error', theme });
     }

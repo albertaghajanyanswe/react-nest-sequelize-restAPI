@@ -1,21 +1,20 @@
 import React, { useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-
-import { Box, Grid, Typography } from '@mui/material';
-
-import { getMessage } from "../../helpers/helper";
-import { stylesWithTheme } from "./styles";
-import { routes } from '../../configs';
 import { useTheme } from '@mui/system';
 import { FormProvider, useForm } from 'react-hook-form';
-import SystemMessage from '../../components/systemMessage';
+import { Box, Grid, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
-import LoginForm from './components/LoginForm';
 import { useTranslation } from 'react-i18next';
-import { usersAPI } from '../../services/rtk/UsersApi';
-import { lsConstants } from '../../constants/constants';
-import { iLoginGuest } from '../../configs/shared/types';
+
+import { stylesWithTheme } from "./styles";
 import { DEFAULT_VALUES_LOGIN_GUEST } from '../../configs/shared/defaultValues';
+import { routes } from '../../configs';
+import { iLoginGuest } from '../../configs/shared/types';
+import { lsConstants } from '../../constants/constants';
+import { getMessage } from "../../helpers/helper";
+import { usersAPI } from '../../services/rtk/UsersApi';
+import SystemMessage from '../../components/systemMessage';
+import LoginForm from './components/LoginForm';
 
 
 const LoginGuestPage = () => {
@@ -39,13 +38,11 @@ const LoginGuestPage = () => {
   const handleSubmitLogin = useCallback(() => handleSubmit(async (data) => {
     try {
       const res = await postLoginGuest(data as iLoginGuest).unwrap();
-      console.log('res = ', res)
       localStorage.setItem(lsConstants.CURRENT_USER, JSON.stringify(res));
       // toast.success(getMessage('', 'success'));
       SystemMessage(enqueueSnackbar, getMessage('', 'success'), { variant: 'success', theme });
       navigate(routes.home.path)
     } catch (error: any) {
-      console.log('error = ', error)
       // toast.error('error');
       SystemMessage(enqueueSnackbar, getMessage(error?.response?.data || error.message || error?.data), { variant: 'error', theme });
     }

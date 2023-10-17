@@ -23,6 +23,12 @@ const muiStyles = {
     '& > .MuiTableSortLabel-icon': {
       opacity: 0.6,
       color: 'primary.textColor6'
+    },
+    '&.Mui-active': {
+      '& > .MuiTableSortLabel-icon': {
+        opacity: 0.6,
+        color: 'primary.textColor1'
+      },
     }
   }
 };

@@ -3,6 +3,7 @@ import { FieldValues, useFormContext } from "react-hook-form";
 import FormTextField from "./textField";
 import FormPhoneField from "./phoneNumberInput";
 import FormSwitchField from "../switchField";
+import FormFileInput from "./imageInput";
 
 export function testStepsIntersection(steps: StepType<any, any>[]) {
   const names: {[key: string]: number} = {}
@@ -40,7 +41,8 @@ export function genForm<Form extends FieldValues>() {
     Content: {} as Form,
     TextField: FormTextField<Form>,
     PhoneField: FormPhoneField<Form>,
-    SwitchField: FormSwitchField<Form>
+    SwitchField: FormSwitchField<Form>,
+    AvatarImageField: FormFileInput<Form>
   }
 }
 

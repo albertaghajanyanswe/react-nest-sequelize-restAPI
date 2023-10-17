@@ -150,3 +150,19 @@ export enum UserRole {
   User = 'USER',
   Admin = 'ADMIN',
 }
+
+export interface iAccountDetails {
+  image: string;
+  firstName: string;
+  lastName: string;
+  nickName: string;
+  email: string;
+  phone: string;
+}
+
+export type FileData = {
+  uuid: string,
+  name: string,
+  size: number,
+  timestamp: string
+}

@@ -1,6 +1,5 @@
-// todo: add and using all variables from theme
 import { Theme } from "@mui/system";
-import loginBg from '../../assets/login-1.jpg';
+// import loginBg from '../../assets/login-1.jpg';
 
 const stylesWithTheme = (theme: Theme) => ({
   layout: {

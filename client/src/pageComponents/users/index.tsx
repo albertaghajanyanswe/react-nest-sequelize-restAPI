@@ -17,7 +17,7 @@ function Users() {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar()
 
-  const currentUser = getCurrentUser();
+  const currentUser = getCurrentUser()?.user;
 
   const pageDefaultParams = {
     params: {

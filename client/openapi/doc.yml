@@ -1,5 +1,64 @@
 openapi: 3.0.0
 paths:
+  /api/uploads:
+    post:
+      operationId: UploadController_uploadFile
+      parameters: []
+      responses:
+        '201':
+          description: ''
+      tags: &ref_0
+        - Uploads
+      security: &ref_1
+        - bearer: []
+  /api/uploads/avatar:
+    post:
+      operationId: UploadController_uploadAvatar
+      parameters: []
+      responses:
+        '201':
+          description: ''
+      tags: *ref_0
+      security: *ref_1
+  /api/uploads/avatar/delete/{filename}:
+    delete:
+      operationId: UploadController_deleteAvatar
+      summary: Delete file by name
+      parameters:
+        - name: filename
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: link
+          required: true
+          in: path
+          description: File name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteFileDto'
+      tags: *ref_0
+      security: *ref_1
+  /api/files/{filename}:
+    get:
+      operationId: FileController_serveFile
+      parameters:
+        - name: filename
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Files
   /api/users/registration:
     post:
       operationId: UsersController_register
@@ -12,9 +71,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-      tags: &ref_0
+      tags: &ref_2
         - Users
-      security: &ref_1
+      security: &ref_3
         - bearer: []
   /api/users/registration/guest:
     post:
@@ -28,8 +87,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-      tags: *ref_0
-      security: *ref_1
+      tags: *ref_2
+      security: *ref_3
   /api/users/activate/{link}:
     get:
       operationId: UsersController_activateUser
@@ -48,8 +107,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-      tags: *ref_0
-      security: *ref_1
+      tags: *ref_2
+      security: *ref_3
   /api/users:
     get:
       operationId: UsersController_getAll
@@ -62,8 +121,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetUsersDto'
-      tags: *ref_0
-      security: *ref_1
+      tags: *ref_2
+      security: *ref_3
+  /api/users/currentUser:
+    get:
+      operationId: UsersController_getCurrentUser
+      summary: Get current users
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+      tags: *ref_2
+      security: *ref_3
+  /api/users/{id}:
+    put:
+      operationId: UsersController_updateUser
+      summary: Update user info
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: User id
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      tags: *ref_2
+      security: *ref_3
   /api/roles:
     post:
       operationId: RolesController_create
@@ -82,7 +181,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Role'
-      tags: &ref_2
+      tags: &ref_4
         - Roles
   /api/roles/{value}:
     get:
@@ -101,7 +200,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Role'
-      tags: *ref_2
+      tags: *ref_4
   /api/auth/login:
     post:
       operationId: AuthController_login
@@ -109,7 +208,7 @@ paths:
       responses:
         '201':
           description: ''
-      tags: &ref_3
+      tags: &ref_5
         - Auth
   /api/auth/postLogin:
     post:
@@ -129,7 +228,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-      tags: *ref_3
+      tags: *ref_5
   /api/auth/postLogin/guest:
     post:
       operationId: AuthController_postLoginGuest
@@ -148,7 +247,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-      tags: *ref_3
+      tags: *ref_5
 info:
   title: Test BE
   description: Description for REST APIs
@@ -165,6 +264,9 @@ components:
       bearerFormat: JWT
       type: http
   schemas:
+    DeleteFileDto:
+      type: object
+      properties: {}
     User:
       type: object
       properties:
@@ -268,9 +370,6 @@ components:
       required:
         - data
         - count
-    CreateRoleDto:
-      type: object
-      properties: {}
     Role:
       type: object
       properties:
@@ -280,16 +379,134 @@ components:
           description: Unique id
         value:
           type: string
-          example: USER
-          description: Role value
+          enum:
+            - ADMIN
+            - USER
+            - GUEST
         description:
           type: string
-          example: User
+          example: Guest user
           description: Role description
       required:
         - id
         - value
         - description
+    UserDto:
+      type: object
+      properties:
+        id:
+          type: number
+          example: '1'
+          description: Unique id
+        nickName:
+          type: string
+          example: Nick name
+          description: User nick name
+        firstName:
+          type: string
+          example: First name
+          description: User first name
+        lastName:
+          type: string
+          example: Last name
+          description: User last name
+        email:
+          type: string
+          example: test@yopmail.com
+          description: User email address
+        password:
+          type: string
+          example: '11111'
+          description: User password
+        passwordExpireDate:
+          type: string
+          example: '2023-09-19 19:31:35.669+04'
+          description: User password expire date
+        lastLogin:
+          type: string
+          example: '2023-09-19 19:31:35.669+04'
+          description: User last login date
+        phone:
+          type: string
+          example: Last name
+          description: User last name
+        activationLink:
+          type: string
+          example: ''
+          description: User activation link
+        isActive:
+          type: boolean
+          example: true
+          description: User active state
+        archived:
+          type: boolean
+          example: false
+          description: User archived
+        image:
+          type: string
+          example: ''
+          description: User image
+        firebaseSubscription:
+          type: string
+          example: ''
+          description: Firebase subscription
+        firebaseToken:
+          type: string
+          example: ''
+          description: Firebase token
+        deviceType:
+          type: string
+          example: ''
+          description: Device type
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+      required:
+        - id
+        - nickName
+        - firstName
+        - lastName
+        - email
+        - password
+        - passwordExpireDate
+        - lastLogin
+        - phone
+        - activationLink
+        - isActive
+        - archived
+        - image
+        - firebaseSubscription
+        - firebaseToken
+        - deviceType
+        - roles
+    UpdateUserDto:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: First name
+          description: User first name
+        lastName:
+          type: string
+          example: Last name
+          description: User last name
+        phone:
+          type: string
+          example: Last name
+          description: User last name
+        image:
+          type: string
+          example: ''
+          description: User image
+      required:
+        - firstName
+        - lastName
+        - phone
+        - image
+    CreateRoleDto:
+      type: object
+      properties: {}
     PostLoginDto:
       type: object
       properties:

@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 import { iLogin, iLoginGuest, iRegistration, iRegistrationGuest, IUser } from '../../configs/shared/types';
-import { GetUsersDto, User } from '../../generated/openapi';
+import { GetUsersDto, UpdateUserDto, User, UserDto } from '../../generated/openapi';
 // import { axiosInstance } from '../client/axiosHelper';
 import { apiEndpoints } from '../configs';
 import { getCurrentUser } from '../lsService';
@@ -32,7 +32,7 @@ export const usersAPI = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Users'],
+  tagTypes: ['Users', 'CurrentUser'],
   endpoints: (build) => ({
     getAllUsers: build.query<GetUsersDto, any>({
       query: (params) => {
@@ -45,13 +45,31 @@ export const usersAPI = createApi({
       },
       providesTags: result => ['Users']
     }),
+    getCurrentUser: build.query<UserDto, any>({
+      query: () => {
+        return {
+          url: `api${apiEndpoints.currentUser}`,
+        }
+      },
+      providesTags: ['CurrentUser']
+    }),
+    updateUser: build.mutation<UserDto, UpdateUserDto & { userId: number }>({
+      query: ({userId, ...data}) => {
+        console.log('userId = ', userId)
+        console.log('data = ', data)
+        return {
+          url: `api${apiEndpoints.user.replace(':userId', `${userId}`)}`,
+          method: 'PUT',
+          body: data
+        }
+      },
+    }),
     register: build.mutation<iRegistration, iRegistration>({
       query: (user) => ({
         url: `api${apiEndpoints.registration}`,
         method: 'POST',
         body: user
       }),
-      // invalidatesTags: ['Users']
     }),
     registerGuest: build.mutation<iRegistrationGuest, iRegistrationGuest>({
       query: (user) => ({
@@ -59,7 +77,6 @@ export const usersAPI = createApi({
         method: 'POST',
         body: user
       }),
-      // invalidatesTags: ['Users']
     }),
     login: build.mutation<any, iLogin>({
       query: (credentials) => ({

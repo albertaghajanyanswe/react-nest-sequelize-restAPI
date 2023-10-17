@@ -10,25 +10,24 @@ import { ReactComponent as SettingsIcon } from '../../assets/sidebar/settings.sv
 // import { ReactComponent as MembersIcon } from '../../assets/sidebar/members.svg';
 import { ReactComponent as BlockedIcon } from '../../assets/sidebar/blocked.svg';
 import { routes } from '../../../src/configs';
-import i18n from "../../i18n";
-import { UserRole } from '../../configs/shared/types';
+import { routesAccess } from '../../configs/roles';
 
 const links = [
   {
     id: 'home',
-    title: i18n.t('sidebar.home'),
+    title: 'sidebar.home',
     link: routes.home.path,
     icon: OverviewIcon,
     disabled: false,
-    roles: [UserRole.Guest, UserRole.User, UserRole.Admin],
+    roles: routesAccess.home.access,
   },
   {
     id: 'users',
-    title: i18n.t('sidebar.users'),
+    title: 'sidebar.users',
     link: routes.users.path,
     icon: BlockedIcon,
     disabled: false,
-    roles: [UserRole.User, UserRole.Admin],
+    roles: routesAccess.users.access,
   },
   {
     id: 'divider-1',
@@ -39,11 +38,11 @@ const links = [
   },
   {
     id: 'settings',
-    title: i18n.t('sidebar.settings'),
+    title: 'sidebar.settings',
     link: routes.settings.path,
     icon: SettingsIcon,
     disabled: false,
-    roles: [UserRole.User, UserRole.Admin],
+    roles: routesAccess.settings.access,
   },
 
 ];

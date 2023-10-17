@@ -2,21 +2,21 @@ import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Box, Grid, Typography } from '@mui/material';
-
-import { getMessage } from "../../helpers/helper";
-import { stylesWithTheme } from "./styles";
-import { routes } from '../../configs';
 import { useTheme } from '@mui/system';
 import { FormProvider, useForm } from 'react-hook-form';
-import SystemMessage from '../../components/systemMessage';
 import { useSnackbar } from 'notistack';
-import RegistrationForm from './components/RegistrationForm';
 import { useTranslation } from 'react-i18next';
+
+import { getMessage } from "../../helpers/helper";
 import { usersAPI } from '../../services/rtk/UsersApi';
+import { routes } from '../../configs';
 import { iRegistrationGuest } from '../../configs/shared/types';
 import { DEFAULT_VALUES_REGISTRATION } from '../../configs/shared/defaultValues';
-import CustomButton from '../../components/customButton';
 import {ReactComponent as ArrowLeft} from '../../assets/arrow-left.svg';
+import CustomButton from '../../components/customButton';
+import SystemMessage from '../../components/systemMessage';
+import RegistrationForm from './components/RegistrationForm';
+import { stylesWithTheme } from "./styles";
 
 
 const RegistrationGuestPage = () => {
@@ -39,13 +39,11 @@ const RegistrationGuestPage = () => {
 
   const handleSubmitRegistration = useCallback(() => handleSubmit(async (data) => {
     try {
-      const res = await registerGuest(data as iRegistrationGuest).unwrap();
-      console.log('res = ', res)
+      await registerGuest(data as iRegistrationGuest).unwrap();
       // toast.success(getMessage('', 'success'));
       SystemMessage(enqueueSnackbar, getMessage('', 'success'), { variant: 'success', theme });
       navigate(routes.login.path)
     } catch (error: any) {
-      console.log('error = ', error)
       // toast.error('error');
       SystemMessage(enqueueSnackbar, getMessage(error?.response?.data || error.message || error?.data), { variant: 'error', theme });
     }

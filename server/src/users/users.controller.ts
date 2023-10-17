@@ -1,10 +1,10 @@
-import { Body, Controller, Get, Param, Post, Query, Req, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Query, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Request, Response } from 'express';
 import { DoesUserExist } from 'src/shared/guards/doesUserExist.guard';
-import { CreateGuestUserDto, CreateUserDto } from './dto/create-user.dto';
-import { GetUsersDto } from './dto/user.dto';
+import { CreateGuestUserDto, CreateUserDto, UpdateUserDto } from './dto/create-user.dto';
+import { GetUsersDto, UserDto } from './dto/user.dto';
 import { User } from './users.model';
 import { UsersService } from './users.service';
 
@@ -12,7 +12,7 @@ import { UsersService } from './users.service';
 @ApiBearerAuth()
 @Controller('users')
 export class UsersController {
-  constructor(private userService: UsersService) {}
+  constructor(private userService: UsersService) { }
 
   @ApiOperation({ summary: 'Create new user' })
   @ApiResponse({ status: 200, type: User })
@@ -41,7 +41,23 @@ export class UsersController {
   @UseGuards(AuthGuard('jwt'))
   @Get()
   // getAll(@Req() request: Request, @Query('params') params: string) {
-    getAll(@Req() request: Request) {
+  getAll(@Req() request: Request) {
     return this.userService.getAllUsers(request);
+  }
+
+  @ApiOperation({ summary: 'Get current users' })
+  @ApiResponse({ status: 200, type: UserDto })
+  @UseGuards(AuthGuard('jwt'))
+  @Get('/currentUser')
+  async getCurrentUser(@Req() request) {
+    return this.userService.getCurrentUser(request);
+  }
+
+  @ApiOperation({ summary: 'Update user info' })
+  @ApiParam({ name: 'id', type: Number, description: 'User id' })
+  @ApiResponse({ status: 200, type: User })
+  @Put('/:id')
+  updateUser(@Param('id') id, @Body() userDto: UpdateUserDto) {
+    return this.userService.updateUser(userDto, id);
   }
 }

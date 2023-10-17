@@ -39,3 +39,17 @@ export class CreateGuestUserDto {
   @ApiProperty({ example: '11111', description: 'User password' })
   readonly password: string;
 }
+
+export class UpdateUserDto {
+  @ApiProperty({ example: 'First name', description: 'User first name' })
+  readonly firstName: string;
+
+  @ApiProperty({ example: 'Last name', description: 'User last name' })
+  readonly lastName: string;
+
+  @ApiProperty({ example: 'Last name', description: 'User last name' })
+  readonly phone: string;
+
+  @ApiProperty({ example: '', description: 'User image' })
+  readonly image: string;
+}

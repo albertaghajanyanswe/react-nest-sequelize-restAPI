@@ -6,18 +6,20 @@ import sidebarReducer from './reducers/SidebarSlice';
 import { usersAPI } from "../services/rtk/UsersApi";
 import { setupListeners } from '@reduxjs/toolkit/query/react';
 import { rtkQueryErrorLogger } from "./middleware/rtkErrorHandling";
+import { uploadsAPI } from "../services/rtk/UploadsApi";
 
 const rootReducer = combineReducers({
   userReducer,
   counterReducer,
   sidebarReducer,
-  [usersAPI.reducerPath]: usersAPI.reducer
+  [usersAPI.reducerPath]: usersAPI.reducer,
+  [uploadsAPI.reducerPath]: uploadsAPI.reducer
 });
 
 export const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(usersAPI.middleware, rtkQueryErrorLogger)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(usersAPI.middleware, uploadsAPI.middleware, rtkQueryErrorLogger)
   })
 }
 setupListeners(setupStore().dispatch);

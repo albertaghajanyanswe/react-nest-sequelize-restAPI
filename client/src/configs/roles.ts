@@ -8,7 +8,7 @@ const routesAccess = {
     access: [UserRole.User, UserRole.Admin]
   },
   settings: {
-    access: [UserRole.User, UserRole.Admin]
+    access: [UserRole.Guest, UserRole.User, UserRole.Admin]
   },
 };
 

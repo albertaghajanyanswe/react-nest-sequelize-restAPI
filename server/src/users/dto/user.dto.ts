@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Role } from 'src/roles/roles.model';
 import { User } from '../users.model';
 
 export class UserDto {
@@ -52,6 +53,9 @@ export class UserDto {
 
   @ApiProperty({ example: '', description: 'Device type' })
   readonly deviceType: string;
+
+  @ApiProperty({ type: [Role] })
+  readonly roles: Role[];
 }
 
 export class GetUsersDto {

@@ -8,6 +8,7 @@ declare module '@mui/material/styles' {
     success?: string;
     info?: string;
     lightBG1?: string;
+    lightBG2?: string;
     btnMainDisabled?: string;
     btnMainHover?: string;
     btnMainPressed?: string;
@@ -48,6 +49,7 @@ declare module '@mui/material/styles' {
     success?: string;
     info?: string;
     lightBG1?: string;
+    lightBG2?: string;
     btnMain?: string;
     btnMainHover?: string;
     btnMainPressed?: string;
@@ -97,7 +99,7 @@ const Default = (): DefaultPaletteOptions => {
       success: '#21a900',
       info: '#096C7C',
       lightBG1: '#FAFBFD',
-
+      lightBG2: '#f5f5f5',
       btnMain: '#004B7F',
       btnMainHover: '#457BAC',
       btnMainPressed: '#226395',
@@ -140,7 +142,7 @@ const Default = (): DefaultPaletteOptions => {
       success: '#21a900',
       info: '#096C7C',
       lightBG1: '#FAFBFD',
-
+      lightBG2: '#f5f5f5',
       btnMain: '#004B7F',
       btnMainHover: '#457BAC',
       btnMainPressed: '#226395',
@@ -307,7 +309,15 @@ const theme = createTheme({
               },
             },
           },
-
+          '&.Mui-disabled': {
+            backgroundColor: '#f5f5f5',
+            '& > input': {
+              cursor: 'text',
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              border: '1px solid #E0E0E0',
+            },
+          },
         },
       },
     },

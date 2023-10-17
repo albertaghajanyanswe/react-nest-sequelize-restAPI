@@ -24,7 +24,9 @@ const ru = {
   },
   lang: {
     english: 'English',
-    russian: 'Русский'
+    russian: 'Русский',
+    en: 'EN',
+    ru: 'РУ'
   },
   login: {
     title: 'Войти',
@@ -94,7 +96,8 @@ const ru = {
     edit: 'Редактировать',
     delete: 'Удалить',
     setReminder: 'Установить время напоминания',
-    changeStatus: 'Нажмите на строку, чтобы изменить статус'
+    changeStatus: 'Нажмите на строку, чтобы изменить статус',
+    save: 'Сохранить'
   },
   actionMsg: {
     success: {

@@ -33,7 +33,7 @@ function CustomThemeProvider(props: any) {
       setTheme: setThemeName,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
+    [themeName],
   );
 
   return (
