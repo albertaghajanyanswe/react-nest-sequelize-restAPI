@@ -6,7 +6,7 @@ const uploadsAPI = usersAPI.injectEndpoints({
     uploadAvatar: build.mutation<{ filename: string }, { formData: FormData }>({
       query: ({ formData }) => {
         return {
-          url: `api${apiEndpoints.uploadsAvatar}`,
+          url: `api${apiEndpoints.uploadsProductImage}`,
           method: 'POST',
           body: formData
         }

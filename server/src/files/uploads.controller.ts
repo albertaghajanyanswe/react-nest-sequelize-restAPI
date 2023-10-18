@@ -1,5 +1,16 @@
 // src/upload/upload.controller.ts
-import { Controller, Post, UploadedFile, UseInterceptors, UseGuards, Request, Delete, Param } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  UploadedFile,
+  UseInterceptors,
+  UseGuards,
+  Request,
+  Delete,
+  Param,
+  Body,
+  Inject,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBearerAuth, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -7,12 +18,22 @@ import { UsersService } from 'src/users/users.service';
 import { multerOptions } from './multer.config';
 import * as fs from 'fs';
 import { DeleteFileDto } from './delete-file.dto';
+import { CreateProductImageDto } from 'src/productImages/dto/create-product-image.dto';
+import { ProductsService } from 'src/products/products.service';
+import { PRODUCT_IMAGE_REPOSITORY } from 'src/shared/constants';
+import { ProductImage } from 'src/productImages/productsImage.model';
+import { InjectModel } from '@nestjs/sequelize';
 
 @ApiTags('Uploads')
 @ApiBearerAuth()
 @Controller('uploads')
 export class UploadController {
-  constructor(private readonly userService: UsersService) { }
+  constructor(
+    private readonly userService: UsersService,
+    private readonly productService: ProductsService,
+    // @InjectModel(ProductImage) private readonly productImageRepository: typeof ProductImage,
+    @Inject(PRODUCT_IMAGE_REPOSITORY) private readonly productImageRepository: typeof ProductImage,
+  ) {}
 
   @Post()
   @UseGuards(AuthGuard('jwt'))
@@ -48,6 +69,27 @@ export class UploadController {
       return { message: 'File deleted successfully', success: true };
     } catch (err) {
       return { message: 'File deletion failed', success: false, error: err.message };
+    }
+  }
+
+  @Post('/productImage')
+  @UseGuards(AuthGuard('jwt'))
+  @UseInterceptors(FileInterceptor('file', multerOptions))
+  async uploadProductImage(@UploadedFile() file, @Request() req, @Body() createProductImageDto: CreateProductImageDto) {
+    const product = await this.productService.getProduct({
+      userId: req.user.id,
+      productId: createProductImageDto.productId,
+    });
+    if (product) {
+      const productImageObj = {
+        name: file.filename,
+        productId: product?.id,
+      };
+      const newProductImage = await this.productImageRepository.create({ ...productImageObj });
+      await this.userService.updateUser({ image: file.filename }, req.user.id);
+      return newProductImage;
+    } else {
+      return { error: 'Product not found' };
     }
   }
 }
