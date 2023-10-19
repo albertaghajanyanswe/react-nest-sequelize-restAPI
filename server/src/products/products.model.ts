@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
 import { Category } from 'src/categories/categories.model';
+import { ProductImage } from 'src/productImages/productsImage.model';
 import { User } from 'src/users/users.model';
 
 interface ProductCreationAttr {
@@ -74,4 +75,14 @@ export class Product extends Model<Product, ProductCreationAttr> {
 
   @BelongsTo(() => User)
   user: User;
+
+  @HasMany(() => ProductImage, {
+    foreignKey: {
+      name: 'productId',
+      field: 'productId',
+    },
+    onDelete: 'CASCADE',
+  })
+  // @HasMany(() => ProductImage, 'productId')
+  productImage: ProductImage[];
 }

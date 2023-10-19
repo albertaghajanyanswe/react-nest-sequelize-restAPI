@@ -1,6 +1,7 @@
 import type { MiddlewareAPI, Middleware } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify';
 import { routes } from '../../services/configs';
+import { logOut } from '../../services/lsService';
 // import { createBrowserHistory } from "@remix-run/router";
 /**
  * Log a warning and show a toast!
@@ -17,6 +18,7 @@ export const rtkQueryErrorLogger: Middleware =
         console.warn('We got a rejected action!');
         toast.error(message)
         window.location.href = routes.login.path;
+        logOut();
         // history.push(routes.login.path, {
         //   url: history.createHref(history.location),
         // });
