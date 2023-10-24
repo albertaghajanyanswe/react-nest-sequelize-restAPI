@@ -33,7 +33,7 @@ export class UploadController {
     private readonly productService: ProductsService,
     // @InjectModel(ProductImage) private readonly productImageRepository: typeof ProductImage,
     @Inject(PRODUCT_IMAGE_REPOSITORY) private readonly productImageRepository: typeof ProductImage,
-  ) {}
+  ) { }
 
   @Post()
   @UseGuards(AuthGuard('jwt'))
@@ -80,16 +80,11 @@ export class UploadController {
       userId: req.user.id,
       productId: createProductImageDto.productId,
     });
-    if (product) {
-      const productImageObj = {
-        name: file.filename,
-        productId: product?.id,
-      };
-      const newProductImage = await this.productImageRepository.create({ ...productImageObj });
-      await this.userService.updateUser({ image: file.filename }, req.user.id);
-      return newProductImage;
-    } else {
-      return { error: 'Product not found' };
-    }
+    const productImageObj = {
+      name: file.filename,
+      productId: product?.id || null,
+    };
+    const newProductImage = await this.productImageRepository.create({ ...productImageObj });
+    return newProductImage;
   }
 }

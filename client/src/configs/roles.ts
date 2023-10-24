@@ -5,7 +5,10 @@ const routesAccess = {
     access: [UserRole.Guest, UserRole.User, UserRole.Admin]
   },
   users: {
-    access: [UserRole.User, UserRole.Admin]
+    access: [UserRole.Guest, UserRole.User, UserRole.Admin]
+  },
+  products: {
+    access: [UserRole.Guest, UserRole.User, UserRole.Admin]
   },
   settings: {
     access: [UserRole.Guest, UserRole.User, UserRole.Admin]

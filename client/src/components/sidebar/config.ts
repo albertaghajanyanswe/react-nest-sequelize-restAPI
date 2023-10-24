@@ -30,6 +30,14 @@ const links = [
     roles: routesAccess.users.access,
   },
   {
+    id: 'products',
+    title: 'sidebar.products',
+    link: routes.products.path,
+    icon: BlockedIcon,
+    disabled: false,
+    roles: routesAccess.users.access,
+  },
+  {
     id: 'divider-1',
     title: '',
     link: '',

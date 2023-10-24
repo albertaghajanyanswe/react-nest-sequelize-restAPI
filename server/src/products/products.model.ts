@@ -3,6 +3,7 @@ import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from '
 import { Category } from 'src/categories/categories.model';
 import { ProductImage } from 'src/productImages/productsImage.model';
 import { User } from 'src/users/users.model';
+import { IntendedForEnum, ProductStateEnum } from './dto/create-product.dto';
 
 interface ProductCreationAttr {
   name: string;
@@ -29,7 +30,7 @@ export class Product extends Model<Product, ProductCreationAttr> {
   name: string;
 
   @ApiProperty({ example: 'Notebook', description: 'Notebook description' })
-  @Column({ type: DataType.STRING, allowNull: true })
+  @Column({ type: DataType.TEXT, allowNull: true })
   description: string;
 
   @ApiProperty({ example: '500', description: 'Notebook price' })
@@ -53,8 +54,22 @@ export class Product extends Model<Product, ProductCreationAttr> {
   address: string;
 
   @ApiProperty({ example: 'New notebook', description: 'Notebook other information' })
-  @Column({ type: DataType.STRING, allowNull: true })
+  @Column({ type: DataType.TEXT, allowNull: true })
   otherInfo: string;
+
+  @ApiProperty({ enum: ['FOR_SALE', 'FOR_RENT', 'FOR_FREE_GIVING'] })
+  @Column({
+    type: DataType.ENUM('FOR_SALE', 'FOR_RENT', 'FOR_FREE_GIVING'),
+    allowNull: false,
+  })
+  intendedFor: IntendedForEnum;
+
+  @ApiProperty({ enum: ['NEW', 'USED', 'NOT_OPERABLE'] })
+  @Column({
+    type: DataType.ENUM('NEW', 'USED', 'NOT_OPERABLE'),
+    allowNull: false,
+  })
+  productState: ProductStateEnum;
 
   @ForeignKey(() => Category)
   @Column({

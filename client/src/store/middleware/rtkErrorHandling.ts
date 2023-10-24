@@ -24,6 +24,9 @@ export const rtkQueryErrorLogger: Middleware =
         // });
         // onUnauthorized(action.payload, history)
       }
+      // if (statusCode) {
+      //   throw new Error(action?.payload)
+      // }
     }
     return next(action);
   }

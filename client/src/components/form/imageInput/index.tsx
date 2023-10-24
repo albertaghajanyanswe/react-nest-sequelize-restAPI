@@ -95,7 +95,7 @@ const FormFileInput = <T extends FieldValues>({
   const onFileUpload = async (file: File) => {
     if (!file) return;
     if (file.size > ALLOWED_MAX_SIZE) {
-      SystemMessage(enqueueSnackbar, t('errors.fileSizeLimit'), { variant: 'error' });
+      SystemMessage(enqueueSnackbar, t('errors.fileSizeLimit'), { variant: 'error', theme });
       return;
     }
     disableSave(true);
@@ -103,7 +103,7 @@ const FormFileInput = <T extends FieldValues>({
     try {
       await createFileApi(file);
     } catch (error: any) {
-      SystemMessage(enqueueSnackbar, getMessage(error?.response?.data || error.message), { variant: 'error' });
+      SystemMessage(enqueueSnackbar, getMessage(error), { variant: 'error', theme });
     } finally {
       disableSave(false);
     }

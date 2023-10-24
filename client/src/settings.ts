@@ -1,3 +1,4 @@
+import { ProductIntendedForEnum, ProductProductStateEnum } from './generated/openapi';
 import i18n from './i18n';
 
 const SETTINGS = {
@@ -57,6 +58,20 @@ const SETTINGS = {
     { label: '10:30 PM', value: '10:30 PM' },
     { label: '11:00 PM', value: '11:00 PM' },
     { label: '11:30 PM', value: '11:30 PM' },
+  ],
+  currencyList: [
+    { label: 'AMD', value: 'AMD' },
+    { label: 'USD', value: 'USD' },
+  ],
+  intendedForList: [
+    { label: i18n.t('products.intendedForOptions.forSale'), value: ProductIntendedForEnum.Sale },
+    { label: i18n.t('products.intendedForOptions.forRent'), value: ProductIntendedForEnum.Rent },
+    { label: i18n.t('products.intendedForOptions.forFreeGiving'), value: ProductIntendedForEnum.FreeGiving },
+  ],
+  productStateList: [
+    { label: i18n.t('products.productStateOptions.new'), value: ProductProductStateEnum.New },
+    { label: i18n.t('products.productStateOptions.used'), value: ProductProductStateEnum.Used },
+    { label: i18n.t('products.productStateOptions.notOperable'), value: ProductProductStateEnum.NotOperable },
   ],
   regexp: {
     number: '^(|(?!0\d)(\d+(\.\d*)?|\.\d+)([eE][-+]?\d+)?)$',

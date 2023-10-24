@@ -58,7 +58,7 @@ function SideBar() {
   const { setActiveLink } = sidebarSlice.actions;
   const dispatch = useAppDispatch();
   const { activeLink } = useAppSelector(state => state.sidebarReducer);
-  console.log('activeLink = ', activeLink)
+  // console.log('activeLink = ', activeLink)
 
   const navigate = useNavigate();
   const location = useLocation();

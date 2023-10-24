@@ -1,10 +1,11 @@
-import { Body, Controller, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Param, Post, Put, Req, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateProductDto } from './dto/create-product.dto';
 import { ProductsService } from './products.service';
 import { Product } from './products.model';
 import { AuthGuard } from '@nestjs/passport';
-import { GetProductsDto } from './dto/product.dto';
+import { GetProductsDto, ProductDto } from './dto/product.dto';
+import { request } from 'http';
 
 @ApiTags('Products')
 @ApiBearerAuth()
@@ -13,7 +14,7 @@ export class ProductsController {
   constructor(private productService: ProductsService) {}
 
   @ApiOperation({ summary: 'Get product by id' })
-  @ApiResponse({ status: 200, type: Product })
+  @ApiResponse({ status: 200, type: ProductDto })
   @UseGuards(AuthGuard('jwt'))
   @Get('/:id')
   getProductById(@Param('id') id: string) {
@@ -30,10 +31,18 @@ export class ProductsController {
   }
 
   @ApiOperation({ summary: 'Create new product' })
-  @ApiResponse({ status: 200, type: Product })
+  @ApiResponse({ status: 200, type: ProductDto })
   @UseGuards(AuthGuard('jwt'))
   @Post()
-  create(@Body() productDto: CreateProductDto) {
-    return this.productService.createProduct(productDto);
+  create(@Req() request, @Body() productDto: CreateProductDto) {
+    return this.productService.createProduct({ ...productDto, userId: request.user.id });
+  }
+
+  @ApiOperation({ summary: 'Update product' })
+  @ApiParam({ name: 'id', type: Number, description: 'Product id' })
+  @ApiResponse({ status: 200, type: Product })
+  @Put('/:id')
+  updateUser(@Param('id') id, @Body() productDto: CreateProductDto) {
+    return this.productService.updateProduct(productDto, id);
   }
 }

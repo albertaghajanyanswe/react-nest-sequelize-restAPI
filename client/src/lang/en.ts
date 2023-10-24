@@ -10,9 +10,11 @@ const en = {
   },
   pages: {
     meetings: 'Meetings',
-    products: 'Products',
     home: 'Home',
     users: 'Users',
+    products: 'Products',
+    product: 'Product',
+    createProducts: 'Products',
     settings: 'settings',
     logout: 'Logout'
   },
@@ -21,6 +23,7 @@ const en = {
     home: 'Home',
     users: 'Users',
     settings: 'Settings',
+    products: 'Products',
   },
   lang: {
     english: 'English',
@@ -102,6 +105,39 @@ const en = {
       cancel: 'No, don’t remove '
     }
   },
+  products: {
+    name: 'Name',
+    description: 'Description',
+    otherInfo: 'Other info',
+    price: 'Price',
+    currency: 'Currency',
+    province: 'Province',
+    city: 'City',
+    address: 'Address',
+    categoryId: 'Category ID',
+    intendedFor: 'Intended for',
+    intendedForOptions: {
+      forSale: 'For sale',
+      FOR_SALE: 'For sale',
+      forRent: 'For rent',
+      FOR_RENT: 'For rent',
+      forFreeGiving: 'For free giving',
+      FOR_FREE_GIVING: 'For free giving'
+    },
+    productState: 'Product state',
+    productStateOptions: {
+      new: 'New',
+      NEW: 'New',
+      used: 'Used',
+      USED: 'Used',
+      notOperable: 'Not operable',
+      NOT_OPERABLE: 'Not operable'
+    }
+  },
+  productItem: {
+    createNewProduct: 'Create new product',
+    title: 'Product'
+  },
   actions: {
     login: 'Login',
     signIn: 'Sign In',
@@ -117,6 +153,10 @@ const en = {
     recoverDeletedItem: 'Recover deleted item',
     save: 'Save',
     uploadNewImage: 'Upload new image',
+    createProduct: 'Create new product',
+    update: 'Update',
+    selectAll: 'Select all',
+    view: 'View'
   },
   deleteUserModal: {
     title1: 'Do you want to remove',

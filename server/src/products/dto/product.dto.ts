@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Category } from 'src/categories/categories.model';
 import { User } from 'src/users/users.model';
 import { Product } from '../products.model';
+import { IntendedForEnum, ProductStateEnum } from './create-product.dto';
 
 export class ProductDto {
   @ApiProperty({ example: '1', description: 'Unique id' })
@@ -30,6 +31,12 @@ export class ProductDto {
 
   @ApiProperty({ example: 'Product info', description: 'Product other information' })
   readonly otherInfo: string;
+
+  @ApiProperty({ enum: ['FOR_SALE', 'FOR_RENT', 'FOR_FREE_GIVING'] })
+  intendedFor: IntendedForEnum;
+
+  @ApiProperty({ enum: ['NEW', 'USED', 'NOT_OPERABLE'] })
+  productState: ProductStateEnum;
 
   @ApiProperty({ example: '1', description: 'Product category id' })
   readonly categoryId: number;

@@ -116,14 +116,14 @@ const stylesCallback = (theme?: Theme | undefined) => ({
     boxShadow: 'none',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'primary.btnMainPressed',
+    borderColor: 'primary.borderColor1',
     color: 'primary.btnMain',
     borderRadius: '500px',
     '&:hover': {
       boxShadow: 'none',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: 'primary.btnMainDisabled',
+      borderColor: 'primary.borderColor1',
       color: 'primary.btnMainHover',
       backgroundColor: 'inherit',
       '& > span': {

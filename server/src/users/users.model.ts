@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BelongsToMany, Column, DataType, Model, Table } from 'sequelize-typescript';
+import { FavoriteProduct } from 'src/favoriteProducts/favoriteProducts.model';
+import { UserFavoriteProducts } from 'src/favoriteProducts/user-favoriteProducts.model';
 import { Role } from 'src/roles/roles.model';
 import { UserRoles } from 'src/roles/user-roles.model';
 
@@ -99,4 +101,8 @@ export class User extends Model<User, UserCreationAttr> {
   @ApiProperty({ example: '', description: 'Device type' })
   @Column({ type: DataType.STRING, allowNull: true })
   deviceType: string;
+
+  @ApiProperty({ example: 1, description: 'Corresponding favoriteProduct id' })
+  @BelongsToMany(() => FavoriteProduct, () => UserFavoriteProducts)
+  favoriteProducts: FavoriteProduct[];
 }

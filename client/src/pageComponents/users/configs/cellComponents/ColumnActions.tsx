@@ -11,6 +11,7 @@ import { useModal } from '../../../../hooks/common/useModal';
 import { getCellPadding } from '../../../../components/customTable/config/tableStyleHelper';
 import CustomModal from '../../../../components/modal/CustomModal';
 import CustomButton from '../../../../components/customButton';
+import { useTheme } from '@mui/system';
 
 interface iProps {
   data: any;
@@ -23,7 +24,7 @@ const ColumnActions: FC<iProps> = (props) => {
 
   const { enqueueSnackbar } = useSnackbar();
   const {isOpen, openModal, closeModal} = useModal(false);
-
+  const theme = useTheme();
   const handleDelete = () => {
     try {
       (closeModal as () => void)();
@@ -42,7 +43,7 @@ const ColumnActions: FC<iProps> = (props) => {
         }
       )
     } catch (error: any) {
-      SystemMessage(enqueueSnackbar, getMessage(error?.response?.data || error.message), { variant: 'error' });
+      SystemMessage(enqueueSnackbar, getMessage(error), { variant: 'error', theme });
     }
     return true
   };

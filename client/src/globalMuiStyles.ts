@@ -363,10 +363,12 @@ const globalMuiStylesWithTheme = (theme: Theme | DefaultTheme | undefined) => ({
     borderRadius: '8px',
     '& > .MuiOutlinedInput-input': {
       '&::placeholder': {
-        color: 'primary.textColor6'
+        color: 'primary.textColor8',
+        fontSize: '14px',
       },
       '& > em': {
-        color: `${(theme as Theme)?.palette?.primary?.textColor6}!important`
+        color: `${(theme as Theme)?.palette?.primary?.textColor8}!important`,
+        fontSize: '14px',
       }
     },
   },
@@ -498,6 +500,9 @@ const globalMuiStylesWithTheme = (theme: Theme | DefaultTheme | undefined) => ({
   },
   fill_8998A8: {
     fill: (theme as Theme)?.palette?.primary?.textColor7
+  },
+  fill_DA9C50: {
+    fill: (theme as Theme)?.palette?.primary?.orange3
   },
 })
 export { globalMuiStyles, globalMuiStylesWithTheme };

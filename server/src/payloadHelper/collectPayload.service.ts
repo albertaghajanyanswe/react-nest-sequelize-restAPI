@@ -12,6 +12,25 @@ export class CollectPayloadService {
     }
   };
 
+  collectFilterCondition = (res, name, operator, value) => {
+    res.where[name] = { [operator]: value };
+  };
+
+  collectCustomFilterItem = (item, customFilter, customFilterNames, filter, filterType) => {
+    const filterName = item.split(`_${filterType}`)[0];
+    if (!customFilter[filterName]) {
+      customFilter[filterName] = {
+        [filterType]: filter[item],
+        isLiteral: item.indexOf('_literal') !== -1,
+      };
+    } else {
+      customFilter[filterName][filterType] = filter[item];
+    }
+    if (customFilterNames.indexOf(filterName) === -1) {
+      customFilterNames.push(filterName);
+    }
+  };
+
   getListPayload(req) {
     // console.log('req = ', req)
     if (req?.query?.params) {
@@ -32,8 +51,12 @@ export class CollectPayloadService {
           res.order = [[sort.field, sort.order]];
         }
         if (filter) {
+          const customFilter = {};
+          const customFilterNames = [];
           for (const i in filter) {
-            if (i.indexOf('_eq') !== -1) {
+            if (i.indexOf('_in') !== -1) {
+              this.collectCustomFilterItem(i, customFilter, customFilterNames, filter, 'in');
+            } else if (i.indexOf('_eq') !== -1) {
               const filterName = i.split('_eq')[0];
               res.where[filterName] = { [Op.eq]: filter[i] };
             } else {
@@ -42,16 +65,27 @@ export class CollectPayloadService {
 
             // res.where[i] = { [Op.startsWith]: filter[i] };
           }
+
+          console.log('\n\n 111 customFilterNames = ', customFilterNames)
+          for (const i in customFilterNames) {
+            const name = customFilterNames[i];
+            if (customFilter[name].in) {
+              this.collectFilterCondition(res, name, Op.in, customFilter[name].in);
+            }
+          }
         }
         if (search) {
+          let hasSearchInMainTable = false;
           for (const i in search.fields) {
+            if (!hasSearchInMainTable) {
+              res.where[Op.or] = [];
+              hasSearchInMainTable = true;
+            }
             const obj = {};
-            res.where[Op.or] = [];
             obj[search.fields[i]] = { [Op.like]: `%${search.value}%` };
             res.where[Op.or].push(obj);
           }
         }
-        console.log('res = ', res)
         return res;
       }
     } else {

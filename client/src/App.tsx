@@ -21,6 +21,8 @@ import NotFound from './components/NotFound';
 import UsersPage from './pageComponents/users';
 import SettingsPage from './pageComponents/settings/SettingsPage';
 import Layout from './components/Layout';
+import ProductsPage from './pageComponents/Products';
+import ProductItemPage from './pageComponents/ProductItem/ProductItemPage';
 
 function App() {
 
@@ -86,6 +88,30 @@ function App() {
             element={
               <PrivateRoute>
                 <UsersPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={routes.products.path}
+            element={
+              <PrivateRoute>
+                <ProductsPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={routes.productCreate.path}
+            element={
+              <PrivateRoute>
+                <ProductItemPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={routes.productEdit.path}
+            element={
+              <PrivateRoute>
+                <ProductItemPage />
               </PrivateRoute>
             }
           />

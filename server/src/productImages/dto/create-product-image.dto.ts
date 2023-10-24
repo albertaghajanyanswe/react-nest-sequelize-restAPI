@@ -1,3 +1,3 @@
 export class CreateProductImageDto {
-  readonly productId: string;
+  readonly productId?: string;
 }

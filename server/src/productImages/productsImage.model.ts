@@ -4,7 +4,7 @@ import { Product } from 'src/products/products.model';
 
 interface ProductImageCreationAttr {
   name: string;
-  productId: number;
+  productId?: number;
 }
 
 @Table({ tableName: 'product_image' })
@@ -29,7 +29,7 @@ export class ProductImage extends Model<ProductImage, ProductImageCreationAttr> 
   @ForeignKey(() => Product)
   @Column({
     type: DataType.INTEGER,
-    allowNull: false,
+    allowNull: true,
   })
   productId: number;
 
