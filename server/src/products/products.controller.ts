@@ -5,7 +5,7 @@ import { ProductsService } from './products.service';
 import { Product } from './products.model';
 import { AuthGuard } from '@nestjs/passport';
 import { GetProductsDto, ProductDto } from './dto/product.dto';
-import { CurrentUser } from 'src/shared/guards/currentUser.decorator';
+import { CurrentUser } from 'src/shared/decorators/currentUser.decorator';
 import { User } from 'src/users/users.model';
 
 @ApiTags('Products')
