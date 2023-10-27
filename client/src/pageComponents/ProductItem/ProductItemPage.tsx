@@ -21,6 +21,7 @@ import SETTINGS from '../../settings';
 import Loading from '../../components/loading';
 import { useTheme } from '@mui/system';
 import PageTitle from '../../components/pageTitle';
+import NotFound from '../../components/NotFound';
 
 const FormHOC = StepHOC<iCreateProduct>()(
   ["name", "description", "otherInfo", "price", "currency", "province", "city", "address", "categoryId", "intendedFor", "productState"]
@@ -139,6 +140,10 @@ const ProductItemPage = () => {
 
   if (isGetLoading) {
     return <Loading />
+  }
+
+  if (productId && !isGetLoading && !productData) {
+    return <NotFound />
   }
 
   return (

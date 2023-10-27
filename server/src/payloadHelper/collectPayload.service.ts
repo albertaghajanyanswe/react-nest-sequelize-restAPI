@@ -31,13 +31,12 @@ export class CollectPayloadService {
     }
   };
 
-  getListPayload(req) {
-    // console.log('req = ', req)
+  getListPayload(req, addUserId = true) {
     if (req?.query?.params) {
 
       const params = JSON.parse(decodeURIComponent(req.query.params));
       const res: Record<string, any> = { distinct: true };
-      res.where = {};
+      res.where = addUserId ? { userId: req.user.id } : {};
 
       if (params) {
         const { limit, offset, sort, filter, search } = this.safeJsonParser(params);

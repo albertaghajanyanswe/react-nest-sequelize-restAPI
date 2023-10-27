@@ -33,8 +33,8 @@ export class ProductsService {
     });
   }
 
-  async getProductById(id: string) {
-    const product = await this.productRepository.findOne({ where: { id } });
+  async getProductById(id: string, userId: number) {
+    const product = await this.productRepository.findOne({ where: { id, userId } });
     return product;
   }
 
@@ -50,11 +50,15 @@ export class ProductsService {
 
   async getAllProducts(req: Request): Promise<GetProductsDto> {
     const payload = this.collectPayload.getListPayload(req);
-    console.log('payload = ', payload);
     payload.include = [
       {
         model: ProductImage,
         attributes: ['id', 'name', 'productId'],
+      },
+      {
+        model: FavoriteProduct,
+        // required: true,
+        // where: { storedProductUserId: userId },
       },
       {
         model: User,
@@ -62,10 +66,8 @@ export class ProductsService {
           {
             model: FavoriteProduct,
             through: { attributes: ['id', 'userId', 'favoriteProductId'] },
-            // attributes: ['id', 'name', 'productId'],
           },
         ],
-        // attributes: ['id', 'name', 'productId'],
       },
     ];
     const { rows, count } = await this.productRepository.findAndCountAll(payload);

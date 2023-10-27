@@ -132,7 +132,9 @@ const en = {
       USED: 'Used',
       notOperable: 'Not operable',
       NOT_OPERABLE: 'Not operable'
-    }
+    },
+    emptyTitle: 'You don`t have a product yet.',
+    emptyDesc: 'You will see your products here after creation.'
   },
   productItem: {
     createNewProduct: 'Create new product',
@@ -147,8 +149,6 @@ const en = {
     search: 'Search',
     edit: 'Edit',
     delete: 'Delete',
-    setReminder: 'Set reminder time',
-    changeStatus: 'Click to the row to change status',
     clickToRow: 'Click to the row',
     recoverDeletedItem: 'Recover deleted item',
     save: 'Save',
@@ -167,19 +167,7 @@ const en = {
   },
   systemMsg: {
     failedSaveData: 'Failed to save data',
-    newChangeArrived: 'New change requests have arrived',
-    taskCompleted: 'Task completed',
-    taskReturned: 'Task returned',
-    dataModificationRequestSent: 'Data modification request sent',
-    appReturnedToHandler: 'Application No. {0} returned to handler',
-    appFormDeleted: 'Application form deleted',
-    appFormNotFount: 'Application form not found',
     userRemoved: '${0} was removed',
-    couldNotOpen: 'Could not open page with status "Not Submitted"',
-    couldNotOpenInvestor: 'Could not open page with status "Submitted"',
-    permissionDenied: 'Permission denied',
-    taskDisregarded: 'Task disregarded',
-    licenseNotFound: 'Application license not found',
   },
   actionMsg: {
     success: {

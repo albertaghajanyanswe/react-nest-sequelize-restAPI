@@ -34,7 +34,6 @@ function ProductItemCard<T>({
     FOR_FREE_GIVING: 'primary.green2'
   }
 
-  console.log('details = ', details)
   return (
     // <CardActionArea sx={{ height: '100%' }} onClick={handleOnClick}>
     <Card sx={{ p: 2, height: '100%' }}>

@@ -19,6 +19,7 @@ import { productsAPI } from "../../services/rtk/ProductsApi";
 import SystemMessage from "../../components/systemMessage";
 import { getMessage } from "../../helpers/helper";
 import { useSnackbar } from "notistack";
+import EmptyState from "../../components/emptyState/EmptyState";
 
 interface iProps<T> {
   loading: boolean;
@@ -174,27 +175,31 @@ function ProductsLayout<T>({
     <Box sx={muiStyles.root}>
       <PageTitle handlePageHeaderRef={handlePageHeaderRef} onSearchCallback={onSearchCallback} filteredParams={filteredParams} />
       <Box sx={muiStyles.tableRoot}>
-        {toolbarView && toolbarView}
-        <Grid container spacing={3}>
-          {(tableSources.data as ProductsDataType[]).map((product) => (
-            <Grid item xs={12} sm={12} md={6} lg={6} xl={4} key={product.id}>
-              <ProductItemCard<ProductsDataType>
-                details={product}
-                handleFavorite={calculateIsFavorite(product) ? handleDeleteFavorite : handleFavorite}
-                isFavorite={calculateIsFavorite(product)}
-              />
+        {tableSources.data.length === 0 ? <EmptyState title={t('products.emptyTitle')} desc={t('products.emptyDesc')} /> :
+          <>
+            {toolbarView && toolbarView}
+            <Grid container spacing={3}>
+              {(tableSources.data as ProductsDataType[]).map((product) => (
+                <Grid item xs={12} sm={12} md={6} lg={6} xl={4} key={product.id}>
+                  <ProductItemCard<ProductsDataType>
+                    details={product}
+                    handleFavorite={calculateIsFavorite(product) ? handleDeleteFavorite : handleFavorite}
+                    isFavorite={calculateIsFavorite(product)}
+                  />
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
-        <Box sx={{ mt: 6 }}>
-          <CustomPagination
-            rowsPerPageOptions={rowsPerPageOptions}
-            count={count}
-            filteredParams={filteredParams}
-            setFilteredParams={setFilteredParams}
-            handleFooterRef={handleFooterRef}
-          />
-        </Box>
+            <Box sx={{ mt: 6 }}>
+              <CustomPagination
+                rowsPerPageOptions={rowsPerPageOptions}
+                count={count}
+                filteredParams={filteredParams}
+                setFilteredParams={setFilteredParams}
+                handleFooterRef={handleFooterRef}
+              />
+            </Box>
+          </>
+        }
       </Box>
     </Box>
   )

@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
 import { Category } from 'src/categories/categories.model';
+import { FavoriteProduct } from 'src/favoriteProducts/favoriteProducts.model';
 import { ProductImage } from 'src/productImages/productsImage.model';
 import { User } from 'src/users/users.model';
 import { IntendedForEnum, ProductStateEnum } from './dto/create-product.dto';
@@ -100,4 +101,14 @@ export class Product extends Model<Product, ProductCreationAttr> {
   })
   // @HasMany(() => ProductImage, 'productId')
   productImage: ProductImage[];
+
+  @HasMany(() => FavoriteProduct, {
+    foreignKey: {
+      name: 'productId',
+      field: 'productId',
+    },
+    onDelete: 'CASCADE',
+  })
+  // @HasMany(() => ProductImage, 'productId')
+  favoriteProduct: FavoriteProduct[];
 }

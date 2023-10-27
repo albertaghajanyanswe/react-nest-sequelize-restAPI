@@ -13,7 +13,7 @@ export class CategoriesService {
   ) {}
 
   async getAllCategories(req: Request): Promise<GetCategoriesDto> {
-    const payload = this.collectPayload.getListPayload(req);
+    const payload = this.collectPayload.getListPayload(req, false);
     const { rows, count } = await this.categoryRepository.findAndCountAll(payload);
     return { count: count, data: rows };
   }

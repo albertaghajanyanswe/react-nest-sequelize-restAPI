@@ -25,7 +25,7 @@ export class UsersService {
   ) {}
 
   async getAllUsers(req: Request): Promise<GetUsersDto> {
-    const payload = this.collectPayload.getListPayload(req);
+    const payload = this.collectPayload.getListPayload(req, false);
     payload.include = [
       {
         model: Role,

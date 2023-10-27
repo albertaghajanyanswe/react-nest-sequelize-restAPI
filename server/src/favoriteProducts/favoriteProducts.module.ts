@@ -6,9 +6,10 @@ import { ProductsModule } from 'src/products/products.module';
 import { userFavoriteProductsProviders } from './user-favoriteProducts.provider';
 import { UsersModule } from 'src/users/users.module';
 import { CollectPayloadService } from 'src/payloadHelper/collectPayload.service';
+import { DatabaseModule } from 'src/database/database.module';
 
 @Module({
-  imports: [ProductsModule, UsersModule],
+  imports: [DatabaseModule, ProductsModule, UsersModule],
   exports: [FavoriteProductsService],
   controllers: [FavoriteProductsController],
   providers: [
