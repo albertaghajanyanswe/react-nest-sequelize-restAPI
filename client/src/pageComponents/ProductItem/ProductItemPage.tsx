@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Box, Grid } from '@mui/material';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSnackbar } from 'notistack';
 import { useNavigate, useParams } from 'react-router-dom';
-import { routes } from '../../configs';
+import { routes, variables } from '../../configs';
 import { useTranslation } from 'react-i18next';
 import { iCreateProduct } from '../../configs/shared/types';
 import { requiredErrMsg } from '../../helpers/formHelper';
@@ -65,6 +65,21 @@ const ProductItemPage = () => {
     defaultValues: ({ ...DEFAULT_VALUES_CREATE_PRODUCT, ...initialData }),
     mode: 'onChange'
   });
+
+  const pageHeaderRef = useRef<any>();
+  const handlePageHeaderRef = useCallback((el: HTMLDivElement | null) => {
+    pageHeaderRef.current = el
+  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const getPageHeaderHeight = useCallback(() => (pageHeaderRef.current?.clientHeight || 0), [pageHeaderRef.current?.clientHeight, isGetLoading])
+
+  const footerRef = useRef<any>();
+  const handleFooterRef = useCallback((el: HTMLDivElement | null) => {
+    footerRef.current = el
+  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const getFooterHeight = useCallback(() => (footerRef.current?.clientHeight || 0), [footerRef.current?.clientHeight, isGetLoading])
+
 
   const isDirty = methods.formState.isDirty;
   const hasError = Object.keys(methods.formState.errors).length > 0;
@@ -146,14 +161,17 @@ const ProductItemPage = () => {
     return <NotFound />
   }
 
+  console.log('getPageHeaderHeight = ', getPageHeaderHeight())
   return (
     <Box>
-      <PageTitle title={productId ? productData?.name : t('productItem.createNewProduct')} withBack />
-      <Box sx={{ p: '0 40px 40px 40px' }}>
+      <Box sx={{ position: 'fixed', width: `calc(100% - ${variables.drawerWidth})`, backgroundColor: 'white', zIndex: 1, boxShadow: 'rgba(33, 35, 38, 0.1) 0px 10px 10px -10px' }}>
+        <PageTitle handlePageHeaderRef={handlePageHeaderRef} title={productData?.name ? productData?.name : t('productItem.createNewProduct')} withBack />
+      </Box>
+      <Box sx={{ p: '0 40px 40px 40px', position: 'absolute', mt: `${getPageHeaderHeight()}px` }}>
 
         <FormProvider {...methods}>
           <form noValidate>
-            <Grid container spacing={3} sx={{ mt: 0 }}>
+            <Grid container spacing={3} sx={{ mt: 0, mb: `${getFooterHeight()}px` }}>
               <Grid item xs={12} sm={12}>
                 <Form.TextField
                   rules={{ required: requiredErrMsg(t('products.name')) }}
@@ -281,7 +299,7 @@ const ProductItemPage = () => {
                 />
               </Grid>
             </Grid>
-            <Grid container sx={{ mt: 4 }} spacing={3}>
+            {/* <Grid container sx={{ mt: 4 }} spacing={3}>
               <Grid item xs={12} sm={6}>
                 <CustomButton
                   label={t('actions.cancel')}
@@ -302,11 +320,29 @@ const ProductItemPage = () => {
                   disabled={disableSubmit || !isDirty || hasError}
                 />
               </Grid>
-            </Grid>
+            </Grid> */}
           </form>
         </FormProvider>
       </Box>
-
+      <Box ref={handleFooterRef} sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, position: 'fixed', bottom: 0, p: '24px 40px', width: `calc(100% - 0px - ${variables.drawerWidth})`, backgroundColor: 'white', zIndex: 1, boxShadow: 'rgba(33, 35, 38, 0.1) 0px -12px 10px -12px' }}>
+        <CustomButton
+          label={t('actions.cancel')}
+          btnType='secondary'
+          onClick={handleCancel}
+          sx={{ width: { xs: '100%', sm: '50%' }, margin: { xs: '0 0 24px 0', sm: '0 24px 0 0' } }}
+          disabled={disableSubmit || !isDirty}
+        />
+        <CustomButton
+          label={productId ? t('actions.update') : t('actions.submit')}
+          variant='contained'
+          btnType='primary'
+          onClick={handleSave}
+          sx={{ width: { xs: '100%', sm: '50%' } }}
+          // sx={{ minWidth: '100%' }}
+          // sx={{ minWidth: '120px', mt: { xs: 3, sm: 0 } }}
+          disabled={disableSubmit || !isDirty || hasError}
+        />
+      </Box>
     </Box>
   )
 };
