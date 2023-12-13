@@ -142,6 +142,9 @@ const FormTextField = <T extends FieldValues>({
         //     autoComplete: autoComplete,
         //   }
         // }}
+        inputProps={{
+          "data-testid": name,
+        }}
         InputProps={{
           // todo autofill
           // autoComplete: autoComplete,

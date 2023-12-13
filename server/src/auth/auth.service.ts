@@ -35,6 +35,8 @@ export class AuthService {
     const passwordValid = await this.comparePassword(password, user.password);
     if (user.dataValues && passwordValid) {
       return { user: user.dataValues, success: true };
+    } else {
+      throw new NotAcceptableException('Could not find the user.');
     }
     return { user: null, success: false };
   }

@@ -88,6 +88,7 @@ const CustomButton: FC<iProps> = ({
       }}
       type={type}
       disabled={disabled || loading}
+      data-testid={name}
     >
       {label}
     </LoadingButton>
@@ -105,6 +106,7 @@ const CustomButton: FC<iProps> = ({
         name={name}
         value={value}
         id={id}
+        data-testid={name}
       >
         {label}
       </Button>
@@ -121,6 +123,7 @@ const CustomButton: FC<iProps> = ({
         href={href}
         id={id}
         name={name}
+        data-testid={name}
       >{label}</Button>
     );
 };

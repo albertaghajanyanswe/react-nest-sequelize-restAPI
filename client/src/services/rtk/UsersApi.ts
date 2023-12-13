@@ -8,8 +8,6 @@ import { getCurrentUser } from '../lsService';
 // const baseUrl = `${process.env.REACT_APP_UI_URL}/api` || 'http://localhost:4000/api';
 const baseUrl = '';
 
-console.log('baseUrl = ', baseUrl)
-
 // interface CustomError {
 //   data: {
 //     message: string,
