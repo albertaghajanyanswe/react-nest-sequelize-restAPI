@@ -2,7 +2,6 @@ import { Body, Controller, Get, Param, Post, Put, Query, Req, Res, UseGuards } f
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Request, Response } from 'express';
-import { DoesUserExist } from 'src/shared/guards/doesUserExist.guard';
 import { CreateGuestUserDto, CreateUserDto, UpdateUserDto } from './dto/create-user.dto';
 import { GetUsersDto, UserDto } from './dto/user.dto';
 import { User } from './users.model';

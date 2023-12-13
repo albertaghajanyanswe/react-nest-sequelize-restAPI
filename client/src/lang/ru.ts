@@ -15,12 +15,15 @@ const ru = {
     users: 'Список всех пользователей',
     meetings: 'Встречи',
     products: 'Продукты',
+    product: 'Продукт',
+    createProducts: 'Создать продукт',
   },
   sidebar: {
     welcome: 'Добро пожаловать',
     home: 'Домой',
     users: 'Пользователи',
     settings: 'Настройки',
+    products: 'Продукты',
   },
   lang: {
     english: 'English',
@@ -114,6 +117,7 @@ const ru = {
     changeStatus: 'Нажмите на строку, чтобы изменить статус',
     save: 'Сохранить',
     uploadNewImage: 'Загрузить новое изображение',
+    createProduct: 'Создать новый продукт'
   },
   actionMsg: {
     success: {

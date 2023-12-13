@@ -45,6 +45,21 @@ paths:
                 $ref: '#/components/schemas/DeleteFileDto'
       tags: *ref_0
       security: *ref_1
+  /api/uploads/productImage:
+    post:
+      operationId: UploadController_uploadProductImage
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductImageDto'
+      responses:
+        '201':
+          description: ''
+      tags: *ref_0
+      security: *ref_1
   /api/files/{filename}:
     get:
       operationId: FileController_serveFile
@@ -183,6 +198,8 @@ paths:
                 $ref: '#/components/schemas/Role'
       tags: &ref_4
         - Roles
+      security: &ref_5
+        - bearer: []
   /api/roles/{value}:
     get:
       operationId: RolesController_getRoleByValue
@@ -201,6 +218,181 @@ paths:
               schema:
                 $ref: '#/components/schemas/Role'
       tags: *ref_4
+      security: *ref_5
+  /api/categories:
+    get:
+      operationId: CategoriesController_getAllCategories
+      summary: Get all categories
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCategoriesDto'
+      tags: &ref_6
+        - Categories
+      security: &ref_7
+        - bearer: []
+    post:
+      operationId: CategoriesController_create
+      summary: Create new category
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCategoryDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+      tags: *ref_6
+      security: *ref_7
+  /api/categories/{value}:
+    get:
+      operationId: CategoriesController_getCategoryByValue
+      summary: Get category by value
+      parameters:
+        - name: value
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+      tags: *ref_6
+      security: *ref_7
+  /api/products/{id}:
+    get:
+      operationId: ProductsController_getProductById
+      summary: Get product by id
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductDto'
+      tags: &ref_8
+        - Products
+      security: &ref_9
+        - bearer: []
+    put:
+      operationId: ProductsController_updateUser
+      summary: Update product
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: Product id
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+      tags: *ref_8
+      security: *ref_9
+  /api/products:
+    get:
+      operationId: ProductsController_getAll
+      summary: Get all product
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProductsDto'
+      tags: *ref_8
+      security: *ref_9
+    post:
+      operationId: ProductsController_create
+      summary: Create new product
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductDto'
+      tags: *ref_8
+      security: *ref_9
+  /api/favoriteProducts/add:
+    post:
+      operationId: FavoriteProductsController_create
+      summary: Create favorite products
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFavoriteProductByIdDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FavoriteProductDto'
+      tags: &ref_10
+        - FavoriteProduct
+      security: &ref_11
+        - bearer: []
+  /api/favoriteProducts/delete/{id}:
+    delete:
+      operationId: FavoriteProductsController_delete
+      summary: Delete favorite products
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDto'
+      tags: *ref_10
+      security: *ref_11
   /api/auth/login:
     post:
       operationId: AuthController_login
@@ -208,7 +400,7 @@ paths:
       responses:
         '201':
           description: ''
-      tags: &ref_5
+      tags: &ref_12
         - Auth
   /api/auth/postLogin:
     post:
@@ -228,7 +420,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-      tags: *ref_5
+      tags: *ref_12
   /api/auth/postLogin/guest:
     post:
       operationId: AuthController_postLoginGuest
@@ -247,7 +439,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-      tags: *ref_5
+      tags: *ref_12
 info:
   title: Test BE
   description: Description for REST APIs
@@ -265,6 +457,9 @@ components:
       type: http
   schemas:
     DeleteFileDto:
+      type: object
+      properties: {}
+    CreateProductImageDto:
       type: object
       properties: {}
     User:
@@ -340,6 +535,12 @@ components:
           type: string
           example: ''
           description: Device type
+        favoriteProducts:
+          example: 1
+          description: Corresponding favoriteProduct id
+          type: array
+          items:
+            type: string
       required:
         - id
         - nickName
@@ -358,6 +559,7 @@ components:
         - firebaseSubscription
         - firebaseToken
         - deviceType
+        - favoriteProducts
     GetUsersDto:
       type: object
       properties:
@@ -505,6 +707,281 @@ components:
         - phone
         - image
     CreateRoleDto:
+      type: object
+      properties: {}
+    Category:
+      type: object
+      properties:
+        id:
+          type: number
+          example: '1'
+          description: Unique id
+        name:
+          type: string
+          example: OTHER
+          description: Other
+        description:
+          type: string
+          example: Other category
+          description: Other category
+      required:
+        - id
+        - name
+        - description
+    GetCategoriesDto:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+        count:
+          type: number
+      required:
+        - data
+        - count
+    CreateCategoryDto:
+      type: object
+      properties: {}
+    ProductDto:
+      type: object
+      properties:
+        id:
+          type: number
+          example: '1'
+          description: Unique id
+        name:
+          type: string
+          example: Name
+          description: Product name
+        description:
+          type: string
+          example: Description
+          description: Product description
+        price:
+          type: string
+          example: '1'
+          description: Product price
+        currency:
+          type: string
+          example: USD
+          description: Product price currency
+        province:
+          type: string
+          example: Lori
+          description: Product located province
+        city:
+          type: string
+          example: Vanadzor
+          description: Product located city
+        address:
+          type: string
+          example: Street Usanoxakan
+          description: Product located address
+        otherInfo:
+          type: string
+          example: Product info
+          description: Product other information
+        intendedFor:
+          type: string
+          enum:
+            - FOR_SALE
+            - FOR_RENT
+            - FOR_FREE_GIVING
+        productState:
+          type: string
+          enum:
+            - NEW
+            - USED
+            - NOT_OPERABLE
+        categoryId:
+          type: number
+          example: '1'
+          description: Product category id
+        category:
+          $ref: '#/components/schemas/Category'
+        userId:
+          type: boolean
+          example: false
+          description: User archived
+        user:
+          $ref: '#/components/schemas/User'
+      required:
+        - id
+        - name
+        - description
+        - price
+        - currency
+        - province
+        - city
+        - address
+        - otherInfo
+        - intendedFor
+        - productState
+        - categoryId
+        - category
+        - userId
+        - user
+    Product:
+      type: object
+      properties:
+        id:
+          type: number
+          example: '1'
+          description: Unique id
+        name:
+          type: string
+          example: Notebook Dell
+          description: Enter product name
+        description:
+          type: string
+          example: Notebook
+          description: Notebook description
+        price:
+          type: string
+          example: '500'
+          description: Notebook price
+        currency:
+          type: string
+          example: USD
+          description: Notebook price currency
+        province:
+          type: string
+          example: Lori
+          description: Notebook located province
+        city:
+          type: string
+          example: Vanadzor
+          description: Notebook located city
+        address:
+          type: string
+          example: Usanoxakan 5
+          description: Notebook located exact address
+        otherInfo:
+          type: string
+          example: New notebook
+          description: Notebook other information
+        intendedFor:
+          type: string
+          enum:
+            - FOR_SALE
+            - FOR_RENT
+            - FOR_FREE_GIVING
+        productState:
+          type: string
+          enum:
+            - NEW
+            - USED
+            - NOT_OPERABLE
+      required:
+        - id
+        - name
+        - description
+        - price
+        - currency
+        - province
+        - city
+        - address
+        - otherInfo
+        - intendedFor
+        - productState
+    GetProductsDto:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        count:
+          type: number
+      required:
+        - data
+        - count
+    CreateProductDto:
+      type: object
+      properties: {}
+    CreateFavoriteProductByIdDto:
+      type: object
+      properties: {}
+    FavoriteProductDto:
+      type: object
+      properties:
+        id:
+          type: number
+          example: '1'
+          description: Unique id
+        storedProductId:
+          type: number
+          example: '1'
+          description: Stored Product id
+        storedProductName:
+          type: string
+          example: Name
+          description: Stored product name
+        storedProductDescription:
+          type: string
+          example: Description
+          description: Stored product description
+        storedProductPrice:
+          type: string
+          example: '1'
+          description: Stored product price
+        storedProductCurrency:
+          type: string
+          example: USD
+          description: Stored product price currency
+        storedProductProvince:
+          type: string
+          example: Lori
+          description: Stored product located province
+        storedProductCity:
+          type: string
+          example: Vanadzor
+          description: Stored product located city
+        storedProductAddress:
+          type: string
+          example: Street Usanoxakan
+          description: Stored product located address
+        storedProductOtherInfo:
+          type: string
+          example: Product info
+          description: Stored product other information
+        storedProductIntendedFor:
+          type: string
+          enum:
+            - FOR_SALE
+            - FOR_RENT
+            - FOR_FREE_GIVING
+        storedProductState:
+          type: string
+          enum:
+            - NEW
+            - USED
+            - NOT_OPERABLE
+        storedProductCategoryId:
+          type: number
+          example: '1'
+          description: Stored product category id
+        storedProductUserId:
+          type: number
+          example: '1'
+          description: Stored Product user id
+      required:
+        - id
+        - storedProductId
+        - storedProductName
+        - storedProductDescription
+        - storedProductPrice
+        - storedProductCurrency
+        - storedProductProvince
+        - storedProductCity
+        - storedProductAddress
+        - storedProductOtherInfo
+        - storedProductIntendedFor
+        - storedProductState
+        - storedProductCategoryId
+        - storedProductUserId
+    DeleteDto:
       type: object
       properties: {}
     PostLoginDto:

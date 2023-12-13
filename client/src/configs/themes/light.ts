@@ -20,6 +20,7 @@ declare module '@mui/material/styles' {
     textColor5?: string;
     textColor6?: string;
     textColor7?: string;
+    textColor8?: string;
     borderColor1?: string;
     borderColor2?: string;
     borderColor3?: string;
@@ -61,6 +62,7 @@ declare module '@mui/material/styles' {
     textColor5?: string;
     textColor6?: string;
     textColor7?: string;
+    textColor8?: string;
     borderColor1?: string;
     borderColor2?: string;
     borderColor3?: string;
@@ -112,6 +114,7 @@ const Default = (): DefaultPaletteOptions => {
       textColor5: '#494947',
       textColor6: '#9FAEBD',
       textColor7: '#8998A8',
+      textColor8: '#b7b7b7',
 
       borderColor1: '#F1F4FA',
       borderColor2: '#DFE8F3',
@@ -153,9 +156,9 @@ const Default = (): DefaultPaletteOptions => {
       textColor3: '#728191',
       textColor4: '#878787',
       textColor5: '#494947',
-
       textColor6: '#9FAEBD',
       textColor7: '#8998A8',
+      textColor8: '#b7b7b7',
 
       borderColor1: '#F1F4FA',
       borderColor2: '#DFE8F3',
@@ -274,9 +277,10 @@ const theme = createTheme({
         },
         input: {
           '&::placeholder': {
-            color: '#878787',
+            color: '#b7b7b7',
             opacity: 1,
             fontFamily: 'Poppins',
+            fontSize: '14px'
           },
         },
 
@@ -294,9 +298,13 @@ const theme = createTheme({
             },
           },
           '&.Mui-focused': {
+            // '& .MuiOutlinedInput-notchedOutline': {
+            //   border: '1px solid #004B7F',
+            //   boxShadow: '0px 0px 0px 3px rgba(0, 75, 127, 0.1)'
+            // },
             '& .MuiOutlinedInput-notchedOutline': {
-              border: '1px solid #004B7F',
-              boxShadow: '0px 0px 0px 3px rgba(0, 75, 127, 0.1)'
+              border: '1px solid #457BAC',
+              boxShadow: '0px 0px 0px 2px rgba(207, 227, 242, 0.6)'
             },
           },
           '&.Mui-error': {

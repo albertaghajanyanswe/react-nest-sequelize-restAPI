@@ -1,6 +1,6 @@
 import React, { ElementType, useEffect } from 'react';
 import moment from 'moment';
-import { Box, TextField, FormControl } from '@mui/material';
+import { Box, FormControl } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
@@ -8,7 +8,6 @@ import {ReactComponent as CalendarSVG} from '../../../../assets/16/calendar-filt
 import { muiStyles } from './styles';
 import { iFilterDatePickerField } from '../../../../configs/shared/types';
 import { useDebounce } from '../../../../hooks/common/useDebaunce';
-import { useTranslation } from 'react-i18next';
 
 interface iProps<T> {
   field: T;
@@ -27,9 +26,8 @@ function CustomFilterDateTimePicker<T extends iFilterDatePickerField>({
   withDefaultSize
 }: iProps<T>) {
 
-  const { t } = useTranslation();
-
   const [searchTerm, setSearchTerm] = React.useState(searchValue);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [changeValue, setChangeValue] = React.useState('');
   const debouncedValue = useDebounce(typeof searchTerm === 'object' ? searchTerm : { [field?.id]: searchTerm }, 1000);
 
@@ -69,7 +67,7 @@ function CustomFilterDateTimePicker<T extends iFilterDatePickerField>({
             {...(field.views && { views: field.views })}
             {...(field.inputFormat && { inputFormat: field.inputFormat })}
             label=''
-            value={searchTerm?.[field.id] || ''}
+            value={searchTerm?.[field.id] || '' || changeValue}
             onChange={(value, keyboardInputValue) => {
               if (keyboardInputValue || !value) {
                 handleChangeKeyboard(keyboardInputValue || '');

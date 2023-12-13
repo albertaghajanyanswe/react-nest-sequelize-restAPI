@@ -26,3 +26,17 @@ export const DEFAULT_VALUES_PROFILE = {
   email: '',
   phone: '',
 }
+
+export const DEFAULT_VALUES_CREATE_PRODUCT = {
+  name: '',
+  description: '',
+  otherInfo: '',
+  price: '',
+  currency: '',
+  province: '',
+  city: '',
+  address: '',
+  categoryId: undefined,
+  intendedFor: undefined,
+  productState: undefined,
+}

@@ -1,5 +1,5 @@
 import React, { useState, useMemo, memo, useCallback } from 'react';
-import { Table, TableBody, TableRow, TableContainer, Paper, Skeleton, Box, Tooltip, TableFooter, TableCell, Typography, TableHead } from '@mui/material';
+import { Table, TableBody, TableRow, TableContainer, Paper, Skeleton, Box, Tooltip } from '@mui/material';
 import CustomTableHead from './customTableHead';
 import CustomTableCell from './customTableCell';
 import TablePaginationComponent from './customPaginationComponent';
@@ -8,11 +8,11 @@ import { muiStyles } from './styles';
 import { iTableField, iTableSources } from '../../configs/shared/types';
 import { useTranslation } from 'react-i18next';
 
-const ArrowMore = (props: any) => (
-  <svg {...props} width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 6.3125L8 10.3125L12 6.3125" stroke="#728191" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
+// const ArrowMore = (props: any) => (
+//   <svg {...props} width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+//     <path d="M4 6.3125L8 10.3125L12 6.3125" stroke="#728191" strokeLinecap="round" strokeLinejoin="round" />
+//   </svg>
+// );
 
 interface iTableOptions {
   fields: iTableField[];

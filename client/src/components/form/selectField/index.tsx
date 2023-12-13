@@ -1,14 +1,14 @@
 import React, { ChangeEvent } from 'react';
-import { Box, Checkbox, FormControl, FormHelperText, InputAdornment, ListItemText, ListSubheader, MenuItem, Radio, Select, Tooltip, Typography } from '@mui/material';
+import { Box, Checkbox, FormControl, FormHelperText, InputAdornment, ListSubheader, MenuItem, Radio, Select, Tooltip, Typography } from '@mui/material';
 import { FieldValues, Path, useController, useFormContext } from "react-hook-form";
-import CheckedSVG from '../../../assets/select/select-item-checked-small.svg';
-import CheckboxSelectedSVG from '../../../assets/select/checkbox-selected.svg';
-import CheckboxNotSelectedSVG from '../../../assets/select/checkbox-not-selected.svg';
-import InputError from '../../../assets/form/input-error.svg';
-import CheckboxDefault from '../../../assets/24/radio.svg';
-import CheckboxActive from '../../../assets/24/radio-checked.svg';
-import CheckboxDefaultSmall from '../../../assets/16/radio.svg';
-import CheckboxActiveSmall from '../../../assets/16/radio-checked.svg';
+import {ReactComponent as CheckedSVG} from '../../../assets/select/select-item-checked-small.svg';
+import {ReactComponent as CheckboxSelectedSVG} from '../../../assets/select/checkbox-selected.svg';
+import {ReactComponent as CheckboxNotSelectedSVG} from '../../../assets/select/checkbox-not-selected.svg';
+import {ReactComponent as InputError} from '../../../assets/form/input-error.svg';
+import {ReactComponent as CheckboxDefault} from '../../../assets/24/radio.svg';
+import {ReactComponent as CheckboxActive} from '../../../assets/24/radio-checked.svg';
+import {ReactComponent as CheckboxDefaultSmall} from '../../../assets/16/radio.svg';
+import {ReactComponent as CheckboxActiveSmall} from '../../../assets/16/radio-checked.svg';
 import { muiStylesWithTheme } from './styles';
 import { useTheme } from '@mui/system';
 import FormFieldTitle from '../fieldTitle';
@@ -73,7 +73,7 @@ const FormSelectField = <T extends FieldValues>({
   const theme = useTheme();
   const muiStyles = muiStylesWithTheme(theme);
   const { field: { onChange, value, ref }, fieldState: { error } } = useController({ name, rules })
-  const { getValues, setValue, watch } = useFormContext();
+  const { getValues, setValue } = useFormContext();
 
   const isOptionDisabled = (option: iOptions) => {
     if (option.value === value) {

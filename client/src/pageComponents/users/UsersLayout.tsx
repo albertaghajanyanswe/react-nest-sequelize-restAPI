@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 import { Box } from "@mui/material";
 import { tableOptions } from "./configs/config";
 // import CustomTableToolbar from "./toolbar";
 import PageTitle from "./pageTitle";
 import { muiStyles } from "./styles";
-import { routes } from "../../configs";
 import { iFilterParams, iTableSources } from "../../configs/shared/types";
 import { getCurrentUser } from "../../services/lsService";
 import { decorateShowField } from "../../helpers/adapter";
@@ -85,7 +84,7 @@ function UsersLayout<T extends {id: number}>({
         if (
           memoFilterFields &&
           oldValue !== fieldValue &&
-          (!Array.isArray(fieldValue) && fieldValue !== undefined || Array.isArray(fieldValue) && JSON.stringify(fieldValue) !== JSON.stringify(oldValue))
+          ((!Array.isArray(fieldValue) && fieldValue !== undefined) || (Array.isArray(fieldValue) && JSON.stringify(fieldValue) !== JSON.stringify(oldValue)))
         ) {
           newFilter = {
             ...newFilter,

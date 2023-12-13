@@ -20,6 +20,7 @@ declare module '@mui/material/styles' {
     textColor5?: string;
     textColor6?: string;
     textColor7?: string;
+    textColor8?: string;
     borderColor1?: string;
     borderColor2?: string;
     borderColor3?: string;
@@ -61,6 +62,7 @@ declare module '@mui/material/styles' {
     textColor5?: string;
     textColor6?: string;
     textColor7?: string;
+    textColor8?: string;
     borderColor1?: string;
     borderColor2?: string;
     borderColor3?: string;
@@ -110,6 +112,7 @@ const Default = (): DefaultPaletteOptions => {
       textColor5: '#494947',
       textColor6: '#9FAEBD',
       textColor7: '#8998A8',
+      textColor8: '#b7b7b7',
 
       borderColor1: '#F1F4FA',
       borderColor2: '#DFE8F3',
@@ -152,6 +155,7 @@ const Default = (): DefaultPaletteOptions => {
       textColor5: '#494947',
       textColor6: '#9FAEBD',
       textColor7: '#8998A8',
+      textColor8: '#b7b7b7',
 
       borderColor1: '#F1F4FA',
       borderColor2: '#DFE8F3',

@@ -78,7 +78,7 @@ const SettingsPage = () => {
       await updateUser({ ...rest, userId: currentUser?.id as number });
       SystemMessage(enqueueSnackbar, getMessage('', 'success'), { variant: 'success', theme });
     } catch (error: any) {
-      SystemMessage(enqueueSnackbar, getMessage(error?.response?.data || error.message), { variant: 'error' });
+      SystemMessage(enqueueSnackbar, getMessage(error), { variant: 'error', theme });
     } finally {
       setDisableSubmit(false)
     }
@@ -109,10 +109,10 @@ const SettingsPage = () => {
   const handleDelete = async () => {
     try {
       // await mutateDeleteAccount({});
-      SystemMessage(enqueueSnackbar, getMessage('', 'success'), { variant: 'success' });
+      SystemMessage(enqueueSnackbar, getMessage('', 'success'), { variant: 'success', theme });
       navigate(routes.login.path);
     } catch (error: any) {
-      SystemMessage(enqueueSnackbar, getMessage(error?.response?.errors[0]?.message || error?.response?.data || error.message), { variant: 'error' });
+      SystemMessage(enqueueSnackbar, getMessage(error), { variant: 'error', theme });
     } finally {
       closeModal();
     }

@@ -7,19 +7,21 @@ import { usersAPI } from "../services/rtk/UsersApi";
 import { setupListeners } from '@reduxjs/toolkit/query/react';
 import { rtkQueryErrorLogger } from "./middleware/rtkErrorHandling";
 import { uploadsAPI } from "../services/rtk/UploadsApi";
+import { productsAPI } from "../services/rtk/ProductsApi";
 
 const rootReducer = combineReducers({
   userReducer,
   counterReducer,
   sidebarReducer,
   [usersAPI.reducerPath]: usersAPI.reducer,
-  [uploadsAPI.reducerPath]: uploadsAPI.reducer
+  [uploadsAPI.reducerPath]: uploadsAPI.reducer,
+  [productsAPI.reducerPath]: productsAPI.reducer
 });
 
 export const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(usersAPI.middleware, uploadsAPI.middleware, rtkQueryErrorLogger)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(usersAPI.middleware, uploadsAPI.middleware, productsAPI.middleware, rtkQueryErrorLogger)
   })
 }
 setupListeners(setupStore().dispatch);

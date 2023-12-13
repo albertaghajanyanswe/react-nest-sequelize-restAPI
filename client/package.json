@@ -47,9 +47,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!@codemirror)/'",
     "eject": "react-scripts eject",
-    "openapi": "yarn openapi-generator-cli generate -g typescript-axios -o src/generated/openapi -i openapi/doc.yml"
+    "openapi": "yarn openapi-generator-cli generate -g typescript-axios -o src/generated/openapi -i openapi/doc.yml",
+    "wdio": "wdio run ./wdio.conf.js"
   },
   "eslintConfig": {
     "extends": [
@@ -70,6 +71,11 @@
     ]
   },
   "devDependencies": {
-    "@openapitools/openapi-generator-cli": "^2.7.0"
+    "@openapitools/openapi-generator-cli": "^2.7.0",
+    "@wdio/cli": "^8.24.16",
+    "@wdio/local-runner": "^8.24.12",
+    "@wdio/mocha-framework": "^8.24.12",
+    "@wdio/spec-reporter": "^8.24.12",
+    "ts-node": "^10.9.2"
   }
 }

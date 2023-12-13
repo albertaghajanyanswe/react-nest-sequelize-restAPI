@@ -10,7 +10,7 @@ interface iProps {
   isSortedCeil: boolean;
 }
 const ColumnStatus: FC<iProps> = (props) => {
-  const { data, cellItem: { cellPaddingRight, cellPaddingLeft, textAlign, id }, isSortedCeil } = props;
+  const { data, cellItem: { cellPaddingRight, cellPaddingLeft, textAlign, id } } = props;
 
   return (
     <TableCell

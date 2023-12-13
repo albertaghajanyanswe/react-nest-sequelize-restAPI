@@ -71,6 +71,7 @@ const LoginForm = FormHOC<iProps>(({ handleSubmit }) => {
             sx={{ width: '100%', p: '8px 12px', fontSize: '16px', lineHeight: '24px', fontWeight: 600 }}
             onClick={handleSubmit()}
             variant='outlined'
+            name='login-submit'
           />
         </Box>
       </Grid>

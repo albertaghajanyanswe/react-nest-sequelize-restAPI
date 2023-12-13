@@ -10,7 +10,6 @@ import {ReactComponent as VisibleOff24Svg} from '../../../assets/form/visibility
 
 import { muiStyles } from './styles';
 import FormFieldTitle from '../fieldTitle';
-import { Theme, useTheme } from '@mui/system';
 
 interface iFormTextField<T> {
   name: Path<T>;
@@ -94,7 +93,6 @@ const FormTextField = <T extends FieldValues>({
     }
   }, [pattern, onChange])
 
-  const theme = useTheme();
   const sxStyle = (hasError: boolean) => {
     return {
       ...muiStyles.textField,
@@ -142,6 +140,9 @@ const FormTextField = <T extends FieldValues>({
         //     autoComplete: autoComplete,
         //   }
         // }}
+        inputProps={{
+          "data-testid": name,
+        }}
         InputProps={{
           // todo autofill
           // autoComplete: autoComplete,

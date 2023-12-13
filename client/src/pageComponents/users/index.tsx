@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Box, CssBaseline } from '@mui/material';
+import { Box } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { routes } from '../../../src/configs';
 import { muiStyles } from './styles';
@@ -15,6 +15,7 @@ import { useTheme } from '@mui/material/styles';
 
 function Users() {
   const navigate = useNavigate();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { enqueueSnackbar } = useSnackbar()
 
   const currentUser = getCurrentUser()?.user;
@@ -30,6 +31,7 @@ function Users() {
 
 
   const { queryParams, setFilteredParams } = useQueryParams({ pageDefaultParams });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { skip, limit, filter, sort, search } = queryParams.params;
   const { isActive_eq, ...restFilter} = filter;
   console.log('isActive_eq = ', isActive_eq)

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 // import { useSnackbar } from 'notistack';
 // import { useTheme } from '@mui/system';
@@ -10,17 +9,7 @@ import { ToastContainer } from 'react-toastify';
 // import ChangeTheme from './components/chamgeTheme';
 // import CustomButton from './components/customButton';
 // import SystemMessage from './components/systemMessage';
-import LoginPage from './pageComponents/login/LoginPage';
-import PrivateRoute from './PrivateRoute';
-import HomePage from './pageComponents/home/HomePage';
-import { routes } from './configs';
-import RegistrationPage from './pageComponents/registration/RegistrationPage';
-import LoginGuestPage from './pageComponents/login/LoginGuestPage';
-import RegistrationGuestPage from './pageComponents/registration/RegistrationGuestPage';
-import NotFound from './components/NotFound';
-import UsersPage from './pageComponents/users';
-import SettingsPage from './pageComponents/settings/SettingsPage';
-import Layout from './components/Layout';
+import AppRouter from './AppRouter';
 
 function App() {
 
@@ -66,39 +55,7 @@ function App() {
         }}
       /> */}
       <QueryClientProvider client={queryClient}>
-        <Routes>
-          <Route path={routes.login.path} element={<LoginPage />} />
-          <Route path={routes.loginGuest.path} element={<LoginGuestPage />} />
-          <Route path={routes.registration.path} element={<RegistrationPage />} />
-          <Route path={routes.registrationGuest.path} element={<RegistrationGuestPage />} />
-          {/* <Route path={routes.registration.path} element={<RegistrationPage />} />
-        <Route path={routes.registrationGuest.path} element={<RegistrationPage />} /> */}
-          <Route
-            path={routes.home.path}
-            element={
-              <PrivateRoute>
-                <HomePage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path={routes.users.path}
-            element={
-              <PrivateRoute>
-                <UsersPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path={routes.settings.path}
-            element={
-              <PrivateRoute>
-                <SettingsPage />
-              </PrivateRoute>
-            }
-          />
-          <Route path="*" element={<Layout><NotFound /></Layout>} />
-        </Routes>
+        <AppRouter />
       </QueryClientProvider>
     </div>
   );

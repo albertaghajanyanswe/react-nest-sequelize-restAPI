@@ -26,6 +26,176 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError } from './base';
 /**
  * 
  * @export
+ * @interface Category
+ */
+export interface Category {
+    /**
+     * Unique id
+     * @type {number}
+     * @memberof Category
+     */
+    'id': number;
+    /**
+     * Other
+     * @type {string}
+     * @memberof Category
+     */
+    'name': string;
+    /**
+     * Other category
+     * @type {string}
+     * @memberof Category
+     */
+    'description': string;
+}
+/**
+ * 
+ * @export
+ * @interface FavoriteProductDto
+ */
+export interface FavoriteProductDto {
+    /**
+     * Unique id
+     * @type {number}
+     * @memberof FavoriteProductDto
+     */
+    'id': number;
+    /**
+     * Stored Product id
+     * @type {number}
+     * @memberof FavoriteProductDto
+     */
+    'storedProductId': number;
+    /**
+     * Stored product name
+     * @type {string}
+     * @memberof FavoriteProductDto
+     */
+    'storedProductName': string;
+    /**
+     * Stored product description
+     * @type {string}
+     * @memberof FavoriteProductDto
+     */
+    'storedProductDescription': string;
+    /**
+     * Stored product price
+     * @type {string}
+     * @memberof FavoriteProductDto
+     */
+    'storedProductPrice': string;
+    /**
+     * Stored product price currency
+     * @type {string}
+     * @memberof FavoriteProductDto
+     */
+    'storedProductCurrency': string;
+    /**
+     * Stored product located province
+     * @type {string}
+     * @memberof FavoriteProductDto
+     */
+    'storedProductProvince': string;
+    /**
+     * Stored product located city
+     * @type {string}
+     * @memberof FavoriteProductDto
+     */
+    'storedProductCity': string;
+    /**
+     * Stored product located address
+     * @type {string}
+     * @memberof FavoriteProductDto
+     */
+    'storedProductAddress': string;
+    /**
+     * Stored product other information
+     * @type {string}
+     * @memberof FavoriteProductDto
+     */
+    'storedProductOtherInfo': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FavoriteProductDto
+     */
+    'storedProductIntendedFor': FavoriteProductDtoStoredProductIntendedForEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FavoriteProductDto
+     */
+    'storedProductState': FavoriteProductDtoStoredProductStateEnum;
+    /**
+     * Stored product category id
+     * @type {number}
+     * @memberof FavoriteProductDto
+     */
+    'storedProductCategoryId': number;
+    /**
+     * Stored Product user id
+     * @type {number}
+     * @memberof FavoriteProductDto
+     */
+    'storedProductUserId': number;
+}
+
+export const FavoriteProductDtoStoredProductIntendedForEnum = {
+    Sale: 'FOR_SALE',
+    Rent: 'FOR_RENT',
+    FreeGiving: 'FOR_FREE_GIVING'
+} as const;
+
+export type FavoriteProductDtoStoredProductIntendedForEnum = typeof FavoriteProductDtoStoredProductIntendedForEnum[keyof typeof FavoriteProductDtoStoredProductIntendedForEnum];
+export const FavoriteProductDtoStoredProductStateEnum = {
+    New: 'NEW',
+    Used: 'USED',
+    NotOperable: 'NOT_OPERABLE'
+} as const;
+
+export type FavoriteProductDtoStoredProductStateEnum = typeof FavoriteProductDtoStoredProductStateEnum[keyof typeof FavoriteProductDtoStoredProductStateEnum];
+
+/**
+ * 
+ * @export
+ * @interface GetCategoriesDto
+ */
+export interface GetCategoriesDto {
+    /**
+     * 
+     * @type {Array<Category>}
+     * @memberof GetCategoriesDto
+     */
+    'data': Array<Category>;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetCategoriesDto
+     */
+    'count': number;
+}
+/**
+ * 
+ * @export
+ * @interface GetProductsDto
+ */
+export interface GetProductsDto {
+    /**
+     * 
+     * @type {Array<Product>}
+     * @memberof GetProductsDto
+     */
+    'data': Array<Product>;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetProductsDto
+     */
+    'count': number;
+}
+/**
+ * 
+ * @export
  * @interface GetUsersDto
  */
 export interface GetUsersDto {
@@ -80,6 +250,208 @@ export interface PostLoginGuestDto {
      */
     'password': string;
 }
+/**
+ * 
+ * @export
+ * @interface Product
+ */
+export interface Product {
+    /**
+     * Unique id
+     * @type {number}
+     * @memberof Product
+     */
+    'id': number;
+    /**
+     * Enter product name
+     * @type {string}
+     * @memberof Product
+     */
+    'name': string;
+    /**
+     * Notebook description
+     * @type {string}
+     * @memberof Product
+     */
+    'description': string;
+    /**
+     * Notebook price
+     * @type {string}
+     * @memberof Product
+     */
+    'price': string;
+    /**
+     * Notebook price currency
+     * @type {string}
+     * @memberof Product
+     */
+    'currency': string;
+    /**
+     * Notebook located province
+     * @type {string}
+     * @memberof Product
+     */
+    'province': string;
+    /**
+     * Notebook located city
+     * @type {string}
+     * @memberof Product
+     */
+    'city': string;
+    /**
+     * Notebook located exact address
+     * @type {string}
+     * @memberof Product
+     */
+    'address': string;
+    /**
+     * Notebook other information
+     * @type {string}
+     * @memberof Product
+     */
+    'otherInfo': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Product
+     */
+    'intendedFor': ProductIntendedForEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Product
+     */
+    'productState': ProductProductStateEnum;
+}
+
+export const ProductIntendedForEnum = {
+    Sale: 'FOR_SALE',
+    Rent: 'FOR_RENT',
+    FreeGiving: 'FOR_FREE_GIVING'
+} as const;
+
+export type ProductIntendedForEnum = typeof ProductIntendedForEnum[keyof typeof ProductIntendedForEnum];
+export const ProductProductStateEnum = {
+    New: 'NEW',
+    Used: 'USED',
+    NotOperable: 'NOT_OPERABLE'
+} as const;
+
+export type ProductProductStateEnum = typeof ProductProductStateEnum[keyof typeof ProductProductStateEnum];
+
+/**
+ * 
+ * @export
+ * @interface ProductDto
+ */
+export interface ProductDto {
+    /**
+     * Unique id
+     * @type {number}
+     * @memberof ProductDto
+     */
+    'id': number;
+    /**
+     * Product name
+     * @type {string}
+     * @memberof ProductDto
+     */
+    'name': string;
+    /**
+     * Product description
+     * @type {string}
+     * @memberof ProductDto
+     */
+    'description': string;
+    /**
+     * Product price
+     * @type {string}
+     * @memberof ProductDto
+     */
+    'price': string;
+    /**
+     * Product price currency
+     * @type {string}
+     * @memberof ProductDto
+     */
+    'currency': string;
+    /**
+     * Product located province
+     * @type {string}
+     * @memberof ProductDto
+     */
+    'province': string;
+    /**
+     * Product located city
+     * @type {string}
+     * @memberof ProductDto
+     */
+    'city': string;
+    /**
+     * Product located address
+     * @type {string}
+     * @memberof ProductDto
+     */
+    'address': string;
+    /**
+     * Product other information
+     * @type {string}
+     * @memberof ProductDto
+     */
+    'otherInfo': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductDto
+     */
+    'intendedFor': ProductDtoIntendedForEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductDto
+     */
+    'productState': ProductDtoProductStateEnum;
+    /**
+     * Product category id
+     * @type {number}
+     * @memberof ProductDto
+     */
+    'categoryId': number;
+    /**
+     * 
+     * @type {Category}
+     * @memberof ProductDto
+     */
+    'category': Category;
+    /**
+     * User archived
+     * @type {boolean}
+     * @memberof ProductDto
+     */
+    'userId': boolean;
+    /**
+     * 
+     * @type {User}
+     * @memberof ProductDto
+     */
+    'user': User;
+}
+
+export const ProductDtoIntendedForEnum = {
+    Sale: 'FOR_SALE',
+    Rent: 'FOR_RENT',
+    FreeGiving: 'FOR_FREE_GIVING'
+} as const;
+
+export type ProductDtoIntendedForEnum = typeof ProductDtoIntendedForEnum[keyof typeof ProductDtoIntendedForEnum];
+export const ProductDtoProductStateEnum = {
+    New: 'NEW',
+    Used: 'USED',
+    NotOperable: 'NOT_OPERABLE'
+} as const;
+
+export type ProductDtoProductStateEnum = typeof ProductDtoProductStateEnum[keyof typeof ProductDtoProductStateEnum];
+
 /**
  * 
  * @export
@@ -253,6 +625,12 @@ export interface User {
      * @memberof User
      */
     'deviceType': string;
+    /**
+     * Corresponding favoriteProduct id
+     * @type {Array<string>}
+     * @memberof User
+     */
+    'favoriteProducts': Array<string>;
 }
 /**
  * 
@@ -598,6 +976,436 @@ export class AuthApi extends BaseAPI {
 
 
 /**
+ * CategoriesApi - axios parameter creator
+ * @export
+ */
+export const CategoriesApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Create new category
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        categoriesControllerCreate: async (body: object, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('categoriesControllerCreate', 'body', body)
+            const localVarPath = `/api/categories`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get all categories
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        categoriesControllerGetAllCategories: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/categories`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get category by value
+         * @param {string} value 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        categoriesControllerGetCategoryByValue: async (value: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'value' is not null or undefined
+            assertParamExists('categoriesControllerGetCategoryByValue', 'value', value)
+            const localVarPath = `/api/categories/{value}`
+                .replace(`{${"value"}}`, encodeURIComponent(String(value)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * CategoriesApi - functional programming interface
+ * @export
+ */
+export const CategoriesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = CategoriesApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Create new category
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async categoriesControllerCreate(body: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Category>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.categoriesControllerCreate(body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get all categories
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async categoriesControllerGetAllCategories(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCategoriesDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.categoriesControllerGetAllCategories(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get category by value
+         * @param {string} value 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async categoriesControllerGetCategoryByValue(value: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Category>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.categoriesControllerGetCategoryByValue(value, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * CategoriesApi - factory interface
+ * @export
+ */
+export const CategoriesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = CategoriesApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Create new category
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        categoriesControllerCreate(body: object, options?: any): AxiosPromise<Category> {
+            return localVarFp.categoriesControllerCreate(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get all categories
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        categoriesControllerGetAllCategories(options?: any): AxiosPromise<GetCategoriesDto> {
+            return localVarFp.categoriesControllerGetAllCategories(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get category by value
+         * @param {string} value 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        categoriesControllerGetCategoryByValue(value: string, options?: any): AxiosPromise<Category> {
+            return localVarFp.categoriesControllerGetCategoryByValue(value, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * CategoriesApi - object-oriented interface
+ * @export
+ * @class CategoriesApi
+ * @extends {BaseAPI}
+ */
+export class CategoriesApi extends BaseAPI {
+    /**
+     * 
+     * @summary Create new category
+     * @param {object} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CategoriesApi
+     */
+    public categoriesControllerCreate(body: object, options?: AxiosRequestConfig) {
+        return CategoriesApiFp(this.configuration).categoriesControllerCreate(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get all categories
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CategoriesApi
+     */
+    public categoriesControllerGetAllCategories(options?: AxiosRequestConfig) {
+        return CategoriesApiFp(this.configuration).categoriesControllerGetAllCategories(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get category by value
+     * @param {string} value 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CategoriesApi
+     */
+    public categoriesControllerGetCategoryByValue(value: string, options?: AxiosRequestConfig) {
+        return CategoriesApiFp(this.configuration).categoriesControllerGetCategoryByValue(value, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * FavoriteProductApi - axios parameter creator
+ * @export
+ */
+export const FavoriteProductApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Create favorite products
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        favoriteProductsControllerCreate: async (body: object, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('favoriteProductsControllerCreate', 'body', body)
+            const localVarPath = `/api/favoriteProducts/add`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete favorite products
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        favoriteProductsControllerDelete: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('favoriteProductsControllerDelete', 'id', id)
+            const localVarPath = `/api/favoriteProducts/delete/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * FavoriteProductApi - functional programming interface
+ * @export
+ */
+export const FavoriteProductApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = FavoriteProductApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Create favorite products
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async favoriteProductsControllerCreate(body: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FavoriteProductDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.favoriteProductsControllerCreate(body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Delete favorite products
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async favoriteProductsControllerDelete(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.favoriteProductsControllerDelete(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * FavoriteProductApi - factory interface
+ * @export
+ */
+export const FavoriteProductApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = FavoriteProductApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Create favorite products
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        favoriteProductsControllerCreate(body: object, options?: any): AxiosPromise<FavoriteProductDto> {
+            return localVarFp.favoriteProductsControllerCreate(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete favorite products
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        favoriteProductsControllerDelete(id: string, options?: any): AxiosPromise<object> {
+            return localVarFp.favoriteProductsControllerDelete(id, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * FavoriteProductApi - object-oriented interface
+ * @export
+ * @class FavoriteProductApi
+ * @extends {BaseAPI}
+ */
+export class FavoriteProductApi extends BaseAPI {
+    /**
+     * 
+     * @summary Create favorite products
+     * @param {object} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FavoriteProductApi
+     */
+    public favoriteProductsControllerCreate(body: object, options?: AxiosRequestConfig) {
+        return FavoriteProductApiFp(this.configuration).favoriteProductsControllerCreate(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete favorite products
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FavoriteProductApi
+     */
+    public favoriteProductsControllerDelete(id: string, options?: AxiosRequestConfig) {
+        return FavoriteProductApiFp(this.configuration).favoriteProductsControllerDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
  * FilesApi - axios parameter creator
  * @export
  */
@@ -700,6 +1508,333 @@ export class FilesApi extends BaseAPI {
 
 
 /**
+ * ProductsApi - axios parameter creator
+ * @export
+ */
+export const ProductsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Create new product
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productsControllerCreate: async (body: object, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('productsControllerCreate', 'body', body)
+            const localVarPath = `/api/products`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get all product
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productsControllerGetAll: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/products`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get product by id
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productsControllerGetProductById: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('productsControllerGetProductById', 'id', id)
+            const localVarPath = `/api/products/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Update product
+         * @param {number} id Product id
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productsControllerUpdateUser: async (id: number, body: object, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('productsControllerUpdateUser', 'id', id)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('productsControllerUpdateUser', 'body', body)
+            const localVarPath = `/api/products/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ProductsApi - functional programming interface
+ * @export
+ */
+export const ProductsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ProductsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Create new product
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productsControllerCreate(body: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productsControllerCreate(body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get all product
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productsControllerGetAll(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetProductsDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productsControllerGetAll(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get product by id
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productsControllerGetProductById(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productsControllerGetProductById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Update product
+         * @param {number} id Product id
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productsControllerUpdateUser(id: number, body: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Product>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productsControllerUpdateUser(id, body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * ProductsApi - factory interface
+ * @export
+ */
+export const ProductsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ProductsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Create new product
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productsControllerCreate(body: object, options?: any): AxiosPromise<ProductDto> {
+            return localVarFp.productsControllerCreate(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get all product
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productsControllerGetAll(options?: any): AxiosPromise<GetProductsDto> {
+            return localVarFp.productsControllerGetAll(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get product by id
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productsControllerGetProductById(id: string, options?: any): AxiosPromise<ProductDto> {
+            return localVarFp.productsControllerGetProductById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update product
+         * @param {number} id Product id
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productsControllerUpdateUser(id: number, body: object, options?: any): AxiosPromise<Product> {
+            return localVarFp.productsControllerUpdateUser(id, body, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ProductsApi - object-oriented interface
+ * @export
+ * @class ProductsApi
+ * @extends {BaseAPI}
+ */
+export class ProductsApi extends BaseAPI {
+    /**
+     * 
+     * @summary Create new product
+     * @param {object} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductsApi
+     */
+    public productsControllerCreate(body: object, options?: AxiosRequestConfig) {
+        return ProductsApiFp(this.configuration).productsControllerCreate(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get all product
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductsApi
+     */
+    public productsControllerGetAll(options?: AxiosRequestConfig) {
+        return ProductsApiFp(this.configuration).productsControllerGetAll(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get product by id
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductsApi
+     */
+    public productsControllerGetProductById(id: string, options?: AxiosRequestConfig) {
+        return ProductsApiFp(this.configuration).productsControllerGetProductById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update product
+     * @param {number} id Product id
+     * @param {object} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductsApi
+     */
+    public productsControllerUpdateUser(id: number, body: object, options?: AxiosRequestConfig) {
+        return ProductsApiFp(this.configuration).productsControllerUpdateUser(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
  * RolesApi - axios parameter creator
  * @export
  */
@@ -726,6 +1861,10 @@ export const RolesApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -763,6 +1902,10 @@ export const RolesApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -988,6 +2131,45 @@ export const UploadsApiAxiosParamCreator = function (configuration?: Configurati
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadControllerUploadProductImage: async (body: object, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('uploadControllerUploadProductImage', 'body', body)
+            const localVarPath = `/api/uploads/productImage`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -1028,6 +2210,16 @@ export const UploadsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadControllerUploadFile(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async uploadControllerUploadProductImage(body: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadControllerUploadProductImage(body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -1064,6 +2256,15 @@ export const UploadsApiFactory = function (configuration?: Configuration, basePa
          */
         uploadControllerUploadFile(options?: any): AxiosPromise<void> {
             return localVarFp.uploadControllerUploadFile(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadControllerUploadProductImage(body: object, options?: any): AxiosPromise<void> {
+            return localVarFp.uploadControllerUploadProductImage(body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1106,6 +2307,17 @@ export class UploadsApi extends BaseAPI {
      */
     public uploadControllerUploadFile(options?: AxiosRequestConfig) {
         return UploadsApiFp(this.configuration).uploadControllerUploadFile(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {object} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UploadsApi
+     */
+    public uploadControllerUploadProductImage(body: object, options?: AxiosRequestConfig) {
+        return UploadsApiFp(this.configuration).uploadControllerUploadProductImage(body, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
