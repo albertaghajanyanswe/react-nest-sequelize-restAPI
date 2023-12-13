@@ -59,6 +59,7 @@ function CustomSearch({
     if (inputRef && inputRef?.current) {
       inputRef.current.focus();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputRef.current, searchOpened]);
 
   React.useEffect(() => {

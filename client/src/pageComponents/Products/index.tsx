@@ -17,6 +17,7 @@ function ProductsPage() {
   const navigate = useNavigate();
   const theme = useTheme();
   const muiStyles = muiStylesWithTheme(theme);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { enqueueSnackbar } = useSnackbar()
 
   const currentUser = getCurrentUser()?.user;
@@ -32,6 +33,7 @@ function ProductsPage() {
 
 
   const { queryParams, setFilteredParams } = useQueryParams({ pageDefaultParams });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { skip, limit, filter, sort, search } = queryParams.params;
   const { intendedFor_in, ...restFilter} = filter;
 

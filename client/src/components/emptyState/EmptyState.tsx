@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { ReactComponent as EmptySVG } from '../../assets/empty.svg';
-import { muiStylesWithTheme } from './styles';
+// import { muiStylesWithTheme } from './styles';
 import { useTheme } from '@mui/system';
 import { globalMuiStyles } from '../../globalMuiStyles';
 
@@ -13,7 +13,7 @@ function EmptyState({
   desc?: string
 }) {
   const theme = useTheme();
-  const muiStyles = muiStylesWithTheme(theme);
+  // const muiStyles = muiStylesWithTheme(theme);
   const toolbarMinHeight = theme.breakpoints.up('md') ? 64 : 56;
 
   return (

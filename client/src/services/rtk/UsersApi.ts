@@ -1,11 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 import { iLogin, iLoginGuest, iRegistration, iRegistrationGuest, IUser } from '../../configs/shared/types';
-import { GetUsersDto, UpdateUserDto, User, UserDto } from '../../generated/openapi';
+import { GetUsersDto, UpdateUserDto, UserDto } from '../../generated/openapi';
 // import { axiosInstance } from '../client/axiosHelper';
 import { apiEndpoints } from '../configs';
 import { getCurrentUser } from '../lsService';
 
 // const baseUrl = `${process.env.REACT_APP_UI_URL}/api` || 'http://localhost:4000/api';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const baseUrl = '';
 
 // interface CustomError {

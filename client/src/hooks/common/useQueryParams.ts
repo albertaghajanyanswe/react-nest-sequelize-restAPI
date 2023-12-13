@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import qs from 'qs';
 import { iFilter, iFilterParams, iSearch, iSort } from '../../configs/shared/types';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
@@ -34,6 +34,7 @@ const useQueryParams = ({ pageDefaultParams }: { pageDefaultParams?: iFilterPara
       replacePath(newParams.params);
       tableFilter.current = { ...tableFilter.current, params: newParams.params };
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 

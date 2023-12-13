@@ -13,6 +13,7 @@ const SystemMessage = (
   options: { variant: 'success' | 'error' | 'warning' | 'info' | 'default', sx?: any, action?: SnackbarAction, theme?: Theme }
 ) => {
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { variant, sx = {}, action, theme } = options;
 
   const variantBGColor = {
@@ -47,6 +48,7 @@ const SystemMessage = (
     default: <InfoSvg />
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const sxStyles = {
     // "& .notistack-MuiContent": {
     "& .SnackbarContent-root": {

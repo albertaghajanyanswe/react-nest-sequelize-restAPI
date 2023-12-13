@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { Box, Checkbox, FormControl, FormHelperText, InputAdornment, ListItemText, ListSubheader, MenuItem, Radio, Select, Tooltip, Typography } from '@mui/material';
+import { Box, Checkbox, FormControl, FormHelperText, InputAdornment, ListSubheader, MenuItem, Radio, Select, Tooltip, Typography } from '@mui/material';
 import { FieldValues, Path, useController, useFormContext } from "react-hook-form";
 import {ReactComponent as CheckedSVG} from '../../../assets/select/select-item-checked-small.svg';
 import {ReactComponent as CheckboxSelectedSVG} from '../../../assets/select/checkbox-selected.svg';
@@ -73,7 +73,7 @@ const FormSelectField = <T extends FieldValues>({
   const theme = useTheme();
   const muiStyles = muiStylesWithTheme(theme);
   const { field: { onChange, value, ref }, fieldState: { error } } = useController({ name, rules })
-  const { getValues, setValue, watch } = useFormContext();
+  const { getValues, setValue } = useFormContext();
 
   const isOptionDisabled = (option: iOptions) => {
     if (option.value === value) {

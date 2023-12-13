@@ -50,10 +50,6 @@ const routes = {
     path: '/meeting',
     title: 'pages.meetings'
   },
-  products: {
-    path: '/products',
-    title: 'pages.products'
-  },
   settings: {
     path: '/settings',
     title: 'pages.settings'

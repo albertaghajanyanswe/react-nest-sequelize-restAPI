@@ -31,6 +31,7 @@ const Form = FormHOC.Form
 
 const ProductItemPage = () => {
   const theme = useTheme();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const muiStyles = stylesWithTheme(theme);
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
@@ -93,7 +94,9 @@ const ProductItemPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [createProduct, { error: createError }] = productsAPI.useCreateProductMutation();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [updateProduct, { error: updateError, isError: updateIsError }] = productsAPI.useUpdateProductMutation();
 
 
@@ -135,12 +138,14 @@ const ProductItemPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productData, methods.reset]);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { isOpen, openModal, closeModal } = useModal(false);
 
   // const { mutateAsync: mutateDeleteAccount, isLoading } = useDeleteAccount();
 
   const navigate = useNavigate();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleDelete = async () => {
     try {
       // await mutateDeleteAccount({});

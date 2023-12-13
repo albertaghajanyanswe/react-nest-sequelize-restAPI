@@ -74,6 +74,7 @@ const SETTINGS = {
     { label: i18n.t('products.productStateOptions.notOperable'), value: ProductProductStateEnum.NotOperable },
   ],
   regexp: {
+    // eslint-disable-next-line
     number: '^(|(?!0\d)(\d+(\.\d*)?|\.\d+)([eE][-+]?\d+)?)$',
     percentage: /^$|^100$|^(?:\d{0,2}(?:\.\d{0,2})?)$/
   }

@@ -34,6 +34,7 @@ function PageTitle({
   const navigate = useNavigate();
   const [searchOpened, setSearchOpened] = useState(!!searchValue);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleCreateProduct = () => {
     navigate(routes.productCreate.path);
   }

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { TableCell, Typography, Box, Avatar, IconButton, Grid } from '@mui/material';
+import { TableCell, Typography, Box, IconButton, Grid } from '@mui/material';
 import RemoveSvg from '../../../../../src/assets/16/delete.svg';
 import { useSnackbar } from 'notistack';
 import { getMessage } from '../../../../helpers/helper';
@@ -20,7 +20,8 @@ interface iProps {
 }
 const ColumnActions: FC<iProps> = (props) => {
   const { t } = useTranslation();
-  const { data, cellItem: { cellPaddingRight, cellPaddingLeft, textAlign, id }, isSortedCeil } = props;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { data, cellItem: { cellPaddingRight, cellPaddingLeft, textAlign }, isSortedCeil } = props;
 
   const { enqueueSnackbar } = useSnackbar();
   const {isOpen, openModal, closeModal} = useModal(false);
@@ -28,6 +29,7 @@ const ColumnActions: FC<iProps> = (props) => {
   const handleDelete = () => {
     try {
       (closeModal as () => void)();
+      // eslint-disable-next-line no-template-curly-in-string
       SystemMessage(enqueueSnackbar, t('systemMsg.userRemoved').replace('${0}', data.name),
         {
           variant: 'success',

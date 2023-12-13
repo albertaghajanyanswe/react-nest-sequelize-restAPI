@@ -3,7 +3,7 @@ import { TableCell, TableHead, TableRow, TableSortLabel } from '@mui/material';
 import { getCellPadding, getWidth } from '../config/tableStyleHelper';
 import TableConfigs from '../config/tableConfigs';
 
-import {ReactComponent as TableArrowsSVG} from '../../../assets/16/table-arrows.svg';
+// import {ReactComponent as TableArrowsSVG} from '../../../assets/16/table-arrows.svg';
 import { muiStyles } from './styles';
 import { useTranslation } from 'react-i18next';
 import { iTableField } from '../../../configs/shared/types';

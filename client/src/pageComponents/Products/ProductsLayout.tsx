@@ -1,10 +1,7 @@
 import { Box, Grid } from "@mui/material";
 import { useTheme } from "@mui/system";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import CustomButton from "../../components/customButton";
-import { routes } from "../../configs";
 import { iFilterParams, iTableSources } from "../../configs/shared/types";
 import PageTitle from "./pageTitle";
 import { muiStylesWithTheme } from "./styles";
@@ -13,7 +10,6 @@ import ProductItemCard from "./card/Card";
 import { options } from "./configs/config";
 import CustomTableToolbar from "./toolbar";
 import { getCurrentUser } from "../../services/lsService";
-import TablePaginationComponent from "../../components/customTable/customPaginationComponent";
 import CustomPagination from "./customPagination";
 import { productsAPI } from "../../services/rtk/ProductsApi";
 import SystemMessage from "../../components/systemMessage";
@@ -47,21 +43,21 @@ function ProductsLayout<T>({
   const handlePageHeaderRef = useCallback((el: HTMLDivElement | null) => {
     pageHeaderRef.current = el
   }, []);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps, @typescript-eslint/no-unused-vars
   const getPageHeaderHeight = useCallback(() => (pageHeaderRef.current?.clientHeight || 0), [pageHeaderRef.current?.clientHeight, loading])
 
   const filterRef = useRef<any>();
   const handleFilterRef = useCallback((el: HTMLDivElement | null) => {
     filterRef.current = el
   }, []);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps, @typescript-eslint/no-unused-vars
   const getFilterHeight = useCallback(() => (filterRef.current?.clientHeight || 0), [filterRef.current?.clientHeight, loading])
 
   const footerRef = useRef<any>();
   const handleFooterRef = useCallback((el: HTMLDivElement | null) => {
     footerRef.current = el
   }, []);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line
   const getFooterHeight = useCallback(() => (footerRef.current?.clientHeight || 0), [footerRef.current?.clientHeight, loading])
 
   const { filterFields, searchFields, rowsPerPageOptions } = options;
@@ -85,7 +81,7 @@ function ProductsLayout<T>({
       (i: any) => !("show" in i) || i.show({ currentUser })
     );
     return filteredFields;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, [currentUser]);
 
 
@@ -102,7 +98,7 @@ function ProductsLayout<T>({
         if (
           memoFilterFields &&
           oldValue !== fieldValue &&
-          (!Array.isArray(fieldValue) && fieldValue !== undefined || Array.isArray(fieldValue) && JSON.stringify(fieldValue) !== JSON.stringify(oldValue))
+          ((!Array.isArray(fieldValue) && fieldValue !== undefined) || (Array.isArray(fieldValue) && JSON.stringify(fieldValue) !== JSON.stringify(oldValue)))
         ) {
           newFilter = {
             ...newFilter,

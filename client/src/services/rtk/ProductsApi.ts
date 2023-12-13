@@ -5,6 +5,7 @@ import { apiEndpoints } from '../configs';
 import { getCurrentUser } from '../lsService';
 
 // const baseUrl = `${process.env.REACT_APP_UI_URL}/api` || 'http://localhost:4000/api';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const baseUrl = '';
 
 export const productsAPI = createApi({

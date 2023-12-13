@@ -167,6 +167,7 @@ const en = {
   },
   systemMsg: {
     failedSaveData: 'Failed to save data',
+    // eslint-disable-next-line no-template-curly-in-string
     userRemoved: '${0} was removed',
   },
   actionMsg: {

@@ -57,6 +57,7 @@ function SideBar() {
 
   const { setActiveLink } = sidebarSlice.actions;
   const dispatch = useAppDispatch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { activeLink } = useAppSelector(state => state.sidebarReducer);
   // console.log('activeLink = ', activeLink)
 

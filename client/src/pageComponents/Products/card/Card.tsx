@@ -2,7 +2,7 @@ import React from "react";
 import { Box, useTheme } from "@mui/system";
 import { muiStylesWithTheme } from "./styles";
 import { ProductsDataType } from "../../../helpers/adapter";
-import { Card, CardActionArea, CardActions, CardContent, CardMedia, Chip, Divider, IconButton, Typography } from "@mui/material";
+import { Card, CardActions, CardContent, CardMedia, Chip, Divider, IconButton, Typography } from "@mui/material";
 import { globalMuiStyles } from "../../../globalMuiStyles";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../../configs";
@@ -11,6 +11,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CustomButton from "../../../components/customButton";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function ProductItemCard<T>({
   details,
   handleFavorite,

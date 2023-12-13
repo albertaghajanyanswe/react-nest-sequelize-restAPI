@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 // import { useSnackbar } from 'notistack';
 // import { useTheme } from '@mui/system';
@@ -10,19 +9,6 @@ import { ToastContainer } from 'react-toastify';
 // import ChangeTheme from './components/chamgeTheme';
 // import CustomButton from './components/customButton';
 // import SystemMessage from './components/systemMessage';
-import LoginPage from './pageComponents/login/LoginPage';
-import PrivateRoute from './PrivateRoute';
-import HomePage from './pageComponents/home/HomePage';
-import { routes } from './configs';
-import RegistrationPage from './pageComponents/registration/RegistrationPage';
-import LoginGuestPage from './pageComponents/login/LoginGuestPage';
-import RegistrationGuestPage from './pageComponents/registration/RegistrationGuestPage';
-import NotFound from './components/NotFound';
-import UsersPage from './pageComponents/users';
-import SettingsPage from './pageComponents/settings/SettingsPage';
-import Layout from './components/Layout';
-import ProductsPage from './pageComponents/Products';
-import ProductItemPage from './pageComponents/ProductItem/ProductItemPage';
 import AppRouter from './AppRouter';
 
 function App() {

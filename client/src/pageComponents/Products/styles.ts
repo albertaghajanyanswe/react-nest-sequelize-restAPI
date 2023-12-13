@@ -1,4 +1,4 @@
-import { grid, Theme } from "@mui/system";
+import { Theme } from "@mui/system";
 
 const muiStylesWithTheme = (theme: Theme) => ({
   root: {

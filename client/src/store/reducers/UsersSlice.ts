@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { iLogin, iRegistrationGuest, IUser } from '../../configs/shared/types';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { iRegistrationGuest, IUser } from '../../configs/shared/types';
 import userService from '../../services/usersService';
 
 interface IUserState {
