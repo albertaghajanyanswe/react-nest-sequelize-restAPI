@@ -3,6 +3,7 @@ import { fireEvent, customRender as render, screen, waitFor } from '../../../tes
 import LoginPage from '../LoginPage';
 import i18n from "../../../i18n";
 import userEvent from '@testing-library/user-event';
+import { act } from 'react-dom/test-utils';
 
 describe('LoginPage', () => {
   it('Validate LoginPage component texts', () => {
@@ -23,13 +24,15 @@ describe('LoginPage', () => {
     expect(emailInp).toBeInTheDocument();
     expect(passwordInp).toBeInTheDocument();
     expect(submitBtn).toBeInTheDocument();
-    userEvent.type(emailInp, 'test1@yopmail.com');
-    userEvent.type(passwordInp, '111111');
-    userEvent.click(submitBtn);
-    await waitFor(() => {
-      const errorTxt = screen.getByText(/Could not find the user./i);
-      expect(errorTxt).toBeInTheDocument();
+
+    await act(async () => {
+      userEvent.type(emailInp, 'test1@yopmail.com');
+      userEvent.type(passwordInp, '111111');
+      userEvent.click(submitBtn);
     });
+
+    const errorTxt = await screen.findByText(/Could not find the user./i);
+    expect(errorTxt).toBeInTheDocument();
   })
 })
 

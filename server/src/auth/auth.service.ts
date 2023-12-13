@@ -9,7 +9,7 @@ import { CustomUserNotActiveException } from 'src/exceptions/userNotActive.excep
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly usersService: UsersService, private jwtService: JwtService) {}
+  constructor(private readonly usersService: UsersService, private jwtService: JwtService) { }
 
   async validateUser(email: string, password: string): Promise<any> {
     const user = await this.usersService.getUser({ where: { email } });
@@ -25,7 +25,6 @@ export class AuthService {
 
   async validatePostUser(email: string, password: string): Promise<any> {
     const user = await this.usersService.getUser({ where: { email } });
-    console.log('user = ', user)
     if (!user) {
       throw new NotAcceptableException('Could not find the user.');
     }
@@ -35,10 +34,8 @@ export class AuthService {
     const passwordValid = await this.comparePassword(password, user.password);
     if (user.dataValues && passwordValid) {
       return { user: user.dataValues, success: true };
-    } else {
-      throw new NotAcceptableException('Could not find the user.');
     }
-    return { user: null, success: false };
+    throw new NotAcceptableException('Could not find the user.');
   }
 
   async validatePostUserGuest(nickName: string, password: string): Promise<any> {

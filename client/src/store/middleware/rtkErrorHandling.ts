@@ -16,7 +16,7 @@ export const rtkQueryErrorLogger: Middleware =
       const message = action?.payload?.data?.message;
       if (statusCode === 401 || statusCode === '401') {
         console.warn('We got a rejected action!');
-        toast.error(message)
+        // toast.error(message)
         window.location.href = routes.login.path;
         logOut();
         // history.push(routes.login.path, {
