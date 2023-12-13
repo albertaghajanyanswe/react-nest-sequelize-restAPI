@@ -1,5 +1,5 @@
 import type { MiddlewareAPI, Middleware } from '@reduxjs/toolkit'
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import { routes } from '../../services/configs';
 import { logOut } from '../../services/lsService';
 // import { createBrowserHistory } from "@remix-run/router";
@@ -13,7 +13,7 @@ export const rtkQueryErrorLogger: Middleware =
 
     if (action.type.endsWith('rejected')) {
       const statusCode = action?.payload?.data?.statusCode;
-      const message = action?.payload?.data?.message;
+      // const message = action?.payload?.data?.message;
       if (statusCode === 401 || statusCode === '401') {
         console.warn('We got a rejected action!');
         // toast.error(message)
