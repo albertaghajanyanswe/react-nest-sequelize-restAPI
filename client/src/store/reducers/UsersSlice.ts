@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { iLogin, iRegistrationGuest, IUser } from '../../configs/shared/types';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { iRegistrationGuest, IUser } from '../../configs/shared/types';
 import userService from '../../services/usersService';
 
 interface IUserState {
@@ -20,7 +20,7 @@ export const getUsers = createAsyncThunk(
     try {
       const users = await userService.getUsers(params)
       return users;
-    } catch(err: any) {
+    } catch (err: any) {
       thunkAPI.rejectWithValue(err.message)
     }
   }
@@ -29,8 +29,8 @@ export const addUser = createAsyncThunk(
   'api/users/registration/guest',
   async (newUser: iRegistrationGuest, thunkAPI) => {
     try {
-      await userService.createUser({data: {...newUser }});
-    } catch(err: any) {
+      await userService.createUser({ data: { ...newUser } });
+    } catch (err: any) {
       thunkAPI.rejectWithValue(err.message)
     }
   }
@@ -41,30 +41,54 @@ export const userSlice = createSlice({
   reducers: {
 
   },
-  extraReducers: {
-    [getUsers.pending.type]: (state, action: PayloadAction<IUser[]>) => {
-      state.isLoading = true;
-    },
-    [getUsers.fulfilled.type]: (state, action: PayloadAction<IUser[]>) => {
-      state.isLoading = false;
-      state.error = '';
-      state.users = action.payload;
-    },
-    [getUsers.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [addUser.pending.type]: (state, action: PayloadAction<IUser[]>) => {
-      state.isLoading = true;
-    },
-    [addUser.fulfilled.type]: (state, action: PayloadAction<IUser[]>) => {
-      state.isLoading = false;
-      state.error = '';
-    },
-    [addUser.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    }
+  extraReducers: (builder) => {
+    builder
+      .addCase(getUsers.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUsers.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = '';
+        state.users = action.payload as unknown as IUser[];
+      })
+      .addCase(getUsers.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(addUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addUser.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = '';
+      })
+      .addCase(addUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+    // [getUsers.pending.type]: (state, action: PayloadAction<IUser[]>) => {
+    //   state.isLoading = true;
+    // },
+    // [getUsers.fulfilled.type]: (state, action: PayloadAction<IUser[]>) => {
+    //   state.isLoading = false;
+    //   state.error = '';
+    //   state.users = action.payload;
+    // },
+    // [getUsers.rejected.type]: (state, action: PayloadAction<string>) => {
+    //   state.isLoading = false;
+    //   state.error = action.payload;
+    // },
+    // [addUser.pending.type]: (state, action: PayloadAction<IUser[]>) => {
+    //   state.isLoading = true;
+    // },
+    // [addUser.fulfilled.type]: (state, action: PayloadAction<IUser[]>) => {
+    //   state.isLoading = false;
+    //   state.error = '';
+    // },
+    // [addUser.rejected.type]: (state, action: PayloadAction<string>) => {
+    //   state.isLoading = false;
+    //   state.error = action.payload;
+    // }
   }
 })
 

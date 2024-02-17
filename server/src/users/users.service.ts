@@ -25,7 +25,7 @@ export class UsersService {
   ) {}
 
   async getAllUsers(req: Request): Promise<GetUsersDto> {
-    const payload = this.collectPayload.getListPayload(req);
+    const payload = this.collectPayload.getListPayload(req, false);
     payload.include = [
       {
         model: Role,
@@ -77,9 +77,6 @@ export class UsersService {
     });
   }
 
-  async getUserByEmail(email: string): Promise<User> {
-    return this.userRepository.findOne<User>({ where: { email } });
-  }
 
   async findOneById(id: number): Promise<User> {
     return await this.userRepository.findOne<User>({ where: { id } });

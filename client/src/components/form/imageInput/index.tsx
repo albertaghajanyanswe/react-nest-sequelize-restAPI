@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { FieldValues, useController, useFormContext } from 'react-hook-form';
-import { Box, CircularProgress, Typography, Tooltip, IconButton, Avatar } from '@mui/material';
+import { Box, Typography, Tooltip, IconButton, Avatar } from '@mui/material';
 import { ReactComponent as InputError } from '../../../assets/form/input-error.svg';
 import { ReactComponent as CleanSvg } from '../../../assets/form/clean.svg';
 import { useSnackbar } from 'notistack';
@@ -16,13 +16,13 @@ import CustomButton from '../../customButton';
 import { useTranslation } from 'react-i18next';
 import fileService from '../../../services/fileService';
 import { uploadsAPI } from '../../../services/rtk/UploadsApi';
-import uploadService from '../../../services/uploadService';
+// import uploadService from '../../../services/uploadService';
 
-const Loading = ({ size = 24 }: { size?: number }) => {
-  return (
-    <Box sx={{ display: 'flex', minWidth: `${size}px`, minHeight: `${size}px`, padding: '0' }}><CircularProgress size={size} /></Box>
-  )
-}
+// const Loading = ({ size = 24 }: { size?: number }) => {
+//   return (
+//     <Box sx={{ display: 'flex', minWidth: `${size}px`, minHeight: `${size}px`, padding: '0' }}><CircularProgress size={size} /></Box>
+//   )
+// }
 
 const LOADING_GIF = 'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif';
 
@@ -67,7 +67,7 @@ const FormFileInput = <T extends FieldValues>({
   const ALLOWED_MAX_SIZE = 10000000; // 10 MB
 
   const [uploadAvatar, { isLoading }] = uploadsAPI.useUploadAvatarMutation();
-  const [deleteAvatar, { isLoading: isLoadingDelete }] = uploadsAPI.useDeleteAvatarMutation();
+  const [deleteAvatar] = uploadsAPI.useDeleteAvatarMutation();
 
   useEffect(() => {
     setInitialFile(value);
@@ -95,7 +95,7 @@ const FormFileInput = <T extends FieldValues>({
   const onFileUpload = async (file: File) => {
     if (!file) return;
     if (file.size > ALLOWED_MAX_SIZE) {
-      SystemMessage(enqueueSnackbar, t('errors.fileSizeLimit'), { variant: 'error' });
+      SystemMessage(enqueueSnackbar, t('errors.fileSizeLimit'), { variant: 'error', theme });
       return;
     }
     disableSave(true);
@@ -103,7 +103,7 @@ const FormFileInput = <T extends FieldValues>({
     try {
       await createFileApi(file);
     } catch (error: any) {
-      SystemMessage(enqueueSnackbar, getMessage(error?.response?.data || error.message), { variant: 'error' });
+      SystemMessage(enqueueSnackbar, getMessage(error), { variant: 'error', theme });
     } finally {
       disableSave(false);
     }

@@ -1,4 +1,5 @@
 import React from "react";
+import { FavoriteProductDto, Product, ProductIntendedForEnum, ProductProductStateEnum } from "../../generated/openapi";
 
 export interface IUser {
   id: number;
@@ -166,3 +167,29 @@ export type FileData = {
   size: number,
   timestamp: string
 }
+
+export interface iCreateProduct {
+  name: string;
+  description: string;
+  otherInfo: string;
+  price: string;
+  currency: string;
+  province: string;
+  city: string;
+  address: string;
+  categoryId: number;
+  intendedFor: ProductIntendedForEnum;
+  productState: ProductProductStateEnum;
+}
+
+// todo add this type in BE
+export type ProductWithImages = Pick<Product, keyof Product> & {
+  productImage: {
+    id: number;
+    name: string;
+    productId: number;
+  }[];
+  user: {
+    favoriteProducts: FavoriteProductDto[]
+  }
+};

@@ -13,16 +13,18 @@ const SystemMessage = (
   options: { variant: 'success' | 'error' | 'warning' | 'info' | 'default', sx?: any, action?: SnackbarAction, theme?: Theme }
 ) => {
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { variant, sx = {}, action, theme } = options;
 
   const variantBGColor = {
     success: (theme as Theme)?.palette.primary.green1,
-    error: (theme as Theme)?.palette.primary.red1,
+    error: (theme as Theme)?.palette.primary.red1 || 'yellow',
     warning: (theme as Theme)?.palette.primary.orange1,
     info: (theme as Theme)?.palette.primary.lightBG1,
     default: (theme as Theme)?.palette.primary.lightBG1
   }
 
+  console.log('variantBGColor = ', variantBGColor)
   const variantBorderColor = {
     success: (theme as Theme)?.palette.primary.green2,
     error: (theme as Theme)?.palette.primary.red2,
@@ -46,7 +48,9 @@ const SystemMessage = (
     default: <InfoSvg />
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const sxStyles = {
+    // "& .notistack-MuiContent": {
     "& .SnackbarContent-root": {
       color: "primary.textColor4",
       backgroundColor: variantBGColor[variant],
@@ -78,7 +82,7 @@ const SystemMessage = (
         borderColor: variantBorderColor[variant],
         color: variantTextColor[variant],
       },
-      sx: { ...sxStyles, ...sx },
+      // sx: { ...sxStyles, ...sx },
       action
     })
 }

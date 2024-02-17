@@ -45,7 +45,7 @@ const RegistrationPage = () => {
       navigate(routes.login.path)
     } catch (error: any) {
       // toast.error('error');
-      SystemMessage(enqueueSnackbar, getMessage(error?.response?.data || error.message || error?.data), { variant: 'error', theme });
+      SystemMessage(enqueueSnackbar, getMessage(error), { variant: 'error', theme });
     }
     return true
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -9,6 +9,11 @@ import { MulterModule } from '@nestjs/platform-express';
 import { multerOptions } from './files/multer.config';
 import { UploadController } from './files/uploads.controller';
 import { FileController } from './files/files.controller';
+import { CategoriesModule } from './categories/categories.module';
+import { ProductsModule } from './products/products.module';
+import { ProductsImageModule } from './productImages/productsImage.module';
+import { productsImageProviders } from './productImages/productsImage.providers';
+import { FavoriteProductsModule } from './favoriteProducts/favoriteProducts.module';
 
 @Module({
   imports: [
@@ -17,9 +22,13 @@ import { FileController } from './files/files.controller';
     DatabaseModule,
     UsersModule,
     RolesModule,
+    CategoriesModule,
+    ProductsModule,
+    ProductsImageModule,
+    FavoriteProductsModule,
     AuthModule,
   ],
   controllers: [UploadController, FileController],
-  // providers: [MailerService],
+  providers: [...productsImageProviders],
 })
 export class AppModule {}

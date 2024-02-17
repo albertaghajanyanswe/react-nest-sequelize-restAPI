@@ -2,6 +2,28 @@ import moment from "moment";
 import i18n from "../i18n";
 
 const getMessage = (error, variant = "success") => {
+  let message = '';
+  if (variant === 'error') {
+    message = i18n.t("actionMsg.error.unknownError")
+  } else {
+    message = i18n.t("actionMsg.success.operationSucceeded")
+  }
+  if (error && error.message) {
+    message = error.message
+  }
+  if (error && error.error) {
+    message = error.error
+  }
+  if (error && error?.response && error?.response?.data) {
+    message = error?.response?.data?.message
+  }
+  if (error && error?.data && error?.data?.message) {
+    message = error?.data?.message
+  }
+  return message;
+};
+
+const getMessageV1 = (error, variant = "success") => {
   const message =
     error && error.message
       ? error.message
@@ -39,4 +61,4 @@ function isJsonString(str) {
   return true;
 }
 
-export { getMessage, deleteAllSpacesFromStr, dateFormat, stringAvatar, isJsonString };
+export { getMessage, getMessageV1, deleteAllSpacesFromStr, dateFormat, stringAvatar, isJsonString };

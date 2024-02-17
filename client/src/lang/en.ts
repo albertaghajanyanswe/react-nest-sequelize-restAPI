@@ -10,9 +10,11 @@ const en = {
   },
   pages: {
     meetings: 'Meetings',
-    products: 'Products',
     home: 'Home',
     users: 'Users',
+    products: 'Products',
+    product: 'Product',
+    createProducts: 'Products',
     settings: 'settings',
     logout: 'Logout'
   },
@@ -21,6 +23,7 @@ const en = {
     home: 'Home',
     users: 'Users',
     settings: 'Settings',
+    products: 'Products',
   },
   lang: {
     english: 'English',
@@ -102,6 +105,41 @@ const en = {
       cancel: 'No, don’t remove '
     }
   },
+  products: {
+    name: 'Name',
+    description: 'Description',
+    otherInfo: 'Other info',
+    price: 'Price',
+    currency: 'Currency',
+    province: 'Province',
+    city: 'City',
+    address: 'Address',
+    categoryId: 'Category ID',
+    intendedFor: 'Intended for',
+    intendedForOptions: {
+      forSale: 'For sale',
+      FOR_SALE: 'For sale',
+      forRent: 'For rent',
+      FOR_RENT: 'For rent',
+      forFreeGiving: 'For free giving',
+      FOR_FREE_GIVING: 'For free giving'
+    },
+    productState: 'Product state',
+    productStateOptions: {
+      new: 'New',
+      NEW: 'New',
+      used: 'Used',
+      USED: 'Used',
+      notOperable: 'Not operable',
+      NOT_OPERABLE: 'Not operable'
+    },
+    emptyTitle: 'You don`t have a product yet.',
+    emptyDesc: 'You will see your products here after creation.'
+  },
+  productItem: {
+    createNewProduct: 'Create new product',
+    title: 'Product'
+  },
   actions: {
     login: 'Login',
     signIn: 'Sign In',
@@ -111,12 +149,14 @@ const en = {
     search: 'Search',
     edit: 'Edit',
     delete: 'Delete',
-    setReminder: 'Set reminder time',
-    changeStatus: 'Click to the row to change status',
     clickToRow: 'Click to the row',
     recoverDeletedItem: 'Recover deleted item',
     save: 'Save',
     uploadNewImage: 'Upload new image',
+    createProduct: 'Create new product',
+    update: 'Update',
+    selectAll: 'Select all',
+    view: 'View'
   },
   deleteUserModal: {
     title1: 'Do you want to remove',
@@ -127,19 +167,8 @@ const en = {
   },
   systemMsg: {
     failedSaveData: 'Failed to save data',
-    newChangeArrived: 'New change requests have arrived',
-    taskCompleted: 'Task completed',
-    taskReturned: 'Task returned',
-    dataModificationRequestSent: 'Data modification request sent',
-    appReturnedToHandler: 'Application No. {0} returned to handler',
-    appFormDeleted: 'Application form deleted',
-    appFormNotFount: 'Application form not found',
+    // eslint-disable-next-line no-template-curly-in-string
     userRemoved: '${0} was removed',
-    couldNotOpen: 'Could not open page with status "Not Submitted"',
-    couldNotOpenInvestor: 'Could not open page with status "Submitted"',
-    permissionDenied: 'Permission denied',
-    taskDisregarded: 'Task disregarded',
-    licenseNotFound: 'Application license not found',
   },
   actionMsg: {
     success: {

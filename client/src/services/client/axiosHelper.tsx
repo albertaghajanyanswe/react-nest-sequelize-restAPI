@@ -40,13 +40,11 @@ const defaultHeaderHandler1 = (request: any) => {
 let service: ReturnType<typeof axios.create>;
 
 if (process.env.REACT_APP_ENV_MODE === 'production') {
-  console.log('PROD')
   service = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}`,
     timeout: 60000,
   });
 } else {
-  console.log('DEV')
   service = axios.create({
     baseURL: `http://localhost:3000`,
     timeout: 60000,

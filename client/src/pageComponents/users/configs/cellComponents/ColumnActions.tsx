@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { TableCell, Typography, Box, Avatar, IconButton, Grid } from '@mui/material';
+import { TableCell, Typography, Box, IconButton, Grid } from '@mui/material';
 import RemoveSvg from '../../../../../src/assets/16/delete.svg';
 import { useSnackbar } from 'notistack';
 import { getMessage } from '../../../../helpers/helper';
@@ -11,6 +11,7 @@ import { useModal } from '../../../../hooks/common/useModal';
 import { getCellPadding } from '../../../../components/customTable/config/tableStyleHelper';
 import CustomModal from '../../../../components/modal/CustomModal';
 import CustomButton from '../../../../components/customButton';
+import { useTheme } from '@mui/system';
 
 interface iProps {
   data: any;
@@ -19,14 +20,16 @@ interface iProps {
 }
 const ColumnActions: FC<iProps> = (props) => {
   const { t } = useTranslation();
-  const { data, cellItem: { cellPaddingRight, cellPaddingLeft, textAlign, id }, isSortedCeil } = props;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { data, cellItem: { cellPaddingRight, cellPaddingLeft, textAlign }, isSortedCeil } = props;
 
   const { enqueueSnackbar } = useSnackbar();
   const {isOpen, openModal, closeModal} = useModal(false);
-
+  const theme = useTheme();
   const handleDelete = () => {
     try {
       (closeModal as () => void)();
+      // eslint-disable-next-line no-template-curly-in-string
       SystemMessage(enqueueSnackbar, t('systemMsg.userRemoved').replace('${0}', data.name),
         {
           variant: 'success',
@@ -42,7 +45,7 @@ const ColumnActions: FC<iProps> = (props) => {
         }
       )
     } catch (error: any) {
-      SystemMessage(enqueueSnackbar, getMessage(error?.response?.data || error.message), { variant: 'error' });
+      SystemMessage(enqueueSnackbar, getMessage(error), { variant: 'error', theme });
     }
     return true
   };

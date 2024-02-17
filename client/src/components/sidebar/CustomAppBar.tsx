@@ -10,6 +10,7 @@ interface AppBarProps extends MuiAppBarProps {
 
 const CustomAppBar = ({ open, children }: AppBarProps) => {
   const theme = useTheme();
+
   return (
     <MuiAppBar
       position="fixed"

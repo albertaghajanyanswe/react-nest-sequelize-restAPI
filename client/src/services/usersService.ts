@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { iRegistrationGuest } from '../configs/shared/types';
-import { GetUsersDto, User, UsersApi } from '../generated/openapi';
+import { GetUsersDto, UsersApi } from '../generated/openapi';
 import { axiosInstance } from './client/axiosHelper';
 
 const PREFIX = '/api';

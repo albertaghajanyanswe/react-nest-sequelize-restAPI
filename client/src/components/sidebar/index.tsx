@@ -14,7 +14,8 @@ import {
   Menu,
   Toolbar,
   Tooltip,
-  Typography
+  Typography,
+  useMediaQuery
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -35,6 +36,7 @@ import CustomAppBar from './CustomAppBar';
 import fileService from '../../services/fileService';
 import { usersAPI } from '../../services/rtk/UsersApi';
 import { stylesWithTheme } from './styles';
+import Loading from '../loading/index';
 
 export const ArrowLeftBtn = ({ color, ...props }: { color?: any, props?: any }) => {
   const theme = useTheme();
@@ -55,10 +57,17 @@ function SideBar() {
 
   const [open, setOpen] = React.useState(true);
 
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+  const isPC = useMediaQuery(theme.breakpoints.up('md'));
+
+  const isAppBarOpen = (isMobile || isTablet ? false : open);
+
   const { setActiveLink } = sidebarSlice.actions;
   const dispatch = useAppDispatch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { activeLink } = useAppSelector(state => state.sidebarReducer);
-  console.log('activeLink = ', activeLink)
+  // console.log('activeLink = ', activeLink)
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -102,35 +111,37 @@ function SideBar() {
         ) : (
           // todo
           (item?.roles?.includes(currentUser?.roles[0].value as UserRole)) &&
+          <Tooltip title={t(item.title)} placement="right">
           <ListItem sx={{ ...muiStyles.listItem, ...(isLinkActive(item.link) && muiStyles.listItemActive), ...(item?.disabled && { pointerEvents: 'none' }) }} key={item.id} disablePadding onClick={() => handleClick(item.link)} disabled={item?.disabled}>
             <ListItemButton
               disableRipple
               sx={{
                 ...muiStyles.listItemBtn,
                 ...(isLinkActive(item.link) && muiStyles.listItemBtnActive),
-                justifyContent: open ? 'initial' : 'center',
+                justifyContent: isAppBarOpen ? 'initial' : 'center',
               }}
             >
               <ListItemIcon
                 sx={{
                   minWidth: 0,
-                  mr: open ? 3 : '0',
+                  mr: isAppBarOpen ? 3 : '0',
                   ...(isLinkActive(item.link) && item.id !== 'departments' && muiStyles.activeLinkIcon),
                   justifyContent: 'center',
                 }}
               >
                 <item.icon />
               </ListItemIcon>
-              {open && <ListItemText
+              {isAppBarOpen && <ListItemText
                 primary={t(item.title)}
                 sx={{
                   ...muiStyles.linkText,
                   ...(isLinkActive(item.link) && muiStyles.activeLinkTitle),
-                  opacity: open ? 1 : 0
+                  opacity: isAppBarOpen ? 1 : 0
                 }}
               />}
             </ListItemButton>
           </ListItem>
+          </Tooltip>
         )
         )}
       </List>
@@ -155,7 +166,7 @@ function SideBar() {
           edge="start"
           sx={{
             marginRight: 5,
-            ...(open && { display: 'none' }),
+            ...(isAppBarOpen && { display: 'none' }),
           }}
         >
           <MenuIcon />
@@ -204,10 +215,10 @@ function SideBar() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <CustomAppBar position="fixed" open={open}>
+      <CustomAppBar position="fixed" open={isAppBarOpen}>
         {appBarContent}
       </CustomAppBar>
-      <CustomDrawer open={open}>
+      <CustomDrawer open={isAppBarOpen}>
         <CustomDrawerHeader>
           <IconButton onClick={closeSideBar}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ArrowLeftBtn />}
@@ -216,14 +227,14 @@ function SideBar() {
         <Divider />
 
         <Box>
-          <Box onClick={handleClickLogo} sx={{ p: open ? '24px 46px' : '24px 6px', alignSelf: 'center', cursor: 'pointer', textAlign: 'center' }} >
+          <Box onClick={handleClickLogo} sx={{ p: isAppBarOpen ? '24px 46px' : '24px 6px', alignSelf: 'center', cursor: 'pointer', textAlign: 'center' }} >
             {/* <SidebarLogo /> */}
           </Box>
           <Box component="div" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <Box component="div">
-              <Avatar {...stringAvatar(`${currentUser?.firstName || 'Guest'} ${currentUser?.lastName || 'Guest'}`, open ? 72 : 36, open ? 72 : 36)} src={fileService.getFileUrl(currentUser?.image)} />
+              <Avatar {...stringAvatar(`${currentUser?.firstName || 'Guest'} ${currentUser?.lastName || 'Guest'}`, isAppBarOpen ? 72 : 36, isAppBarOpen ? 72 : 36)} src={fileService.getFileUrl(currentUser?.image)} />
             </Box>
-            {open && <Box component="div" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 2 }}>
+            {isAppBarOpen && <Box component="div" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 2 }}>
               <Typography sx={muiStyles.welcomeUser}>{t('sidebar.welcome')}</Typography>
               <Typography sx={muiStyles.userName}>{currentUser?.firstName} {currentUser?.lastName}</Typography>
             </Box>}

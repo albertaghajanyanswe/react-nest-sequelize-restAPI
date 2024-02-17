@@ -48,6 +48,7 @@ function CustomSortField<T extends iFilterSortField>({
     if (onSortCallback) {
       onSortCallback(sortState);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedValue]);
 
   useEffect(() => {

@@ -27,16 +27,28 @@ const routes = {
     path: '/users/:id',
     title: 'pages.user'
   },
+  products: {
+    path: '/products',
+    title: 'pages.products'
+  },
+  productEdit: {
+    path: '/products/:id',
+    title: 'pages.product'
+  },
+  productCreate: {
+    path: '/products/create',
+    title: 'pages.createProduct'
+  },
+  kiosksMenusEdit: {
+    path: '/menus/:id',
+    accessRoutes: ['superAdmin', 'kerpakAdmin', 'kerpakSupport', 'accountHolder', 'admin', 'inventoryManager'],
+  },
   todo: {
     path: '/todo',
   },
   meeting: {
     path: '/meeting',
     title: 'pages.meetings'
-  },
-  products: {
-    path: '/products',
-    title: 'pages.products'
   },
   settings: {
     path: '/settings',
