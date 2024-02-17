@@ -58,10 +58,6 @@ const ProductItemPage = () => {
     productState: productData?.productState || undefined
   }
 
-  // console.log('productData = ', productData)
-  // console.log('categoriesData =  ', categoriesData)
-  // console.log('initialData =  ', initialData)
-
   const methods = useForm<iCreateProduct>({
     defaultValues: ({ ...DEFAULT_VALUES_CREATE_PRODUCT, ...initialData }),
     mode: 'onChange'
@@ -99,15 +95,12 @@ const ProductItemPage = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [updateProduct, { error: updateError, isError: updateIsError }] = productsAPI.useUpdateProductMutation();
 
+  const { handleSubmit } = methods;
 
-  const handleSave = async () => {
+  const handleSave = useCallback(() => handleSubmit(async (data: any) => {
     try {
       setDisableSubmit(true)
-      const data = { ...methods.getValues() };
-      methods.reset({ ...methods.getValues() }, {
-        keepErrors: true,
-        keepDirty: false,
-      })
+      methods.reset(data, { keepErrors: true, keepDirty: false });
       if (productId) {
         await updateProduct({ ...data, productId: (productId as unknown as number) }).unwrap();
       } else {
@@ -116,13 +109,11 @@ const ProductItemPage = () => {
       }
       SystemMessage(enqueueSnackbar, getMessage('', 'success'), { variant: 'success', theme });
     } catch (error: any) {
-      console.log(' 111 theme = ', theme)
-      console.log('error - ', error)
       SystemMessage(enqueueSnackbar, getMessage(error), { variant: 'error', theme });
     } finally {
       setDisableSubmit(false)
     }
-  }
+  }), [])
 
   const originalValue = useRef(currentUser || DEFAULT_VALUES_CREATE_PRODUCT);
 
@@ -166,7 +157,6 @@ const ProductItemPage = () => {
     return <NotFound />
   }
 
-  console.log('getPageHeaderHeight = ', getPageHeaderHeight())
   return (
     <Box>
       <Box sx={{ position: 'fixed', width: `calc(100% - ${variables.drawerWidth})`, backgroundColor: 'white', zIndex: 1, boxShadow: 'rgba(33, 35, 38, 0.1) 0px 10px 10px -10px' }}>
@@ -304,28 +294,6 @@ const ProductItemPage = () => {
                 />
               </Grid>
             </Grid>
-            {/* <Grid container sx={{ mt: 4 }} spacing={3}>
-              <Grid item xs={12} sm={6}>
-                <CustomButton
-                  label={t('actions.cancel')}
-                  btnType='secondary'
-                  onClick={handleCancel}
-                  sx={{ minWidth: '100%' }}
-                  disabled={disableSubmit || !isDirty}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <CustomButton
-                  label={productId ? t('actions.update') : t('actions.submit')}
-                  variant='contained'
-                  btnType='primary'
-                  onClick={handleSave}
-                  sx={{ minWidth: '100%' }}
-                  // sx={{ minWidth: '120px', mt: { xs: 3, sm: 0 } }}
-                  disabled={disableSubmit || !isDirty || hasError}
-                />
-              </Grid>
-            </Grid> */}
           </form>
         </FormProvider>
       </Box>
@@ -341,10 +309,8 @@ const ProductItemPage = () => {
           label={productId ? t('actions.update') : t('actions.submit')}
           variant='contained'
           btnType='primary'
-          onClick={handleSave}
+          onClick={handleSave()}
           sx={{ width: { xs: '100%', sm: '50%' } }}
-          // sx={{ minWidth: '100%' }}
-          // sx={{ minWidth: '120px', mt: { xs: 3, sm: 0 } }}
           disabled={disableSubmit || !isDirty || hasError}
         />
       </Box>
